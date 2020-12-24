@@ -6,7 +6,11 @@ class Distribution:
     def __init__(self, entries):
         self.entries = entries
         self.number_of_entries = len(self.entries)
-        self.number_of_columns = settings.NUMBER_OF_COLUMNS
+        _user_settings = getattr(settings, 'VERTICAL_MULTI_COLUMNS', {})
+        if _user_settings == {}:
+            self.number_of_columns = 3
+        else:
+            self.number_of_columns = _user_settings['NUMBER_OF_COLUMNS']
 
     def pad_columns(self, columns):
         # Determine the longest column so the rest can be padded to the same length

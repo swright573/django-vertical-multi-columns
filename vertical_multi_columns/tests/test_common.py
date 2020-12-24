@@ -1,5 +1,5 @@
 import pytest
-from vmc.configure import Distribution
+from vertical_multi_columns.configure import Distribution
 
 # Testing method pad_columns
 #   What to test

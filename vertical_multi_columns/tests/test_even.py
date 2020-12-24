@@ -1,5 +1,5 @@
 import pytest
-from vmc.configure import EvenDistribution
+from vertical_multi_columns.configure import EvenDistribution
 from django.contrib.admin.utils import flatten
 
 #   Testing EvenDistribution
@@ -10,7 +10,7 @@ def test_number_columns_correct(entries_27, settings_NUMBER_OF_COLUMNS_3):
     my_num_cols = len(my_rows[0])
     assert my_num_cols == 3
 
-def test_number_columns_defaults_to_3(entries_27, settings_NUMBER_OF_COLUMNS_null):
+def test_number_columns_defaults_to_3(entries_27, settings_NUMBER_OF_COLUMNS_Null):
     # the number of columns defaults to 3 if not provided
     my_rows = EvenDistribution(entries_27).process()
     my_num_cols = len(my_rows[0])

@@ -3,19 +3,19 @@ import random
 from django.conf import settings
 
 @pytest.fixture()
-def settings_NUMBER_OF_COLUMNS_Null(settings):
+def settings_NUMBER_OF_COLUMNS_Null():
     settings.VERTICAL_MULTI_COLUMNS = {}
 
 @pytest.fixture()
-def settings_NUMBER_OF_COLUMNS_3(settings):
+def settings_NUMBER_OF_COLUMNS_3():
     settings.VERTICAL_MULTI_COLUMNS = {'NUMBER_OF_COLUMNS': 3}
 
 @pytest.fixture()
-def settings_NUMBER_OF_COLUMNS_4(settings):
+def settings_NUMBER_OF_COLUMNS_4():
     settings.VERTICAL_MULTI_COLUMNS = {'NUMBER_OF_COLUMNS': 4}
 
 @pytest.fixture()
-def settings_NUMBER_OF_COLUMNS_5(settings):
+def settings_NUMBER_OF_COLUMNS_5():
     settings.VERTICAL_MULTI_COLUMNS = {'NUMBER_OF_COLUMNS': 5}
 
 @pytest.fixture()
@@ -94,39 +94,39 @@ def all_columns_empty():
 def criteria_functions_2():
     def a_to_m(args):
             parms = args.split(",")
-            return 'ABCDEFGHIJKLM'.find(parms[0][0]) is True
+            return 'ABCDEFGHIJKLM'.find(parms[0][0]) > -1
     def n_to_z(args):
         parms = args.split(",")
-        return 'NOPQRSTUVWXYZ'.find(parms[0][0]) is True
+        return 'NOPQRSTUVWXYZ'.find(parms[0][0]) > -1
     return [a_to_m, n_to_z]
 
 @pytest.fixture()
 def criteria_functions_3():
     def a_to_f(args):
             parms = args.split(",")
-            return 'ABCDEF'.find(parms[0][0]) is True
+            return 'ABCDEF'.find(parms[0][0]) > -1
     def g_to_s(args):
         parms = args.split(",")
-        return 'GHIJKLMNOPQRS'.find(parms[0][0]) is True
+        return 'GHIJKLMNOPQRS'.find(parms[0][0]) > -1
     def t_to_z(args):
         parms = args.split(",")
-        return 'TUVWXYZ'.find(parms[0][0]) is True
+        return 'TUVWXYZ'.find(parms[0][0]) > -1
     return [a_to_f, g_to_s, t_to_z]
 
 @pytest.fixture()
 def criteria_functions_4():
     def a_to_d(args):
             parms = args.split(",")
-            return 'ABCD'.find(parms[0][0]) is True
+            return 'ABCD'.find(parms[0][0]) > -1
     def e_to_m(args):
         parms = args.split(",")
-        return 'EFGHIJKLM'.find(parms[0][0]) is True
+        return 'EFGHIJKLM'.find(parms[0][0]) > -1
     def n_to_r(args):
         parms = args.split(",")
-        return 'NOPQR'.find(parms[0][0]) is True
+        return 'NOPQR'.find(parms[0][0]) > -1
     def s_to_z(args):
         parms = args.split(",")
-        return 'STUVWXYZ'.find(parms[0][0]) is True
+        return 'STUVWXYZ'.find(parms[0][0]) > -1
     return [a_to_d, e_to_m, n_to_r, s_to_z]
 
 @pytest.fixture()

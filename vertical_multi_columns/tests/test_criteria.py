@@ -1,5 +1,5 @@
 import pytest
-from vmc.configure import CriteriaDistribution
+from vertical_multi_columns.configure import CriteriaDistribution
 from django.core.exceptions import ImproperlyConfigured
 
 # Testing CriteriaDistribution
@@ -56,10 +56,3 @@ def test_number_of_functions_same_as_columns_setting(entries_27,
     my_num_cols = len(my_rows[0])
     assert my_num_cols == 4
 
-def test_y():
-    # Each passed entry is checked by a "criteria function" and appears in the corresponding column
-    pass
-
-def test_z():
-    # Entries appear in columns in the same order as was passed in by the user
-    pass
