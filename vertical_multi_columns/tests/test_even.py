@@ -1,5 +1,5 @@
 import pytest
-from vertical_multi_columns.configure import EvenDistribution
+from django_vertical_multi_columns.configure import EvenDistribution
 from django.contrib.admin.utils import flatten
 
 #   Testing EvenDistribution
@@ -15,6 +15,18 @@ def test_number_columns_defaults_to_3(entries_27, settings_NUMBER_OF_COLUMNS_Nul
     my_rows = EvenDistribution(entries_27).process()
     my_num_cols = len(my_rows[0])
     assert my_num_cols == 3
+    
+def test_number_columns_kwarg_no_setting(entries_27, settings_NUMBER_OF_COLUMNS_Null):
+    # the number of columns corresponds to num_columns kwarg passed
+    my_rows = EvenDistribution(entries_27, num_columns=5).process()
+    my_num_cols = len(my_rows[0])
+    assert my_num_cols == 5
+    
+def test_number_columns_kwarg_with_setting(entries_27, settings_NUMBER_OF_COLUMNS_4):
+    # the number of columns corresponds to num_columns kwarg passed
+    my_rows = EvenDistribution(entries_27, num_columns=5).process()
+    my_num_cols = len(my_rows[0])
+    assert my_num_cols == 5
 
 def test_same_entries_in_same_vertical_order(entries_27, settings_NUMBER_OF_COLUMNS_4):
     # All the entries received are still there and are vertically sorted in the same order as received

@@ -2,10 +2,18 @@ import pytest
 import random
 from django.conf import settings
 
+def pytest_configure():
+    settings.configure()
+    INSTALLED_APPS = ['django_vertical_multi_columns',]
+
 @pytest.fixture()
 def settings_NUMBER_OF_COLUMNS_Null():
     settings.VERTICAL_MULTI_COLUMNS = {}
 
+@pytest.fixture()
+def settings_NUMBER_OF_COLUMNS_2():
+    settings.VERTICAL_MULTI_COLUMNS = {'NUMBER_OF_COLUMNS': 2}
+    
 @pytest.fixture()
 def settings_NUMBER_OF_COLUMNS_3():
     settings.VERTICAL_MULTI_COLUMNS = {'NUMBER_OF_COLUMNS': 3}
@@ -44,6 +52,20 @@ def entries_4():
 def entries_0():
     # This list has 0 entries
     return []
+    
+@pytest.fixture()
+def columns_4():
+    return \
+        [[{'id': 5, 'name': 'Asparagus'}, {'id': 2, 'name': 'Basil'}, {'id': 6, 'name': 'Beans'}, {'id': 7, 'name': 'Beets'}],
+         [{'id': 48, 'name': 'Fred'}, {'id': 19, 'name': 'Garlic'}],
+         [{'id': 20, 'name': 'Kale'}, {'id': 3, 'name': 'Lettuce'}, {'id': 40, 'name': 'Mint'}, {'id': 43, 'name': 'Okra'}, {'id': 18, 'name': 'Onion'}],
+         [{'id': 42, 'name': 'Tarragon'}, {'id': 35, 'name': 'Thyme'}, {'id': 1, 'name': 'Tomatoes'}]]
+         
+@pytest.fixture()
+def columns_2():
+    return \
+        [[{'id': 20, 'name': 'Kale'}, {'id': 3, 'name': 'Lettuce'}, {'id': 40, 'name': 'Mint'}, {'id': 43, 'name': 'Okra'}, {'id': 18, 'name': 'Onion'}],
+         [{'id': 42, 'name': 'Tarragon'}, {'id': 35, 'name': 'Thyme'}, {'id': 1, 'name': 'Tomatoes'}]]         
 
 @pytest.fixture()
 def padded_columns_16():
@@ -128,6 +150,25 @@ def criteria_functions_4():
         parms = args.split(",")
         return 'STUVWXYZ'.find(parms[0][0]) > -1
     return [a_to_d, e_to_m, n_to_r, s_to_z]
+
+@pytest.fixture()
+def criteria_functions_5():
+    def a_to_d(args):
+            parms = args.split(",")
+            return 'ABCD'.find(parms[0][0]) > -1
+    def e_to_m(args):
+        parms = args.split(",")
+        return 'EFGHIJKLM'.find(parms[0][0]) > -1
+    def n_to_r(args):
+        parms = args.split(",")
+        return 'NOPQR'.find(parms[0][0]) > -1
+    def s_to_u(args):
+        parms = args.split(",")
+        return 'STU'.find(parms[0][0]) > -1
+    def v_to_z(args):
+        parms = args.split(",")
+        return 'VWXYZ'.find(parms[0][0]) > -1   
+    return [a_to_d, e_to_m, n_to_r, s_to_u, v_to_z]
 
 @pytest.fixture()
 def function_args():

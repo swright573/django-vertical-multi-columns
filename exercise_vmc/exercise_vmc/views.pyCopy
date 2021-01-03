@@ -1,0 +1,94 @@
+from django.views.generic import ListView
+from vertical_multi_columns.configure import EvenDistribution, CriteriaDistribution, DefinedDistribution
+
+import os
+import requests
+
+
+class EvenList(ListView, EvenDistribution):
+
+    def __init__(self):
+        super().__init__()
+        self.__api_key = {'X-Api-Key': os.environ.get('PLANT_API_KEY')}
+
+    def get_queryset(self):
+        resp = requests.get(os.environ.get('PLANT_API_URL') + 'harvesthelper', headers=self.__api_key)
+        vegetables = resp.json()
+        sorted_vegetables = sorted(vegetables, key=lambda i: i['name'], reverse=False)
+        rows = super().process(sorted_vegetables, num_columns=5)
+        return rows
+
+    template_name = 'evenlist.html'
+    context_object_name = "rows"
+
+class CriteriaList(ListView):
+
+    def __init__(self):
+        super().__init__()
+        self.__api_key = {'X-Api-Key': os.environ.get('PLANT_API_KEY')}
+
+    # These functions are passed to CriteriaDistribution to enable assignment to columns
+    def a_to_f(self, args):
+        parms = args.split(",")
+        return 'ABCDEFG'.find(parms[0][0]) > -1
+
+    def g_to_s(self, args):
+        parms = args.split(",")
+        return 'FGHIJKLMNOPQR'.find(parms[0][0]) > -1
+
+    def t_to_z(self, args):
+        parms = args.split(",")
+        return 'STUVWXYZ'.find(parms[0][0]) > -1
+    # down to here
+
+    def get_queryset(self):
+        resp = requests.get(os.environ.get('PLANT_API_URL') + 'harvesthelper', headers=self.__api_key)
+        vegetables = resp.json()
+        sorted_vegetables = sorted(vegetables, key=lambda i: i['name'], reverse=False)
+        column_criteria = [self.a_to_f, self.g_to_s, self.t_to_z]
+        rows = CriteriaDistribution(sorted_vegetables, column_criteria, ['name', 'id']).process()
+        return rows
+
+    template_name = 'criterialist.html'
+    context_object_name = "rows"
+
+class DefinedList(ListView):
+
+    def __init__(self):
+        super().__init__()
+        self.__api_key = {'X-Api-Key': os.environ.get('PLANT_API_KEY')}
+
+    def a_to_e(self, args):
+        parms = args.split(",")
+        return 'ABCDE'.find(parms[0][0]) > -1
+
+    def f_to_j(self, args):
+        parms = args.split(",")
+        return 'FGHIJ'.find(parms[0][0]) > -1
+
+    def k_to_s(self, args):
+        parms = args.split(",")
+        return 'KLMNOPQRS'.find(parms[0][0]) > -1
+
+    def t_to_z(self, args):
+        parms = args.split(",")
+        return 'TUVWXYZ'.find(parms[0][0]) > -1
+
+    def get_queryset(self):
+        resp = requests.get(os.environ.get('PLANT_API_URL') + 'harvesthelper', headers=self.__api_key)
+        vegetables = resp.json()
+        sorted_vegetables = sorted(vegetables, key=lambda i: i['name'], reverse=False)
+        # next few lines simulates knowing the column makeup prior to passing to VMC
+        col_funcs = [self.a_to_e, self.f_to_j, self.k_to_s, self.t_to_z]
+        columns = [[] for i in range(len(col_funcs))]
+        for i in sorted_vegetables:
+            for j in range(0, len(col_funcs)):
+                func = col_funcs[j]
+                if func(i['name']):
+                    columns[j].append(i)
+        # down to here
+        rows = DefinedDistribution(columns, num_columns=4).process()
+        return rows
+
+    template_name = 'definedlist.html'
+    context_object_name = "rows"
