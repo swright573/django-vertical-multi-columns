@@ -27,7 +27,7 @@ class CriteriaVMC(CriteriaVMCView):
     def __init__(self, **kwargs):
         super().__init__(num_columns=3)
 
-    # These are examples of functions being passed to CriteriaVMCView to handle assignment to columns
+    # These are examples of functions you can pass to CriteriaVMCView to handle assignment to columns
     def a_to_f(self, args):
         parms = args.split(",")
         return 'ABCDEF'.find(parms[0][0]) > -1
@@ -75,7 +75,6 @@ class DefinedVMC(DefinedVMCView):
             [{'id': 42, 'name': 'Tarragon'}, {'id': 35, 'name': 'Thyme'}, {'id': 1, 'name': 'Tomatoes'},
              {'id': 32, 'name': 'Turnips'}, {'id': 33, 'name': 'Watermelon'},
              {'id': 34, 'name': 'Winter Squash'}])
-        print(f'{example_columns=}')
         return example_columns
 
     template_name = 'definedlist.html'
