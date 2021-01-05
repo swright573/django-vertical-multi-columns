@@ -1,11 +1,12 @@
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
+from django.views.generic import ListView
 
-class Distribution:
+class BaseVMC:
     '''
-    This is the base class for the specific distribution classes. It contains their common logic.
+    This is the base class for the specific VMC view classes. It contains common logic.
     '''
-    def __init__(self, **kwargs):
+    def set_number_of_columns(self, **kwargs):
         self.number_of_columns = kwargs.get('num_columns')
         if self.number_of_columns == None:
             _user_settings = getattr(settings, 'VERTICAL_MULTI_COLUMNS', {})
@@ -13,7 +14,7 @@ class Distribution:
                 self.number_of_columns = 3
             else:
                 self.number_of_columns = _user_settings['NUMBER_OF_COLUMNS']
-
+                
     def pad_columns(self, columns: list) -> [list,int]:
         # Determine the longest column so the rest can be padded to the same length
         max_column = max(len(i) for i in columns)
@@ -32,20 +33,26 @@ class Distribution:
             rows.append(row)
         return rows
 
-class EvenDistribution(Distribution):
+class EvenVMCView(BaseVMC, ListView):
     '''
-    Items are displayed vertically in the sorted order received. They are then spread as evenly as possible
+    Items are displayed vertically in the sorted order received. They are then rendered, spread as evenly as possible
     across the number of columns specified.
     '''
-
-    def __init__(self, entries: list, **kwargs: int):
+    def __init__(self, **kwargs: int):
         super().__init__(**kwargs)
-        self.entries = entries
-        self.number_of_entries = len(self.entries)        
+        self.set_number_of_columns(**kwargs)
 
-    def process(self) -> list:
-        entries_all = self.number_of_entries // self.number_of_columns    # minimum number of entries in all rows
-        entries_some = self.number_of_entries % self.number_of_columns    # number of additional entries in some rows
+    def get_data(self):
+        '''
+        Override this method to retrieve data.
+        Return a list of items in json format, sorted in the order you wish them displayed.
+        '''
+        pass
+        
+    def process_entries(self, entries: list) -> list:
+        number_of_entries = len(entries)
+        entries_all = number_of_entries // self.number_of_columns    # minimum number of entries in all rows
+        entries_some = number_of_entries % self.number_of_columns    # number of additional entries in some rows
 
         # Create columns and calculate column lengths
         columns = [[] for i in range(self.number_of_columns)]
@@ -60,78 +67,112 @@ class EvenDistribution(Distribution):
         entries_pos = 0
         for col in range(self.number_of_columns):
             for i in range(entries_pos, entries_pos + col_count[col]):
-                columns[col].append(self.entries[i])
+                columns[col].append(entries[i])
             entries_pos += col_count[col]
 
         columns, max_column = self.pad_columns(columns)
         rows = self.build_rows(columns, max_column)
         return rows
         
-class CriteriaDistribution(Distribution):
+    def get_queryset(self):
+        entries = self.get_data()
+        processed_entries = self.process_entries(entries)
+        return processed_entries
+        
+        
+class CriteriaVMCView(BaseVMC, ListView):
     '''
-    Items are displayed vertically in the sorted order received. They are assigned to a column based on
+    Items are displayed vertically in the order received. They are assigned to a column based on
     functions passed to the class, one function per column.   
     '''
-    
-    def __init__(self, entries: list, column_criteria: list, func_args: list, **kwargs: int):
+    def __init__(self, **kwargs: int):
         super().__init__(**kwargs)
-        self.entries = entries
-        self.number_of_entries = len(self.entries)
-        self.column_criteria = column_criteria
-        self.func_args = func_args
+        self.set_number_of_columns(**kwargs)
 
-    def check_criteria(self):
-        if not self.column_criteria:
+    def get_data(self):
+        '''
+        Override this method to retrieve data.
+        Return a list of items in json format, sorted in the order you wish them displayed.
+        '''
+        pass
+
+    def get_column_criteria(self):
+        '''
+        Override this method to retrieve the functions and keys needed to place data in the correct column.
+        '''   
+        pass
+  
+    def check_criteria(self, functions, keys):
+        if not functions:
             raise ImproperlyConfigured(
-                "Vertical-Multi-Columns/CriteriaDistribution-You have provided no list of functions defining column criteria.")
-        elif len(self.column_criteria) != self.number_of_columns:
+                "Vertical-Multi-Columns/CriteriaVMCView-You have provided no list of functions defining column criteria.")
+        elif len(functions) != self.number_of_columns:
             raise ImproperlyConfigured(
-                "Vertical-Multi-Columns/CriteriaDistribution-The number of functions passed must correspond to the number of columns.")
-        elif not self.func_args:
+                "Vertical-Multi-Columns/CriteriaVMCView-The number of functions passed must correspond to the number of columns.")
+        elif not keys:
             raise ImproperlyConfigured(
-                "Vertical-Multi-Columns/CriteriaDistribution-You have not provided any fields to check for the column criteria functions)")
+                "Vertical-Multi-Columns/CriteriaVMCView-You have not provided the keys to check in the column criteria functions)")
         return
 
-    def process(self) -> list:
-        self.check_criteria()
-        # create column lists based on criteria passed in
-        columns = [[] for i in range(self.number_of_columns)]
-        for i in self.entries:
-            for j in range(0, len(self.column_criteria)):
-                func = self.column_criteria[j]
+    def process_entries(self, entries: list, functions: list, keys: list) -> list:
+        self.check_criteria(functions, keys)
+        
+        # create column lists using criteria functions passed in
+        columns = [[] for c in range(self.number_of_columns)]
+        for e in entries:
+            for f in range(0, len(functions)):
+                func = functions[f]
                 parm = ''
-                for x in self.func_args:
-                    if isinstance(i[x], int):
-                        i[x] = str(i[x])
-                    parm += i[x] + ","
+                for k in keys:
+                    if isinstance(e[k], int):
+                        e[k] = str(e[k])
+                    parm += e[k] + ","
                 parm = parm[:-1]
                 if func(parm):
-                    columns[j].append(i)
+                    columns[f].append(e)
 
         columns, max_column = self.pad_columns(columns)
         rows = self.build_rows(columns, max_column)
         return rows
+            
+    def get_queryset(self):
+        entries = self.get_data()
+        functions, keys = self.get_column_criteria()
+        self.check_criteria(functions, keys)
+        processed_entries = self.process_entries(entries, functions, keys)
+        return processed_entries
         
-class DefinedDistribution(Distribution):
+class DefinedVMCView(BaseVMC, ListView):
     '''
     Items are passed in defined columns and displayed as vertically in the same sorted order as received.
     Each column's contents are displayed without change.   
     '''
-
-    def __init__(self, columns: list, **kwargs: int):
+    def __init__(self, **kwargs: int):
         super().__init__(**kwargs)
-        self.columns = columns
+        self.set_number_of_columns(**kwargs)
         
-    def check_columns(self):
-        if not self.columns:
+    def get_data(self):
+        '''
+        Override this method to retrieve data (which in this case is a list of columns
+        in json format that contain the sorted data you wish to display.
+        '''
+        pass
+    
+    def check_columns(self, columns):
+        if not columns:
             raise ImproperlyConfigured(
-            "Vertical-Multi-Columns/DefinedDistribution-You have passed no columns.")
-        elif len(self.columns) != self.number_of_columns:
+            "Vertical-Multi-Columns/DefinedVMCView-You have passed no columns.")
+        elif len(columns) != self.number_of_columns:
             raise ImproperlyConfigured(
-                "Vertical-Multi-Columns/DefinedDistribution-The number of columns passed must correspond to the number of columns specified.")
+                "Vertical-Multi-Columns/DefinedVMCView-The number of columns passed must correspond to the number of columns.")
                 
-    def process(self) -> list:
-        self.check_columns()
-        columns, max_column = self.pad_columns(self.columns)
+    def process_columns(self, columns) -> list:
+        self.check_columns(columns)
+        columns, max_column = self.pad_columns(columns)
         rows = self.build_rows(columns, max_column)
         return rows
+        
+    def get_queryset(self):
+        columns = self.get_data()
+        processed_entries = self.process_columns(columns)
+        return processed_entries

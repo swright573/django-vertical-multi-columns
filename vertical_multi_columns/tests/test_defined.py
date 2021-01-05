@@ -1,32 +1,37 @@
 import pytest
-from django_vertical_multi_columns.configure import DefinedDistribution
+from vertical_multi_columns.configure import DefinedVMCView
 from django.core.exceptions import ImproperlyConfigured
 
-# Testing DefinedDistribution
+# Testing DefinedVMCView
 #   Note: Columns are passed pre-filled as they are to appear.
 
 def test_no_columns_are_passed(settings_NUMBER_OF_COLUMNS_3):
     # The number of columns passed must correspond to the columns setting
+    instance = DefinedVMCView()
     with pytest.raises(ImproperlyConfigured):
-        my_rows = DefinedDistribution(None).process()
+        rows = instance.process_columns(None)
 
 def test_too_few_columns_are_passed(columns_2, settings_NUMBER_OF_COLUMNS_3):
     # The number of columns passed must correspond to the columns setting
+    instance = DefinedVMCView()
     with pytest.raises(ImproperlyConfigured):
-        my_rows = DefinedDistribution(columns_2).process()
+        rows = instance.process_columns(columns_2)
 
 def test_too_many_columns_are_passed(columns_4, settings_NUMBER_OF_COLUMNS_3):
     # The number of columns passed must correspond to the columns setting
+    instance = DefinedVMCView()
     with pytest.raises(ImproperlyConfigured):
-        my_rows = DefinedDistribution(columns_4).process()
+        rows = instance.process_columns(columns_4)
 
 def test_correct_number_columns_are_passed(columns_4, settings_NUMBER_OF_COLUMNS_4):
-    my_rows = DefinedDistribution(columns_4).process()
-    my_num_cols = len(my_rows[0])
-    assert my_num_cols == 4
+    instance = DefinedVMCView()
+    rows = instance.process_columns(columns_4)
+    num_cols = len(rows[0])
+    assert num_cols == 4
 
 def test_same_data_after_processing(columns_2, settings_NUMBER_OF_COLUMNS_2):
-    rows = DefinedDistribution(columns_2).process()
+    instance = DefinedVMCView()
+    rows = instance.process_columns(columns_2)
     gen_columns_from_rows = []
     for c in range(len(rows)):
         column = []

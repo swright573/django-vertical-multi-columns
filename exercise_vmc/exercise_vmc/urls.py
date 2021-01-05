@@ -4,7 +4,7 @@ from . import views
 app_name = 'exercise_vmc'
 
 urlpatterns = [
-    path('even', views.EvenList.as_view(), name='even_list'),
-    path('criteria', views.CriteriaList.as_view(), name='criteria_list'),
-    path('defined', views.DefinedList.as_view(), name='defined_list'),
+    path('even', views.EvenVMC.as_view(), name='even_list'),
+    path('criteria', views.CriteriaVMC.as_view(), name='criteria_list'),
+    path('defined', views.DefinedVMC.as_view(), name='defined_list'),
 ]

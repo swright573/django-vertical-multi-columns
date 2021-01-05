@@ -4,7 +4,7 @@ from django.conf import settings
 
 def pytest_configure():
     settings.configure()
-    INSTALLED_APPS = ['django_vertical_multi_columns',]
+    INSTALLED_APPS = ['vertical_multi_columns',]
 
 @pytest.fixture()
 def settings_NUMBER_OF_COLUMNS_Null():

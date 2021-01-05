@@ -12,7 +12,7 @@ ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'exercise_vmc',
-    #'vertical_multi_columns'
+    'vertical_multi_columns'
 ]
 ROOT_URLCONF = 'exercise_vmc.urls'
 TEMPLATES = [
