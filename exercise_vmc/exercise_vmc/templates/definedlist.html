@@ -1,49 +1,18 @@
 <!doctype html>
+{% extends 'base.html' %}
 {% load static %}
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Defined List</title>
-    <link href="//cdn.muicss.com/mui-0.10.3/css/mui.min.css" rel="stylesheet" type="text/css" />
-    <link href="{% static 'exercise_vmc/css/style.css' %}" rel="stylesheet" type="text/css" />
-    <script src="//cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
-  </head>
-  <body>
-    <header class="mui-appbar mui--z1">
-      <div class="mui-container">
-        <table>
-			<tr class="mui--appbar-height">
-                <td class="mui--text-title"><a id="pageTitle" href="{% url "criteria_list" %}"><strong>Defined List</strong></a></td>
-				<td class="mui--text-right">
-					<ul class="mui-list--inline mui--text-body2">
-                    <li><a href="{% url "even_list" %}" target="_self">Even List</a></li>
-                    <li><a href="{% url "criteria_list" %}" target="_self">Criteria List</a></li>
-					</ul>
-				</td>
-			</tr>
-        </table>
-      </div>
-    </header>
-      <p> </p>
-      <div class="mui-container">
-        <br><br>
-        <div id="messages">
-          {% for message in messages %}
-            <p style="color: {% if message.tags == 'success' %}green{% elif message.tags == 'error' %}red{% endif %}">
-              {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
-            </p>
-          {% endfor %}
-        </div>
+
 {% block content %}
   <br><br>
   <table style="width:100%">
+    <tr>
+      <td class="mui--text-title"><a id="pageTitle"
+                                     href="{% url "defined_list" %}"><strong>Defined List</strong></a></td>
+    </tr>
     <tr><th style="text-align:left">Col 1</th>
         <th style="text-align:left">Col 2</th>
         <th style="text-align:left">Col 3</th>
         <th style="text-align:left">Col 4</th>
-        <th style="text-align:left">Col 5</th>
     </tr>
     {% for row in rows %}
     <tr>
@@ -66,12 +35,7 @@
         {%  if row.3.id%}
         {{ row.3.name|capfirst }}
         {%  endif %}
-    </td>
-        <td style="width:20%">
-        {%  if row.4.id%}
-        {{ row.4.name|capfirst }}
-        {%  endif %}
-    </td>
+        </td>
     </tr>
 {%  empty %}
         There are no results to display.
@@ -79,7 +43,3 @@
   </table>
   <br>
 {% endblock %}
-      </div>
-    <footer></footer>
-  </body>
-</html>

@@ -1,10 +1,13 @@
 from vertical_multi_columns.configure import EvenVMCView, CriteriaVMCView, DefinedVMCView
+#import os
+#import requests
+from . import simulate
 
-import os
-import requests
+# An API call is being simulated here to avoid complexity in this demo program.
+# Instead data in JSON format is being returned from simulate.py
 
-_api_url = os.environ.get('API_URL')
-_api_key = {'X-Api-Key': os.environ.get('API_KEY')}
+#_api_url = os.environ.get('API_URL')
+#_api_key = {'X-Api-Key': os.environ.get('API_KEY')}
 
 class EvenVMC(EvenVMCView):
     # Use VMC's Even distribution to evenly divide data into side-by-side columns
@@ -13,8 +16,9 @@ class EvenVMC(EvenVMCView):
         super().__init__(num_columns=5)
 
     def get_data(self):
-        resp = requests.get(_api_url, headers=_api_key)
-        raw_api_data = resp.json()
+#       resp = requests.get(_api_url, headers=_api_key)
+#       raw_api_data = resp.json()
+        raw_api_data = simulate.api_data_json()   # simulation
         sorted_api_data = sorted(raw_api_data, key=lambda i: i['name'], reverse=False)
         return sorted_api_data
 
@@ -42,8 +46,9 @@ class CriteriaVMC(CriteriaVMCView):
     # down to here
 
     def get_data(self):
-        resp = requests.get(_api_url, headers=_api_key)
-        raw_api_data = resp.json()
+#       resp = requests.get(_api_url, headers=_api_key)
+#       raw_api_data = resp.json()
+        raw_api_data = simulate.api_data_json()  # simulation
         sorted_api_data = sorted(raw_api_data, key=lambda i: i['name'], reverse=False)
         return sorted_api_data
 

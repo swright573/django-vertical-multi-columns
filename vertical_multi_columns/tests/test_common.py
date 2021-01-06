@@ -72,7 +72,7 @@ def test_build_4(entries_0, padded_columns_4):
     assert reversed_columns == original_columns
 
 def test_build_16(entries_0, padded_columns_16):
-    instance = BaseVMC()  # only used to instantiate EvenBaseVMC
+    instance = BaseVMC()
     instance.set_number_of_columns(num_cols = 3)
     original_columns = padded_columns_16
     num_rows = 16
