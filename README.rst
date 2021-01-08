@@ -10,7 +10,7 @@ This
    :width: 704
    :alt: Multiple columns
 
-![Screenshot](https://github.com/swright573/django-vertical-multi-columns/blob/main/docs/images/multiplecolumns.gif) 
+![Screenshot](/docs/images/multiplecolumns.gif?raw=true "Susan") 
 
 
 rather than this
@@ -19,7 +19,7 @@ rather than this
    :width: 161
    :alt: Single column
 
-![Screenshot](https://github.com/swright573/django-vertical-multi-columns/docs/images/singlecolumn.gif)   
+![Screenshot] (https://github.com/swright573/django-vertical-multi-columns/docs/images/singlecolumn.gif)   
 
 Requirements
 ------------
