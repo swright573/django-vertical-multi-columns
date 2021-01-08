@@ -1,20 +1,21 @@
-Django Vertical Multi Columns
-=============
+Django-Vertical-Multi-Columns
+-----------------------------
 
-Django-Vertical-Multi-Columns (VMC) is a reusable Django application allowing users to display multiple items in side-by-side
-columns that a user can scan vertically rather than in one long list that would require a user to do a lot of scrolling or page hopping.
- 
-This <image> rather than this <image>.
+Django-Vertical-Multi-Columns (VMC) is a reusable Django application allowing users
+to display a list of items in side-by-side columns rather than in one long list.
 
-???
-Full documentation on `read the docs`_.
+This
 
-.. image:: https://codecov.io/gh/carltongibson/django-filter/branch/develop/graph/badge.svg
-    :target: https://codecov.io/gh/carltongibson/django-filter
+.. image:: multiplecolumns.gif
+  :width: 704
+  :alt: Multiple columns
 
-.. image:: https://badge.fury.io/py/django-filter.svg
-    :target: http://badge.fury.io/py/django-filter
-???
+
+rather than this
+
+.. image:: singlecolumn.gif
+  :width: 161
+  :alt: Single column
 
 Requirements
 ------------
@@ -30,7 +31,7 @@ Install using pip:
 
 .. code-block:: sh
 
-    pip install django-vertical-multi-columns
+    pip install vertical-multi-columns
 
 Then add ``'vertical_multi_columns'`` to your ``INSTALLED_APPS``.
 
@@ -47,7 +48,7 @@ Usage
 
 Displaying a long list of data in a template is quite easy ... {% for row in rows %} ... {% endfor %}.
 
-What VMC does is generate "rows" that contain multiple items where the 
+What VMC does is generate "rows" that contain multiple items where the
 
 Django-filter can be used for generating interfaces similar to the Django
 admin's ``list_filter`` interface.  It has an API very similar to Django's
@@ -56,21 +57,14 @@ filterset for it with the code:
 
 .. code-block:: python
 
-    import django_filters
-
-    class ProductFilter(django_filters.FilterSet):
-        class Meta:
-            model = Product
-            fields = ['name', 'price', 'manufacturer']
+    import vertical_multi_columns
 
 
 And then in your view you could do:
 
 .. code-block:: python
 
-    def product_list(request):
-        filter = ProductFilter(request.GET, queryset=Product.objects.all())
-        return render(request, 'my_app/template.html', {'filter': filter})
+    def
 
 
 
