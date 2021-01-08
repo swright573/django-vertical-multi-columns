@@ -7,15 +7,15 @@ to display a list of items in side-by-side columns rather than in one long list.
 This
 
 .. image:: https://github.com/swright573/django-vertical-multi-columns/docs/images/multiplecolumns.gif
-  :width: 704
-  :alt: Multiple columns
+   :width: 704
+   :alt: Multiple columns
 
 
 rather than this
 
 .. image:: https://github.com/swright573/django-vertical-multi-columns/docs/images/singlecolumn.gif
-  :width: 161
-  :alt: Single column
+   :width: 161
+   :alt: Single column
 
 Requirements
 ------------
