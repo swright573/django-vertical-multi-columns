@@ -15,11 +15,11 @@ This
 
 rather than this
 
-.. image:: https://github.com/swright573/django-vertical-multi-columns/blob/main/docs/images/singlecolumn.gif
+.. image:: https://github.com/swright573/django-vertical-multi-columns/blob/main/docs/images/singlecolumn.GIF
    :width: 161
    :alt: Single column
    
-![Screenshot](https://github.com/swright573/django-vertical-multi-columns/blob/main/docs/images/singlecolumn.gif)   
+![Screenshot](https://github.com/swright573/django-vertical-multi-columns/blob/main/docs/images/singlecolumn.GIF)   
 
 Requirements
 ------------
