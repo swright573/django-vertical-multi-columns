@@ -5,41 +5,41 @@
 {% block content %}
   <br><br>
   <table style="width:100%">
-      <tr>
+      <!--<tr>
           <td class="mui--text-title"><a id="pageTitle"
                                          href="{% url "even_list" %}"><strong>Even List</strong></a></td>
-      </tr>
-      <tr><th style="text-align:left">Col 1</th>
+      </tr>-->
+      <!--<tr><th style="text-align:left">Col 1</th>
         <th style="text-align:left">Col 2</th>
         <th style="text-align:left">Col 3</th>
         <th style="text-align:left">Col 4</th>
         <th style="text-align:left">Col 5</th>
-      </tr>
+      </tr>-->
     {% for row in rows %}
     <tr>
         <td style="width:20%">
             {%  if row.0.id%}
-            {{ row.0.name|capfirst }} ({{ row.0.id }})
+            {{ row.0.name|capfirst }}
             {%  endif %}
         </td>
         <td style="width:20%">
             {%  if row.1.id%}
-            {{ row.1.name|capfirst }} ({{ row.1.id }})
+            {{ row.1.name|capfirst }}
             {% endif %}
         </td>
         <td style="width:20%">
             {%  if row.2.id%}
-            {{ row.2.name|capfirst }} ({{ row.2.id }})
+            {{ row.2.name|capfirst }}
             {%  endif %}
         </td>
         <td style="width:20%">
             {%  if row.3.id%}
-            {{ row.3.name|capfirst }} ({{ row.3.id }})
+            {{ row.3.name|capfirst }}
             {%  endif %}
         </td>
         <td style="width:20%">
             {%  if row.4.id%}
-            {{ row.4.name|capfirst }} ({{ row.4.id }})
+            {{ row.4.name|capfirst }}
             {%  endif %}
         </td>
     </tr>
