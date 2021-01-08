@@ -9,6 +9,7 @@ This
 .. image:: https://github.com/swright573/django-vertical-multi-columns/blob/main/docs/images/multiplecolumns.gif
    :width: 704
    :alt: Multiple columns
+
 ![Screenshot](https://github.com/swright573/django-vertical-multi-columns/blob/main/docs/images/multiplecolumns.gif) 
 
 
@@ -17,6 +18,7 @@ rather than this
 .. image:: https://github.com/swright573/django-vertical-multi-columns/docs/images/singlecolumn.gif
    :width: 161
    :alt: Single column
+
 ![Screenshot](https://github.com/swright573/django-vertical-multi-columns/docs/images/singlecolumn.gif)   
 
 Requirements
