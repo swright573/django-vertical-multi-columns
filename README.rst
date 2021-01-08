@@ -6,7 +6,7 @@ to display a list of items in side-by-side columns rather than in one long list.
 
 This
 
-.. image:: https://github.com/swright573/django-vertical-multi-columns/docs/images/multiplecolumns.gif
+.. image:: https://github.com/swright573/django-vertical-multi-columns/blob/main/docs/images/multiplecolumns.gif
    :width: 704
    :alt: Multiple columns
    
