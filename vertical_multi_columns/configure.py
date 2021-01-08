@@ -6,7 +6,7 @@ class BaseVMC:
     '''
     This is the base class for the specific VMC view classes. It contains common logic.
     '''
-    def set_number_of_columns(self, **kwargs):
+    def set_number_of_columns(self, **kwargs) -> int: 
         self.number_of_columns = kwargs.get('num_columns')
         if self.number_of_columns == None:
             _user_settings = getattr(settings, 'VERTICAL_MULTI_COLUMNS', {})
@@ -39,10 +39,10 @@ class EvenVMCView(BaseVMC, ListView):
     across the number of columns specified.
     '''
     def __init__(self, **kwargs: int):
-        super().__init__(**kwargs)
+        #super().__init__(**kwargs)
         self.set_number_of_columns(**kwargs)
 
-    def get_data(self):
+    def get_data(self) -> list:
         '''
         Override this method to retrieve data.
         Return a list of items in json format, sorted in the order you wish them displayed.
@@ -74,7 +74,7 @@ class EvenVMCView(BaseVMC, ListView):
         rows = self.build_rows(columns, max_column)
         return rows
         
-    def get_queryset(self):
+    def get_queryset(self) -> list:
         entries = self.get_data()
         processed_entries = self.process_entries(entries)
         return processed_entries
@@ -86,7 +86,7 @@ class CriteriaVMCView(BaseVMC, ListView):
     functions passed to the class, one function per column.   
     '''
     def __init__(self, **kwargs: int):
-        super().__init__(**kwargs)
+        #super().__init__(**kwargs)
         self.set_number_of_columns(**kwargs)
 
     def get_data(self):
@@ -148,7 +148,7 @@ class DefinedVMCView(BaseVMC, ListView):
     Each column's contents are displayed without change.   
     '''
     def __init__(self, **kwargs: int):
-        super().__init__(**kwargs)
+        #super().__init__(**kwargs)
         self.set_number_of_columns(**kwargs)
         
     def get_data(self):

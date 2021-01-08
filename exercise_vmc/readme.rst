@@ -3,9 +3,9 @@
 Why Use RST?
 ------------
 
-    | Laurel
-    | Susan
-    | Wright
+    | ABC
+    | DEF
+    | GHI
 
 README
 ~~~~~~
@@ -14,7 +14,7 @@ README
 
 .. _Susan: https://api.leftwright.ca
 
-.. -module:: Susan Wright
+.. -module:: swright573
 
  fred
 

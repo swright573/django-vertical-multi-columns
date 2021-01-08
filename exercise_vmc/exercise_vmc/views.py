@@ -1,3 +1,4 @@
+from django.views.generic import TemplateView
 from vertical_multi_columns.configure import EvenVMCView, CriteriaVMCView, DefinedVMCView
 #import os
 #import requests
@@ -8,6 +9,14 @@ from . import simulate
 
 #_api_url = os.environ.get('API_URL')
 #_api_key = {'X-Api-Key': os.environ.get('API_KEY')}
+
+class Home(TemplateView):
+
+    def __init__(self, **kwargs):
+        super().__init__()
+
+    template_name = 'home.html'
+
 
 class EvenVMC(EvenVMCView):
     # Use VMC's Even distribution to evenly divide data into side-by-side columns
