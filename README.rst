@@ -10,7 +10,7 @@ This
    :width: 704
    :alt: Multiple columns
    
-![Screenshot](  ./docs/images/multicolumns.gif) 
+![Screenshot](./docs/images/multicolumns.gif) 
 
 
 rather than this
@@ -19,7 +19,7 @@ rather than this
    :width: 161
    :alt: Single column
    
-![Screenshot](  ./docs/images/singlecolumn.gif)   
+![Screenshot](./docs/images/singlecolumn.gif)   
 
 Requirements
 ------------
