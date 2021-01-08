@@ -6,14 +6,14 @@ to display a list of items in side-by-side columns rather than in one long list.
 
 This
 
-.. image:: multiplecolumns.gif
+.. image:: ./docs/images/multiplecolumns.gif
   :width: 704
   :alt: Multiple columns
 
 
 rather than this
 
-.. image:: singlecolumn.gif
+.. image:: ./docs/images/singlecolumn.gif
   :width: 161
   :alt: Single column
 
