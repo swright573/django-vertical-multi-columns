@@ -10,7 +10,7 @@ This
    :width: 704
    :alt: Multiple columns
    
-![Screenshot](https://github.com/swright573/django-vertical-multi-columns/blob/main/docs/images/multicolumns.gif) 
+![Screenshot](https://github.com/swright573/django-vertical-multi-columns/blob/main/docs/images/multiplecolumns.GIF) 
 
 
 rather than this
