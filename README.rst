@@ -73,8 +73,10 @@ If you have questions about usage or development you can join the
     :alt: Multiple Columns
 	:width: 352px
 	:height: 119px
+	:align: top
 	
 .. |single-column-small| image:: https://user-images.githubusercontent.com/31971607/104095428-bada2d80-5264-11eb-813d-e3e7e04c587c.gif
 	:alt: Single Columns
 	:width: 68 px
 	:height: 368px
+	:align: top
