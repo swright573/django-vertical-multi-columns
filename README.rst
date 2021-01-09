@@ -6,12 +6,12 @@ to display a list of items in side-by-side columns rather than in one long list.
 
 This
 
-.. image:: https://raw.githubusercontent.com/swright573/django-vertical-multi-columns/blob/main/docs/images/multiplecolumns_small.GIF
+.. image:: https://user-images.githubusercontent.com/31971607/104095425-b6ae1000-5264-11eb-96c2-bf9b2542de6d.gif
    :width: 704
 
 not this
 
-.. image:: https://raw.githubusercontent.com/swright573/django-vertical-multi-columns/blob/main/docs/images/singlecolumn_small.GIF
+.. image:: https://user-images.githubusercontent.com/31971607/104095428-bada2d80-5264-11eb-813d-e3e7e04c587c.gif
    :width: 161
 
 
