@@ -8,13 +8,11 @@ This
 
 .. image:: https://github.com/swright573/django-vertical-multi-columns/blob/main/docs/images/multiplecolumns_small.GIF
    :width: 704
-   :alt: Multiple columns
 
 not this
 
 .. image:: https://github.com/swright573/django-vertical-multi-columns/blob/main/docs/images/singlecolumn_small.GIF
    :width: 161
-   :alt: Single column
 
 
 Requirements
