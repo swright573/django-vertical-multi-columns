@@ -47,24 +47,24 @@ code your template this way (for 3 columns):
 	{% for row in rows %}
 	<table>
 	  <tr>
-		<td>
-            {% if row.0.<field> %}
-                {{ row.0.<field>}}
-            {%  endif %}
-		</td>	
-		<td>
-            {% if row.1.<field> %}
-                {{ row.1.<field>}}
-            {%  endif %}
-		</td>
-		<td>
-            {% if row.2.<field> %}
-                {{ row.2.<field>}}
-            {%  endif %}
-		</td>
-	  </tr>
-	 </table> 
-	{% endfor %}
+       <td>
+        {% if row.0.<field> %}
+           {{ row.0.<field>}}
+        {%  endif %}
+        </td>	
+       <td>
+        {% if row.1.<field> %}
+           {{ row.1.<field>}}
+        {%  endif %}
+        </td>
+       <td>
+        {% if row.2.<field> %}
+           {{ row.2.<field>}}
+        {%  endif %}
+        </td>	
+       </tr>
+    </table> 
+    {% endfor %}
 
 Note: The if statement is required because rows may have empty slots in situations where columns are of different lengths.
 
