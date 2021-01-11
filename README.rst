@@ -12,18 +12,14 @@ Requirements
 * **Python**: 3.5, 3.6, 3.7, 3.8, 3.9
 * **Django**: 2.2, 3.0, 3.1
 
-
 Installation
 ------------
-
 Install using pip:
-
 .. code-block:: sh
 
-    pip install vertical-multi-columns
+    pip install vertical_multi_columns
 
 Then add ``'vertical_multi_columns'`` to your ``INSTALLED_APPS``.
-
 .. code-block:: python
 
     INSTALLED_APPS = [
@@ -32,12 +28,59 @@ Then add ``'vertical_multi_columns'`` to your ``INSTALLED_APPS``.
     ]
 
 
+Why You May Need This
+---------------------
+Displaying a long list of items in a template is quite easy ... ``{% for row in rows %} ... {{ row.<field> }} ... {% endfor %}``. This comes at a cost for your end user though. Long lists 
+can require a user who is looking for something to do a lot of paging up and down or jumping back and forth from page to page if you implement pagination.
+
+What VMC Does
+VMC generates views with rows that contain multiple items where the items are still sorted so they can be read in order vertically but the items are spread across the screen in side by side columns. 
+You can specify the default number of columns in your Django settings. You can also override this by providing a different column setting in a view. VMC views are sub-classes of ListView so all the its capabilities are still available to you, such as pagination.
+
+Impact on Templates
+-------------------
+Your template must account for the number of columns you ask for. The template coding is still fairly easy. Rather than ``{% for row in rows %} ... {{ row.<field> }} ... {% endfor %}`` you would 
+code your template this way (for 3 columns):
+.. code-block:: sh
+{% for row in rows %}
+	<table>
+	  <tr>
+		<td>
+            {% if row.0.<field> %}
+                {{ row.0.<field>}}
+            {%  endif %}
+		</td>	
+		<td>
+            {% if row.0.<field> %}
+                {{ row.0.<field>}}
+            {%  endif %}
+		</td>
+		<td>
+            {% if row.0.<field> %}
+                {{ row.0.<field>}}
+            {%  endif %}
+		</td>
+	  </tr>
+	 </table> 
+{% endfor %}
+
+Note that the if statement is required because rows may have empty slots in situations where columns are of different lengths.
+
+View Options
+------------
+There are 3 VMC views available.
+
+EvenView |evenview| 
+Spreads your data across the number of columns you specify, keeping the length of the columns as even as possible.
+
+CriteriaView |criteriaview|
+You provide a list of functions, one per column, that VMC uses to determine which column an item will be placed in.
+
+DefinedView |definedview|
+This is for the scenario where you already have columns that you want displayed as is. You provide the list and VMC does the rest.
+
 Usage
 -----
-
-Displaying a long list of data in a template is quite easy ... {% for row in rows %} ... {% endfor %}.
-
-What VMC does is generate "rows" that contain multiple items where the
 
 Django-filter can be used for generating interfaces similar to the Django
 admin's ``list_filter`` interface.  It has an API very similar to Django's
@@ -64,19 +107,17 @@ Support
 If you have questions about usage or development you can join the
 `mailing list`_.
 
-.. _`read the docs`: https://django-filter.readthedocs.io/en/master/
-.. _`mailing list`: http://groups.google.com/group/django-filter
+.. _`read the docs`: TBD
+.. _`mailing list`: TBD
 
 .. |comparison| image:: https://user-images.githubusercontent.com/31971607/104185855-90fb4500-53e3-11eb-87b2-ef301866de63.gif
+	:alt: Comparison
 
-.. |multiple-columns-small| image:: https://user-images.githubusercontent.com/31971607/104095425-b6ae1000-5264-11eb-96c2-bf9b2542de6d.gif
-    :alt: Multiple Columns
-	:width: 352px
-	:height: 119px
-	:align: top
+.. |evenview| image:: https://user-images.githubusercontent.com/31971607/104191698-d754a200-53eb-11eb-8e77-374b58143567.gif
+    :alt: EvenView
 	
-.. |single-column-small| image:: https://user-images.githubusercontent.com/31971607/104095428-bada2d80-5264-11eb-813d-e3e7e04c587c.gif
-	:alt: Single Columns
-	:width: 68 px
-	:height: 368px
-	:align: top
+.. |criteriaview| image:: https://user-images.githubusercontent.com/31971607/104191709-db80bf80-53eb-11eb-8cae-cd182c92970c.gif
+	:alt: CriteriaView
+	
+.. |definedview| image:: https://user-images.githubusercontent.com/31971607/104191740-e2a7cd80-53eb-11eb-90f2-b1fbb4331f1b.gif
+	:alt: DefinedView
