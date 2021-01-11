@@ -42,8 +42,7 @@ Impact on Templates
 Your template must account for the number of columns you ask for. The template coding is still fairly easy. Rather than ``{% for row in rows %} ... {{ row.<field> }} ... {% endfor %}`` you would 
 code your template this way (for 3 columns):
 
-.. code-block:: python
-
+``
 {% for row in rows %}
 	<table>
 	  <tr>
@@ -65,7 +64,7 @@ code your template this way (for 3 columns):
 	  </tr>
 	 </table> 
 {% endfor %}
-
+``
 Note: The if statement is required because rows may have empty slots in situations where columns are of different lengths.
 
 View Options
@@ -80,7 +79,7 @@ There are 3 VMC views available.
 
 |criteriaview|
 
-**DefinedView** You already have the columns you want displayed. You provide the list and VMC does the rest.
+**DefinedView** You already have the columns you want displayed. You provide a column list and VMC does the rest.
  
 |definedview|
 
