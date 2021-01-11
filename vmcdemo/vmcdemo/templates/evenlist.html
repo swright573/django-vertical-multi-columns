@@ -5,16 +5,10 @@
 {% block content %}
   <br><br>
   <table style="width:100%">
-      <!--<tr>
-          <td class="mui--text-title"><a id="pageTitle"
-                                         href="{% url "even_list" %}"><strong>Even List</strong></a></td>
-      </tr>-->
-      <!--<tr><th style="text-align:left">Col 1</th>
-        <th style="text-align:left">Col 2</th>
-        <th style="text-align:left">Col 3</th>
-        <th style="text-align:left">Col 4</th>
-        <th style="text-align:left">Col 5</th>
-      </tr>-->
+    <tr>
+      <td class="mui--text-title"><a id="pageTitle"
+                                     href="{% url "defined_list" %}"><strong>Even List</strong></a></td>
+    </tr>
     {% for row in rows %}
     <tr>
         <td style="width:20%">

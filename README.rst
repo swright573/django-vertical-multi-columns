@@ -2,6 +2,7 @@ Django-Vertical-Multi-Columns
 -----------------------------
 Django-Vertical-Multi-Columns (VMC) is a reusable Django application allowing users
 to display a list of items in side-by-side columns rather than in one long list.
+
 |comparison|
 
 Requirements
@@ -29,12 +30,12 @@ Then add ``'vertical_multi_columns'`` to your ``INSTALLED_APPS``.
 Why You May Need This
 ---------------------
 Displaying a long list of items in a template is quite easy ... ``{% for row in rows %} ... {{ row.<field> }} ... {% endfor %}``. This comes at a cost for your end user though. Long lists 
-can require someone who is looking for something to do a lot of paging up and down or jumping back and forth from page to page.
+can require someone who is looking for something to do a lot of scrolling up and down or jumping back and forth from page to page.
 
 What VMC Does
 -------------
 VMC generates views with rows that contain multiple items where those items are still sorted so they can be read in order vertically but they are spread across the screen in side by side columns. 
-You can specify the default number of columns in your Django settings. You can also override this by providing a different column setting in a VMC view. VMC views are sub-classes of ListView so all its capabilities are still available to you, such as pagination.
+You can specify the default number of columns in your Django settings. You can also override this by passing a different column setting to a VMC view. VMC views are sub-classes of ListView so all its capabilities are still available to you.
 
 Impact on Templates
 -------------------
@@ -52,13 +53,13 @@ code your template this way (for 3 columns):
             {%  endif %}
 		</td>	
 		<td>
-            {% if row.0.<field> %}
-                {{ row.0.<field>}}
+            {% if row.1.<field> %}
+                {{ row.1.<field>}}
             {%  endif %}
 		</td>
 		<td>
-            {% if row.0.<field> %}
-                {{ row.0.<field>}}
+            {% if row.2.<field> %}
+                {{ row.2.<field>}}
             {%  endif %}
 		</td>
 	  </tr>

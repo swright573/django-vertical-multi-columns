@@ -1,5 +1,5 @@
 """
-Django settings for exercise_vmc project.
+Django settings for vmcdemo project.
 """
 
 from pathlib import Path
@@ -11,14 +11,14 @@ DEBUG = int(os.environ.get("DEBUG", default=0))
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 INSTALLED_APPS = [
     'django.contrib.staticfiles',
-    'exercise_vmc',
+    'vmcdemo',
     'vertical_multi_columns'
 ]
-ROOT_URLCONF = 'exercise_vmc.urls'
+ROOT_URLCONF = 'vmcdemo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'exercise_vmc/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'vmcdemo/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -33,4 +33,4 @@ TEMPLATES = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (BASE_DIR + '/static/exercise_vmc/', )
+STATICFILES_DIRS = (BASE_DIR + '/static/vmcdemo/', )

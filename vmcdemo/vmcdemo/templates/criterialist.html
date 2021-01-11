@@ -5,25 +5,33 @@
 {% block content %}
   <br><br>
   <table style="width:100%">
-
-
-    <tr><th style="text-align:left">Col 1</th>
-        <th style="text-align:left">Col 2</th>
-        <th style="text-align:left">Col 3</th>
+    <tr>
+      <td class="mui--text-title"><a id="pageTitle"
+                                     href="{% url "defined_list" %}"><strong>Criteria List</strong></a></td>
     </tr>
+    <tr>
+        <td style="width:33%">
+            <strong>A to F</strong>
+        </td>
+        <td style="width:33%">
+            <strong>G to S</strong>
+        </td>
+        <td style="width:34%">
+            <strong>S to Z</strong>
+        </td>
     {% for row in rows %}
     <tr>
-        <td style="width:20%">
+        <td>
             {%  if row.0.id%}
             {{ row.0.name|capfirst }}
             {%  endif %}
         </td>
-        <td style="width:20%">
+        <td>
             {%  if row.1.id%}
             {{ row.1.name|capfirst }}
             {% endif %}
         </td>
-        <td style="width:20%">
+        <td>
             {%  if row.2.id%}
             {{ row.2.name|capfirst }}
             {%  endif %}
