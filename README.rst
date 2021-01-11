@@ -42,7 +42,7 @@ Impact on Templates
 Your template must account for the number of columns you ask for. The template coding is still fairly easy. Rather than ``{% for row in rows %} ... {{ row.<field> }} ... {% endfor %}`` you would 
 code your template this way (for 3 columns):
 
-.. code-block:: html
+.. code-block:: python
 
 {% for row in rows %}
 	<table>
@@ -112,11 +112,11 @@ If you have questions about usage or development you can join the
 .. |comparison| image:: https://user-images.githubusercontent.com/31971607/104185855-90fb4500-53e3-11eb-87b2-ef301866de63.gif
 	:alt: Comparison
 
-.. |evenview| image:: https://user-images.githubusercontent.com/31971607/104191698-d754a200-53eb-11eb-8e77-374b58143567.gif
+.. |evenview| image:: https://user-images.githubusercontent.com/31971607/104204457-4eddfd80-53fb-11eb-9d0d-06db9dafb5c8.gif
     :alt: EvenView
 	
-.. |criteriaview| image:: https://user-images.githubusercontent.com/31971607/104191709-db80bf80-53eb-11eb-8cae-cd182c92970c.gif
+.. |criteriaview| image:: https://user-images.githubusercontent.com/31971607/104204473-51d8ee00-53fb-11eb-9824-11f835292ef4.gif
 	:alt: CriteriaView
 	
-.. |definedview| image:: https://user-images.githubusercontent.com/31971607/104191740-e2a7cd80-53eb-11eb-90f2-b1fbb4331f1b.gif
+.. |definedview| image:: https://user-images.githubusercontent.com/31971607/104204480-53a2b180-53fb-11eb-91f9-98d624ccd170.gif
 	:alt: DefinedView
