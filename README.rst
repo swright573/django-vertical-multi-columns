@@ -15,11 +15,13 @@ Requirements
 Installation
 ------------
 Install using pip:
+
 .. code-block:: sh
 
     pip install vertical_multi_columns
 
 Then add ``'vertical_multi_columns'`` to your ``INSTALLED_APPS``.
+
 .. code-block:: python
 
     INSTALLED_APPS = [
