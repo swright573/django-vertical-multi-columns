@@ -33,17 +33,20 @@ Then add ``'vertical_multi_columns'`` to your ``INSTALLED_APPS``.
 Why You May Need This
 ---------------------
 Displaying a long list of items in a template is quite easy ... ``{% for row in rows %} ... {{ row.<field> }} ... {% endfor %}``. This comes at a cost for your end user though. Long lists 
-can require a user who is looking for something to do a lot of paging up and down or jumping back and forth from page to page if you implement pagination.
+can require someone who is looking for something to do a lot of paging up and down or jumping back and forth from page to page.
 
 What VMC Does
-VMC generates views with rows that contain multiple items where the items are still sorted so they can be read in order vertically but the items are spread across the screen in side by side columns. 
-You can specify the default number of columns in your Django settings. You can also override this by providing a different column setting in a view. VMC views are sub-classes of ListView so all the its capabilities are still available to you, such as pagination.
+-------------
+VMC generates views with rows that contain multiple items where those items are still sorted so they can be read in order vertically but they are spread across the screen in side by side columns. 
+You can specify the default number of columns in your Django settings. You can also override this by providing a different column setting in a VMC view. VMC views are sub-classes of ListView so all its capabilities are still available to you, such as pagination.
 
 Impact on Templates
 -------------------
 Your template must account for the number of columns you ask for. The template coding is still fairly easy. Rather than ``{% for row in rows %} ... {{ row.<field> }} ... {% endfor %}`` you would 
 code your template this way (for 3 columns):
-.. code-block:: sh
+
+.. code-block:: html
+
 {% for row in rows %}
 	<table>
 	  <tr>
@@ -66,19 +69,22 @@ code your template this way (for 3 columns):
 	 </table> 
 {% endfor %}
 
-Note that the if statement is required because rows may have empty slots in situations where columns are of different lengths.
+Note: The if statement is required because rows may have empty slots in situations where columns are of different lengths.
 
 View Options
 ------------
 There are 3 VMC views available.
 
-EvenView |evenview| 
+EvenView
+|evenview| 
 Spreads your data across the number of columns you specify, keeping the length of the columns as even as possible.
 
-CriteriaView |criteriaview|
+CriteriaView
+|criteriaview|
 You provide a list of functions, one per column, that VMC uses to determine which column an item will be placed in.
 
-DefinedView |definedview|
+DefinedView
+|definedview|
 This is for the scenario where you already have columns that you want displayed as is. You provide the list and VMC does the rest.
 
 Usage
