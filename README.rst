@@ -1,14 +1,11 @@
 Django-Vertical-Multi-Columns
 -----------------------------
-
 Django-Vertical-Multi-Columns (VMC) is a reusable Django application allowing users
 to display a list of items in side-by-side columns rather than in one long list.
-
 |comparison|
 
 Requirements
 ------------
-
 * **Python**: 3.5, 3.6, 3.7, 3.8, 3.9
 * **Django**: 2.2, 3.0, 3.1
 
@@ -28,7 +25,6 @@ Then add ``'vertical_multi_columns'`` to your ``INSTALLED_APPS``.
         ...
         'vertical_multi_columns',
     ]
-
 
 Why You May Need This
 ---------------------
@@ -75,17 +71,11 @@ View Options
 ------------
 There are 3 VMC views available.
 
-EvenView
-********
-Spreads your data across the number of columns you specify, keeping the length of the columns as even as possible.
+**EvenView** Spreads your data across the number of columns you specify, keeping the length of the columns as even as possible.
 
-CriteriaView
-************
-You provide a list of functions, one per column, that VMC uses to determine which column an item will be placed in.
+**CriteriaView** You provide a list of functions, one per column, that VMC uses to determine which column an item will be placed in.
 
-DefinedView
-***********
-You already have the columns you want displayed. You provide the list and VMC does the rest.
+**DefinedView** You already have the columns you want displayed. You provide the list and VMC does the rest.
 
 Usage
 -----
