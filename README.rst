@@ -42,8 +42,7 @@ Impact on Templates
 Your template must account for the number of columns you ask for. The template coding is still fairly easy. Rather than ``{% for row in rows %} ... {{ row.<field> }} ... {% endfor %}`` you would 
 code your template this way (for 3 columns):
 
-``
-{% for row in rows %}
+``{% for row in rows %}
 	<table>
 	  <tr>
 		<td>
@@ -63,8 +62,7 @@ code your template this way (for 3 columns):
 		</td>
 	  </tr>
 	 </table> 
-{% endfor %}
-``
+{% endfor %}``
 Note: The if statement is required because rows may have empty slots in situations where columns are of different lengths.
 
 View Options
