@@ -44,9 +44,9 @@ code your template this way (for 3 columns):
 
 .. code-block:: python
 
-	{% for row in rows %}
-	<table>
-	  <tr>
+    {% for row in rows %}
+    <table>
+      <tr>
        <td>
         {% if row.0.<field> %}
            {{ row.0.<field>}}
