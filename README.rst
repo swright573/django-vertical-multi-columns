@@ -76,16 +76,16 @@ View Options
 There are 3 VMC views available.
 
 EvenView
-^^^^^^^^
+********
 Spreads your data across the number of columns you specify, keeping the length of the columns as even as possible.
 
 CriteriaView
-^^^^^^^^^^^^
+************
 You provide a list of functions, one per column, that VMC uses to determine which column an item will be placed in.
 
 DefinedView
-^^^^^^^^^^^
-This is for the scenario where you already have columns that you want displayed as is. You provide the list and VMC does the rest.
+***********
+You already have the columns you want displayed. You provide the list and VMC does the rest.
 
 Usage
 -----
