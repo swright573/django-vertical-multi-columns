@@ -4,9 +4,7 @@ Django-Vertical-Multi-Columns
 Django-Vertical-Multi-Columns (VMC) is a reusable Django application allowing users
 to display a list of items in side-by-side columns rather than in one long list.
 
-This |multiple-columns-small| not this |single-column-small|
-
-
+|comparison|
 
 Requirements
 ------------
@@ -68,6 +66,8 @@ If you have questions about usage or development you can join the
 
 .. _`read the docs`: https://django-filter.readthedocs.io/en/master/
 .. _`mailing list`: http://groups.google.com/group/django-filter
+
+.. |comparison| image:: https://user-images.githubusercontent.com/31971607/104185855-90fb4500-53e3-11eb-87b2-ef301866de63.gif
 
 .. |multiple-columns-small| image:: https://user-images.githubusercontent.com/31971607/104095425-b6ae1000-5264-11eb-96c2-bf9b2542de6d.gif
     :alt: Multiple Columns
