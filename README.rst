@@ -26,6 +26,14 @@ Then add ``'vertical_multi_columns'`` to your ``INSTALLED_APPS``.
         ...
         'vertical_multi_columns',
     ]
+	
+You can specify a default number of columns in your Django settings:
+
+.. code-block:: python
+
+	VERTICAL_MULTI_COLUMNS = [
+		{NUMBER_OF_COLUMNS=3}
+	]	
 
 Why You May Need This
 ---------------------
@@ -36,37 +44,6 @@ What VMC Does
 -------------
 VMC generates views with rows that contain multiple items where those items are still sorted so they can be read in order vertically but they are spread across the screen in side by side columns. 
 You can specify the default number of columns in your Django settings. You can also override this by passing a different column setting to a VMC view. VMC views are sub-classes of ListView so all its capabilities are still available to you.
-
-Impact on Templates
--------------------
-Your template must account for the number of columns you ask for. The template coding is still fairly easy. Rather than ``{% for row in rows %} ... {{ row.<field> }} ... {% endfor %}`` you would 
-code your template this way (for 3 columns):
-
-.. code-block:: python
-
-    {% for row in rows %}
-    <table>
-      <tr>
-       <td>
-        {% if row.0.<field> %}
-           {{ row.0.<field>}}
-        {%  endif %}
-        </td>	
-       <td>
-        {% if row.1.<field> %}
-           {{ row.1.<field>}}
-        {%  endif %}
-        </td>
-       <td>
-        {% if row.2.<field> %}
-           {{ row.2.<field>}}
-        {%  endif %}
-        </td>	
-       </tr>
-    </table> 
-    {% endfor %}
-
-Note: The if statement is required because rows may have empty slots in situations where columns are of different lengths.
 
 View Options
 ------------
@@ -84,33 +61,10 @@ There are 3 VMC views available.
  
 |definedview|
 
-Usage
------
-
-Django-filter can be used for generating interfaces similar to the Django
-admin's ``list_filter`` interface.  It has an API very similar to Django's
-``ModelForms``.  For example, if you had a Product model you could have a
-filterset for it with the code:
-
-.. code-block:: python
-
-    import vertical_multi_columns
-
-
-And then in your view you could do:
-
-.. code-block:: python
-
-    def
-
-
-
-
 Support
 -------
 
-If you have questions about usage or development you can join the
-`mailing list`_.
+If you have questions about usage or development you can ... <tbd>
 
 .. _`read the docs`: TBD
 .. _`mailing list`: TBD

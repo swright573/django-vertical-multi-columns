@@ -1,16 +1,22 @@
-.. Django-Vertical_Multi-Columns documentation master file, created by
-   sphinx-quickstart on Wed Jan  6 10:20:13 2021.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+=============================
+django-vertical-multi-columns
+=============================
 
-Welcome to Django-Vertical_Multi-Columns's documentation!
-=========================================================
+Welcome to django-vertical-multi-columns's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: User Guide
 
+   guide/about
+   guide/install
+   guide/usage
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Developer Documentation
+
+   dev/tests
 
 Indices and tables
 ==================

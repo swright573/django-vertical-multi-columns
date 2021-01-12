@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/exercise_vmc.iml" filepath="$PROJECT_DIR$/.idea/exercise_vmc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/django-vertical-multi-columns.iml" filepath="$PROJECT_DIR$/.idea/django-vertical-multi-columns.iml" />
     </modules>
   </component>
 </project>

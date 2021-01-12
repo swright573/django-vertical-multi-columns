@@ -34,3 +34,7 @@ TEMPLATES = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (BASE_DIR + '/static/vmcdemo/', )
+
+VERTICAL_MULTI_COLUMNS = [
+    {NUMBER_OF_COLUMNS=3}
+]
