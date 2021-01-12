@@ -8,7 +8,7 @@ Django-vertical-multi-columns can be installed from PyPI with tools like ``pip``
 
     $ pip install django-vertical-multi-columns
 
-Then add ``'vertical-multi-columns'`` to your ``INSTALLED_APPS``.
+Add ``'vertical-multi-columns'`` to your ``INSTALLED_APPS``.
 
 .. code-block:: python
 
@@ -28,7 +28,7 @@ You can specify a default number of columns in your Django settings:
 Requirements
 ------------
 
-Django-filter is tested against all supported versions of Python and `Django`__.
+Django-vertical-multi-columns is tested against all supported versions of Python and `Django`__.
 
 __ https://www.djangoproject.com/download/
 

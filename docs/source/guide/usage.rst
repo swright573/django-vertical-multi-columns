@@ -4,18 +4,24 @@ Usage
 
 There are 3 VMC views available. These views are all subclasses of Django's ListView so all its capabilities are still available to you in addition to the specific VMC capabilities described below.
 
-Available Views
----------------
+Views Options
+#############
 
-**EvenVMCView** Spreads your data across the number of columns you specify, keeping the length of the columns as even as possible.
+**EvenVMCView** 
+
+Spreads your data across the number of columns you specify, keeping the length of the columns as even as possible.
 
 |evenview|
 
-**CriteriaVMCView** You provide a list of functions, one per column, that VMC uses to determine which column an item will be placed in.
+**CriteriaVMCView** 
+
+You provide a list of functions, one per column, that VMC uses to determine which column an item will be placed in.
 
 |criteriaview|
 
-**DefinedVMCView** You already have the columns you want displayed. You provide a column list and VMC does the rest.
+**DefinedVMCView** 
+
+You already have the columns you want displayed. You provide a column list and VMC does the rest.
  
 |definedview|
 
@@ -31,7 +37,7 @@ DefinedVMCView
 define method get_data() to retrieve a list of pre-defined columns which must be in JSON format.
 
 Sample Code
------------
+***********
 
 This example implements EvenVMCView but they are all fairly similar. Differences are noted below. Note that the example is pulling API data via requests but data from any source can be used.
 
@@ -45,13 +51,16 @@ This example implements EvenVMCView but they are all fairly similar. Differences
 
 	class MyEvenView(EvenVMCView):
 		def __init__(self, **kwargs):
-			# You can pass an optional num_columns kwarg to override the value in settings.
-			# If there is nothing in settings and you don't pass num_columns, the number of columns will be 3.
+			# You can pass an optional num_columns kwarg to override
+			#    the value in settings.
+			# If there is nothing in settings and you don't pass
+			#    num_columns, the number of columns will be 3.
 			super().__init__(num_columns=5)
 
 		def get_data(self):
-			# Write logic to retrieve the data to be displayed (often from an API) and return it sorted in the desired order.
-			# Data must be in JSON format.
+			# Write logic to retrieve the data to be displayed (often from an API)
+			# Sort it appropriately
+			# Note that data must be in JSON format.
 			resp = requests.get(<api_url>)
 			raw_api_data = resp.json()
 			sorted_api_data = sorted(raw_api_data, key=lambda i: i['<field>'])

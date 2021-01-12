@@ -12,7 +12,7 @@ Django-virtual-multi-columns (VMC) solves the excessive scrolling/paging problem
 
 |example|
 
-Some scrolling or paging may still be required but it will be less. The more columns you can display on the page, the less scrolling or paging will be required.
+Even if there are a lot of choices and some scrolling or paging is required, there will be less than otherwise. The more columns you can display on the page, the less scrolling or paging there will be.
 
 .. |example| image:: https://user-images.githubusercontent.com/31971607/104324478-7e514080-54b5-11eb-9399-da702969429f.GIF
     :alt: Example
