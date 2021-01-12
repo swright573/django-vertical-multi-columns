@@ -1,6 +1,6 @@
-=====
+*****
 Usage
-=====
+*****
 
 There are 3 VMC views available. These views are all subclasses of Django's ListView so all its capabilities are still available to you in addition to the specific VMC capabilities described below.
 

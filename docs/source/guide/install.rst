@@ -1,6 +1,6 @@
-============
+************
 Installation
-============
+************
 
 Django-vertical-multi-columns can be installed from PyPI with tools like ``pip``:
 
