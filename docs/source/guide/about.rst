@@ -1,6 +1,6 @@
-**********************************
-About Django-virtual-multi-columns
-**********************************
+*****
+About
+*****
 
 Django-Vertical-Multi-Columns (VMC) is a reusable Django application allowing users to display a list of items in side-by-side columns rather than in one long list.
 

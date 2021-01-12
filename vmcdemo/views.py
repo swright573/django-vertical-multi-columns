@@ -55,8 +55,8 @@ class CriteriaVMC(CriteriaVMCView):
     # down to here
 
     def get_data(self):
-#       resp = requests.get(_api_url, headers=_api_key)
-#       raw_api_data = resp.json()
+        #resp = requests.get(_api_url, headers=_api_key)
+        #raw_api_data = resp.json()
         raw_api_data = simulate.api_data_json()  # simulation
         sorted_api_data = sorted(raw_api_data, key=lambda i: i['name'], reverse=False)
         return sorted_api_data

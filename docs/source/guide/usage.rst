@@ -5,7 +5,7 @@ Usage
 There are 3 VMC views available. These views are all subclasses of Django's ListView so all its capabilities are still available to you in addition to the specific VMC capabilities described below.
 
 Views Options
-#############
+*************
 
 **EvenVMCView** 
 
@@ -25,16 +25,26 @@ You already have the columns you want displayed. You provide a column list and V
  
 |definedview|
 
+Required Overrides
+******************
 
-EvenVMCView
-define method get_data() to retrieve a list of data to be displayed which must be in JSON format.
+Some methods in the VMC classes must be overridden.
+
+**EvenVMCView**
+
+In your view, define a method ``get_data()`` to return a list of data to be displayed, sorted as you wish. It must be in JSON format.
 	
-CriteriaVMCView
-define method get_data() to retrieve a list of data to be displayed which must be in JSON format.
-define method get_column_criteria() to define logic used to place data items into columns
+**CriteriaVMCView**
+
+In your view, define 2 methods:
+* ``get_data()`` to return a list of data, sorted as you wish. It must be in JSON format.
+* ``get_column_criteria()`` to retrieve two things ...
+	1. a list of functions that will be used to place data items into columns, one function for each column.
+	2. a list of the dictionary keys referenced in the functions.
 	 
-DefinedVMCView
-define method get_data() to retrieve a list of pre-defined columns which must be in JSON format.
+**DefinedVMCView**
+
+In your view, define a method ``get_data()`` to return a list of pre-defined columns. They must be in JSON format.
 
 Sample Code
 ***********
