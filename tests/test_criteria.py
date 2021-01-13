@@ -82,8 +82,8 @@ def test_number_columns_kwarg_with_setting(entries_27,
     rows = instance.process_entries(entries_27, criteria_functions_5, function_args)
     num_cols = len(rows[0])
     assert num_cols == 5
-    
-def test_same_entries_in_same_vertical_order(entries_27, 
+
+def test_same_entries_in_same_vertical_order(entries_27,
                                              criteria_functions_2,
                                              function_args, 
                                              settings_NUMBER_OF_COLUMNS_2):
@@ -94,9 +94,36 @@ def test_same_entries_in_same_vertical_order(entries_27,
     instance = CriteriaVMCView()
     rows = instance.process_entries(entries_27, criteria_functions_2, function_args)
     temp_list = []
-    for c in range(2):
-        temp_list.append([rows[r][c]['name'] if rows[r][c] != '' else 'to-be-removed' for r in range(7)])
+    for c in range(2):   # hard coded 2 because I know this will generate 2 columns
+        temp_list.append([rows[r][c]['name'] if rows[r][c] != '' else 'to-be-removed' for r in range(len(rows))])
     temp_list = flatten(temp_list)
     generated_entries = [e for e in temp_list if e != 'to-be-removed']
     original_entries = [e['name'] for e in entries_27]
-    
+    assert generated_entries == original_entries
+
+# for next test ... class fixtures not yet supported in pytest
+# note ... I had to create this mocked version because overridden methods would not execute in tests
+class MockCriteriaVMCView(CriteriaVMCView):
+    def __init__(self, **kwargs: int):
+        super().__init__(**kwargs)
+        self.set_number_of_columns(**kwargs)
+        self.in_data = kwargs.get('in_data')
+
+    def get_data(self):
+        return self.in_data
+
+    def get_column_criteria(self):
+        def a_to_f(args):
+            parms = args.split(",")
+            return 'ABCDEF'.find(parms[0][0]) > -1
+        def g_to_s(args):
+            parms = args.split(",")
+            return 'GHIJKLMNOPQRS'.find(parms[0][0]) > -1
+        def t_to_z(args):
+            parms = args.split(",")
+            return 'TUVWXYZ'.find(parms[0][0]) > -1
+        return [a_to_f, g_to_s, t_to_z], ['name', 'id']
+
+def test_get_querydata(test_in_even_criteria_data, test_out_criteria_data, settings_NUMBER_OF_COLUMNS_3):
+    instance = MockCriteriaVMCView(in_data=test_in_even_criteria_data)
+    assert instance.get_queryset() == test_out_criteria_data

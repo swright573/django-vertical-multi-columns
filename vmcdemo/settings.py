@@ -36,5 +36,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (BASE_DIR + '/static/vmcdemo/', )
 
 VERTICAL_MULTI_COLUMNS = [
-    {NUMBER_OF_COLUMNS=3}
+    {'NUMBER_OF_COLUMNS': 3}
 ]

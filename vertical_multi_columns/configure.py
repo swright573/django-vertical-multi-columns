@@ -39,7 +39,6 @@ class EvenVMCView(BaseVMC, ListView):
     across the number of columns specified.
     '''
     def __init__(self, **kwargs: int):
-        #super().__init__(**kwargs)
         self.set_number_of_columns(**kwargs)
 
     def get_data(self) -> list:
@@ -86,21 +85,20 @@ class CriteriaVMCView(BaseVMC, ListView):
     functions passed to the class, one function per column.   
     '''
     def __init__(self, **kwargs: int):
-        #super().__init__(**kwargs)
         self.set_number_of_columns(**kwargs)
 
-    def get_data(self):
+    def get_data(self) -> list:
         '''
         Override this method to retrieve data.
         Return a list of items in json format, sorted in the order you wish them displayed.
         '''
-        pass
+        return []
 
-    def get_column_criteria(self):
+    def get_column_criteria(self) -> list:
         '''
         Override this method to retrieve the functions and keys needed to place data in the correct column.
         '''   
-        pass
+        return [[], []]
   
     def check_criteria(self, functions, keys):
         if not functions:
@@ -135,7 +133,7 @@ class CriteriaVMCView(BaseVMC, ListView):
         rows = self.build_rows(columns, max_column)
         return rows
             
-    def get_queryset(self):
+    def get_queryset(self) -> list:
         entries = self.get_data()
         functions, keys = self.get_column_criteria()
         self.check_criteria(functions, keys)
@@ -148,7 +146,6 @@ class DefinedVMCView(BaseVMC, ListView):
     Each column's contents are displayed without change.   
     '''
     def __init__(self, **kwargs: int):
-        #super().__init__(**kwargs)
         self.set_number_of_columns(**kwargs)
         
     def get_data(self):
@@ -172,7 +169,7 @@ class DefinedVMCView(BaseVMC, ListView):
         rows = self.build_rows(columns, max_column)
         return rows
         
-    def get_queryset(self):
+    def get_queryset(self) -> list:
         columns = self.get_data()
         processed_entries = self.process_columns(columns)
         return processed_entries

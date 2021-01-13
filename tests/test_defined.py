@@ -39,3 +39,18 @@ def test_same_data_after_processing(columns_2, settings_NUMBER_OF_COLUMNS_2):
             column.append(r)
         gen_columns_from_rows.append(column)
     assert gen_columns_from_rows == rows
+
+# for next test ... class fixtures not yet supported in pytest
+# note ... I had to create this mocked version because overridden methods would not execute in tests
+class MockDefinedVMCView(DefinedVMCView):
+    def __init__(self, **kwargs: int):
+        super().__init__(**kwargs)
+        self.set_number_of_columns(**kwargs)
+        self.defined_in_data = kwargs.get('in_data')
+
+    def get_data(self):
+        return self.defined_in_data
+
+def test_get_querydata(test_in_defined_data, test_out_defined_data, settings_NUMBER_OF_COLUMNS_4):
+    instance = MockDefinedVMCView(num_columns=4, in_data=test_in_defined_data)
+    assert instance.get_queryset() == test_out_defined_data

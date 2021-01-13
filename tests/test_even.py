@@ -65,3 +65,18 @@ def test_partial_rows_display_data_in_left_most_columns(entries_27, settings_NUM
         assert type(row[i]) is dict
     for i in range(2, 5):
         assert row[i] == ''
+
+# for next test ... class fixtures not yet supported in pytest
+# note ... I had to create this mocked version because overridden methods would not execute in tests
+class MockEvenVMCView(EvenVMCView):
+    def __init__(self, **kwargs: int):
+        super().__init__(**kwargs)
+        self.set_number_of_columns(**kwargs)
+        self.in_data = kwargs.get('in_data')
+
+    def get_data(self):
+        return self.in_data
+
+def test_get_querydata(test_in_even_criteria_data, test_out_even_data, settings_NUMBER_OF_COLUMNS_3):
+    instance = MockEvenVMCView(in_data=test_in_even_criteria_data)
+    assert instance.get_queryset() == test_out_even_data
