@@ -10,7 +10,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = int(os.environ.get("DEBUG", default=0))
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 INSTALLED_APPS = [
-    'django.contrib.staticfiles',
     'vertical_multi_columns'
 ]
 ROOT_URLCONF = 'vmcdemo.urls'
