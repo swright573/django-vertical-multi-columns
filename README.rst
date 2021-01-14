@@ -13,11 +13,13 @@ Requirements
 Installation
 ------------
 Install using pip:
+
 .. code-block:: sh
 
     pip install vertical_multi_columns
 
 Add ``'vertical_multi_columns'`` to your ``INSTALLED_APPS``.
+
 .. code-block:: python
 
     INSTALLED_APPS = [
@@ -72,10 +74,10 @@ If you have questions about usage or development you can ... <tbd>
 .. _`read the docs`: TBD
 .. _`mailing list`: TBD
 
-.. |comparison| image:: https://user-images.githubusercontent.com/31971607/104185855-90fb4500-53e3-11eb-87b2-ef301866de63.gif
+.. |comparison| image:: https://user-images.githubusercontent.com/31971607/104608321-bbe9d100-564f-11eb-96ba-270fc192ef4b.gif
 	:alt: Comparison
 
-.. |evenview| image:: https://user-images.githubusercontent.com/31971607/104204457-4eddfd80-53fb-11eb-9d0d-06db9dafb5c8.gif
+.. |evenview| image:: https://user-images.githubusercontent.com/31971607/104608352-c4daa280-564f-11eb-8084-2e78bf6ca1ce.gif
     :alt: EvenView
 	
 .. |criteriaview| image:: https://user-images.githubusercontent.com/31971607/104204473-51d8ee00-53fb-11eb-9824-11f835292ef4.gif
