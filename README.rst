@@ -7,19 +7,17 @@ to display a list of items in side-by-side columns rather than in one long list.
 
 Requirements
 ------------
-* **Python**: 3.5, 3.6, 3.7, 3.8, 3.9
+* **Python**: 3.7, 3.8, 3.9
 * **Django**: 2.2, 3.0, 3.1
 
 Installation
 ------------
 Install using pip:
-
 .. code-block:: sh
 
     pip install vertical_multi_columns
 
-Then add ``'vertical_multi_columns'`` to your ``INSTALLED_APPS``.
-
+Add ``'vertical_multi_columns'`` to your ``INSTALLED_APPS``.
 .. code-block:: python
 
     INSTALLED_APPS = [
@@ -27,7 +25,7 @@ Then add ``'vertical_multi_columns'`` to your ``INSTALLED_APPS``.
         'vertical_multi_columns',
     ]
 	
-You can specify a default number of columns in your Django settings:
+In your Django settings, you can optionally specify a default number of columns to be generated.
 
 .. code-block:: python
 
@@ -37,33 +35,38 @@ You can specify a default number of columns in your Django settings:
 
 Why You May Need This
 ---------------------
-Displaying a long list of items in a template is quite easy ... ``{% for row in rows %} ... {{ row.<field> }} ... {% endfor %}``. This comes at a cost for your end user though. Long lists 
-can require someone who is looking for something to do a lot of scrolling up and down or jumping back and forth from page to page.
+Displaying a long list of items in a template is quite easy.
+``{% for row in rows %} ... {{ row.<field> }} ... {% endfor %}``.
+This comes at a cost for your end user though. Searching through a long list can test your user's patience if it requires a lot of scrolling or paging.
 
 What VMC Does
 -------------
-VMC generates views with rows that contain multiple items where those items are still sorted so they can be read in order vertically but they are spread across the screen in side by side columns. 
-You can specify the default number of columns in your Django settings. You can also override this by passing a different column setting to a VMC view. VMC views are sub-classes of ListView so all its capabilities are still available to you.
+* VMC views let you generate rows that contain multiple items. Those items are still sorted so they can be read in order vertically but they are spread across the screen in side by side columns.
+* You specify the number of columns you want generated.
+* VMC views are sub-classes of ListView so all its capabilities are still available to you.
 
 View Options
 ------------
-There are 3 VMC views available.
+There are 3 views available.
 
-**EvenView** Spreads your data across the number of columns you specify, keeping the length of the columns as even as possible.
+**EvenView**
+This view spreads your data across the number of columns you specify, keeping the length of the columns as even as possible.
 
 |evenview|
 
-**CriteriaView** You provide a list of functions, one per column, that VMC uses to determine which column an item will be placed in.
+**CriteriaView**
+You provide a list of functions, one per column, that VMC uses to determine which column an item will be placed in.
 
 |criteriaview|
 
-**DefinedView** You already have the columns you want displayed. You provide a column list and VMC does the rest.
+**DefinedView**
+You already have the columns you want displayed. You provide a column list and VMC does the rest.
  
 |definedview|
 
+
 Support
 -------
-
 If you have questions about usage or development you can ... <tbd>
 
 .. _`read the docs`: TBD
