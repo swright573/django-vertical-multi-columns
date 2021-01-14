@@ -5,7 +5,7 @@ Usage
 There are 3 VMC views available. These views are all subclasses of Django's ListView so all its capabilities are still available to you in addition to the specific VMC capabilities described below.
 
 View Options
-************
+------------
 
 **EvenVMCView** 
 
@@ -26,7 +26,7 @@ You already have the columns you want displayed. You provide a column list and V
 |definedview|
 
 Required Overrides
-******************
+------------------
 
 Some methods in the VMC classes must be overridden.
 
@@ -48,7 +48,7 @@ In your view, define 2 methods:
 In your view, define a method ``get_data()`` to return a list of pre-defined columns. They must be in JSON format.
 
 Sample Code
-***********
+-----------
 
 This example implements EvenVMCView but they are all fairly similar. Differences are noted below. Note that the example is pulling API data via requests but data from any source can be used.
 
@@ -81,9 +81,9 @@ This example implements EvenVMCView but they are all fairly similar. Differences
 		context_object_name = "<your_choice>"
 
 Sample App
-**********
+----------
 
-There is a sample app ...
+There is a sample app you can run to see the VMC views in action. It has no outside 
 
 
 

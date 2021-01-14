@@ -43,6 +43,7 @@ def entries_27():
          {'id':44,'name':'Sweet Potato'},{'id':1,'name':'Tomatoes'},{'id':32,'name':'Turnips'}]
 
 @pytest.fixture()
+# not used
 def entries_4():
     # This list has 4 entries
     return [{'id':5,'name':'Asparagus'},
