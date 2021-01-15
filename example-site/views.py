@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-from vertical_multi_columns.configure import EvenVMCView, CriteriaVMCView, DefinedVMCView
+from vertical_multi_columns.views import EvenVMCView, CriteriaVMCView, DefinedVMCView
 #import os
 #import requests
 from . import simulate
