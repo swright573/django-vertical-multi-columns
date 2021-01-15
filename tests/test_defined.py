@@ -1,5 +1,5 @@
 import pytest
-from vertical_multi_columns.configure import DefinedVMCView
+from vertical_multi_columns.views import DefinedVMCView
 from django.core.exceptions import ImproperlyConfigured
 
 # Testing DefinedVMCView

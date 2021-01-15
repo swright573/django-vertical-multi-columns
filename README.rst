@@ -18,7 +18,7 @@ Install using pip:
 
     pip install vertical_multi_columns
 
-Add ``'vertical_multi_columns'`` to your ``INSTALLED_APPS``.
+Add 'vertical_multi_columns' to your INSTALLED_APPS setting.
 
 .. code-block:: python
 
@@ -38,8 +38,10 @@ In your Django settings, you can optionally specify a default number of columns 
 Why You May Need This
 ---------------------
 Displaying a long list of items in a template is quite easy.
-``{% for row in rows %} ... {{ row.<field> }} ... {% endfor %}``.
-This comes at a cost for your end user though. Searching through a long list can test your user's patience if it requires a lot of scrolling or paging.
+
+``{% for row in rows %} ... {{ row.<field> }} ... {% endfor %}``
+
+This comes at a cost for your end user though. Searching through a long list can test someone's patience if it requires a lot of scrolling or paging.
 
 What VMC Does
 -------------
@@ -67,8 +69,8 @@ You already have the columns you want displayed. You provide a column list and V
 |definedview|
 
 
-Support
--------
+Comments & Support
+------------------
 If you have questions about usage or development you can ... <tbd>
 
 .. _`read the docs`: TBD

@@ -1,5 +1,5 @@
 import pytest
-from vertical_multi_columns.configure import CriteriaVMCView
+from vertical_multi_columns.views import CriteriaVMCView
 from django.core.exceptions import ImproperlyConfigured
 from django.contrib.admin.utils import flatten
 

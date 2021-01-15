@@ -1,5 +1,5 @@
 import pytest
-from vertical_multi_columns.configure import BaseVMC
+from vertical_multi_columns.views import BaseVMC
 
 # Testing method pad_columns
 #   What to test
