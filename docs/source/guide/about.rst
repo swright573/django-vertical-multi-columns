@@ -8,11 +8,11 @@ In a typical "list" view where you are potentially displaying a lot of choices, 
 
 It is quite natural for people to scan their eyes up and down a vertical list to find what they are looking for. But if the list is long, it can be quite annoying to have to do a lot of scrolling or paging up and down.
 
-Django-virtual-multi-columns (VMC) solves the excessive scrolling/paging problem. It enables a view class to generate input to your template that lets you easily display your items in side-by-side columns that are still sorted vertically.
+Django-virtual-multi-columns (VMC) solves the excessive scrolling/paging problem. It enables a view class to generate input to your template so you can easily display your items in side-by-side columns that are still sorted vertically.
 
 |example|
 
-Even if there are a lot of choices and some scrolling or paging is required, there will be less than otherwise. The more columns you can display on the page, the less scrolling or paging there will be.
+Even if there are a lot of choices and some scrolling or paging is still required, there will be less than otherwise. The more columns you can display on the page, the less scrolling or paging there will be.
 
 .. |example| image:: https://user-images.githubusercontent.com/31971607/104324478-7e514080-54b5-11eb-9399-da702969429f.GIF
     :alt: Example

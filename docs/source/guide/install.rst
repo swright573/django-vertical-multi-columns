@@ -28,7 +28,7 @@ You can specify a default number of columns in your Django settings:
 Requirements
 ************
 
-Django-vertical-multi-columns is tested against supported versions of Python 3.7/3.8/3.9 and `Django`__.
+Django-vertical-multi-columns is tested against supported versions of Python and `Django`__.
 
 __ https://www.djangoproject.com/download/
 

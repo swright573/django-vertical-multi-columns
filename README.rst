@@ -45,7 +45,7 @@ This comes at a cost for your end user though. Searching through a long list can
 
 What VMC Does
 -------------
-* VMC views let you generate rows that contain multiple items. Those items are still sorted so they can be read in order vertically but they are spread across the screen in side by side columns.
+* VMC views let you generate rows that can easily be displayed in multiple side-by-side columns in your templates. The columns retain your sort order so your users can still scan the data in a natural up-and-down way. And because the items are spread across the screen, your content takes  less vertical space, reducing the amount of scrolling/paging a user must do.
 * You specify the number of columns you want generated.
 * VMC views are sub-classes of ListView so all its capabilities are still available to you.
 
@@ -68,10 +68,22 @@ You already have the columns you want displayed. You provide a column list and V
  
 |definedview|
 
+Documentation
+-------------
+For more extensive document see the ``docs`` folder or `read it on readthedocs`._
+
+.. _`read it on readthedocs`: https://django-vertical-multi-columns.readthedocs.io/en/latest/index.html
 
 Comments & Support
 ------------------
 If you have questions about usage or development you can ... <tbd>
+
+Special Thanks
+--------------
+
+* To `Graham Wright` for his guidance and support in publishing this.
+
+.. _`Graham Wright`: https://github.com/gwright99/gwright99.github.io
 
 .. _`read the docs`: TBD
 .. _`mailing list`: TBD

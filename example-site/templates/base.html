@@ -7,18 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Django VMC Demo App</title>
-    <link href="//cdn.muicss.com/mui-0.10.3/css/mui.min.css" rel="stylesheet" type="text/css" />
-    <link href="{% static 'vmcdemo/css/style.css' %}" rel="stylesheet" type="text/css" />
-    <script src="//cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
+    <link href="{% static 'vmcexamplesite/css/style.css' %}" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <header class="mui-appbar mui--z1">
-      <div class="mui-container">
-        <table>
-			<tr class="mui--appbar-height">
-                <td class="mui--text-title"><a href="{% url "home" %}"><strong>Django Vertical Multi Columns</strong></a></td>
-                <td class="mui--text-right">
-					<ul class="mui-list--inline mui--text-body2">
+    <header>
+      <div>
+        <table border=1>
+			<tr>
+				<td><a href="{% url "home" %}"><strong>Django Vertical Multi Columns</strong></a></td>
+			</tr>
+			<tr>
+                <td>
+					<ul>
                     <li><a href="{% url "even_list" %}" target="_self">Even List</a></li>
                     <li><a href="{% url "criteria_list" %}" target="_self">Criteria List</a></li>
                     <li><a href="{% url "defined_list" %}" target="_self">Defined List</a></li>
@@ -29,7 +29,7 @@
       </div>
     </header>
     <p> </p>
-    <div class="mui-container">
+    <div>
         <br><br>
         <div id="messages">
           {% for message in messages %}
@@ -40,6 +40,6 @@
         </div>
 {% block content %}{% endblock %}
     </div>
-    <p class="mui-appbar mui--z1"></p>
+    <p></p>
   </body>
 </html>

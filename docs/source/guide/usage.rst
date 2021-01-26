@@ -2,7 +2,7 @@
 Usage
 *****
 
-There are 3 VMC views available. These views are all subclasses of Django's ListView so all its capabilities are still available to you in addition to the specific VMC capabilities described below.
+There are 3 VMC views available. They are all subclasses of Django's ListView so in addition to the specific VMC capabilities described below, all ListView's capabilities are still available to you.
 
 View Options
 ------------
@@ -32,7 +32,7 @@ Some methods in the VMC classes must be overridden.
 
 **EvenVMCView**
 
-In your view, define a method ``get_data()`` to return a list of data to be displayed, sorted as you wish. It must be in JSON format.
+In your view, define a method ``get_data()`` to return a list of data to be displayed, sorted as you wish, and returned in JSON format.
 	
 **CriteriaVMCView**
 
@@ -40,12 +40,12 @@ In your view, define 2 methods:
 
 * ``get_data()`` to return a list of data, sorted as you wish. It must be in JSON format.
 * ``get_column_criteria()`` to retrieve two things ...
-	1. a list of functions that will be used to place data items into columns, one function for each column.
+	1. a list of functions to be used to place data items into columns, one function for each column.
 	2. a list of the dictionary keys referenced in the functions.
 	 
 **DefinedVMCView**
 
-In your view, define a method ``get_data()`` to return a list of pre-defined columns. They must be in JSON format.
+In your view, define a method ``get_data()`` to return a list of pre-defined columns in JSON format.
 
 Sample Code
 -----------
@@ -80,11 +80,44 @@ This example implements EvenVMCView but they are all fairly similar. Differences
 		template_name = '<your_template>.html'
 		context_object_name = "<your_choice>"
 
-Sample App
-----------
+Example Site
+------------
 
-There is a sample app you can run to see the VMC views in action. It has no outside 
+There is a example siie you can install and run to see the VMC views in action. It has no external requirements other than for you to have pip installed
+both Django itself and the django-vertical_multi_columns package.
 
+WILL BE REMOVED ...
+Django-vertical-multi-columns can be installed from PyPI with tools like ``pip``:
+
+.. code-block:: bash
+
+    $ pip install django-vertical-multi-columns
+... DOWN TO HERE
+
+Create a Python virtual directory and activate it. (This is optional and can be done in whatever manner you choose.)
+
+Install Django and the django-vertical-multi-columns package.
+
+.. code-block:: bash
+
+	$ pip install django
+	$ pip install django-vertical-multi-columns
+
+Create a new Django project called vmcexamplesite.
+
+.. code-block:: bash
+
+	$ django-admin startproject vmcexamplesite
+	
+Copy all the files in example-site in the repo into the vmcexamplesite directory Django just created.
+
+Execute python manage.py runserver to activate the site.
+
+.. code-block:: bash
+
+	$ python manage.py runserver
+	
+Point your browser to localhost:8000. More information about the site is provided there under "About the VMC Example Site.
 
 
 .. |evenview| image:: https://user-images.githubusercontent.com/31971607/104204457-4eddfd80-53fb-11eb-9d0d-06db9dafb5c8.gif

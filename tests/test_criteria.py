@@ -101,8 +101,8 @@ def test_same_entries_in_same_vertical_order(entries_27,
     original_entries = [e['name'] for e in entries_27]
     assert generated_entries == original_entries
 
-# for next test ... class fixtures not yet supported in pytest
-# note ... I had to create this mocked version because overridden methods would not execute in tests
+# For next test ... class fixtures are not yet supported in pytest. Therfore I had to create this mocked version
+# because overridden methods in imported classes will not execute in tests
 class MockCriteriaVMCView(CriteriaVMCView):
     def __init__(self, **kwargs: int):
         super().__init__(**kwargs)
