@@ -24,6 +24,7 @@ class _BaseVMC:
                 self.number_of_columns = 3
             else:
                 self.number_of_columns = _user_settings['NUMBER_OF_COLUMNS']
+                #self.number_of_columns = list(map(lambda x: x['NUMBER_OF_COLUMNS'], _user_settings))[0]
 
     def pad_columns(self, columns: list) -> [list, int]:
         """Determines the longest column so the rest can be padded to the same length"""

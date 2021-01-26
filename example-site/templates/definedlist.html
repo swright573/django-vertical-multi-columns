@@ -3,12 +3,22 @@
 {% load static %}
 
 {% block content %}
-  <br><br>
+  <p style="font-size:20px;color:red;">Defined List</p>
   <table style="width:100%">
-    <tr>
-      <td class="mui--text-title"><a id="pageTitle"
-                                     href="{% url "defined_list" %}"><strong>Defined List</strong></a></td>
-    </tr>
+	<tr>
+        <td style="width:25%">
+            <strong>Column 1</strong>
+        </td>
+        <td style="width:25%">
+            <strong>Column 2</strong>
+        </td>
+        <td style="width:25%">
+            <strong>Column 3</strong>
+        </td>
+		<td style="width:25%">
+            <strong>Column 4</strong>
+        </td>
+	</tr>
     {% for row in rows %}
     <tr>
         <td style="width:25%">

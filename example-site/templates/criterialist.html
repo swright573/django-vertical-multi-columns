@@ -3,22 +3,19 @@
 {% load static %}
 
 {% block content %}
-  <br><br>
+  <p style="font-size:20px;color:red;">Criteria List</p>
   <table style="width:100%">
     <tr>
-      <td class="mui--text-title"><a id="pageTitle"
-                                     href="{% url "defined_list" %}"><strong>Criteria List</strong></a></td>
-    </tr>
-    <tr>
         <td style="width:33%">
-            <strong>A to F</strong>
+            <strong>Column 1</strong>
         </td>
         <td style="width:33%">
-            <strong>G to S</strong>
+            <strong>Column 2</strong>
         </td>
         <td style="width:34%">
-            <strong>S to Z</strong>
+            <strong>Column 3</strong>
         </td>
+	</tr>	
     {% for row in rows %}
     <tr>
         <td>

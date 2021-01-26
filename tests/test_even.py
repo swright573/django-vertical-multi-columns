@@ -71,7 +71,6 @@ def test_partial_rows_display_data_in_left_most_columns(entries_27, settings_NUM
 class MockEvenVMCView(EvenVMCView):
     def __init__(self, **kwargs: int):
         super().__init__(**kwargs)
-        self.set_number_of_columns(**kwargs)
         self.in_data = kwargs.get('in_data')
 
     def get_data(self):

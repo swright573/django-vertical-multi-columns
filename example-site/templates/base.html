@@ -6,40 +6,33 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Django VMC Demo App</title>
-    <link href="{% static 'vmcexamplesite/css/style.css' %}" rel="stylesheet" type="text/css" />
+    <title>Django Vertical Multi Columns</title>
   </head>
-  <body>
+  <body style="font-family:verdana,serif">
     <header>
-      <div>
-        <table border=1>
-			<tr>
-				<td><a href="{% url "home" %}"><strong>Django Vertical Multi Columns</strong></a></td>
-			</tr>
-			<tr>
-                <td>
-					<ul>
-                    <li><a href="{% url "even_list" %}" target="_self">Even List</a></li>
-                    <li><a href="{% url "criteria_list" %}" target="_self">Criteria List</a></li>
-                    <li><a href="{% url "defined_list" %}" target="_self">Defined List</a></li>
-					</ul>
-				</td>
-			</tr>
-        </table>
-      </div>
+		<div style="font-size:20px; color:blue;"> Example Site - Django Vertical Multi Columns</div>
+		<hr>
+		<p>Click to view:</p>
+		  <a href="{% url "about" %}" target="_self">About the VMC Example Site</a>
+		  <ul>
+            <li><a href="{% url "even_list" %}" target="_self">VMC Even List</a></li>
+            <li><a href="{% url "criteria_list" %}" target="_self">VMC Criteria List</a></li>
+            <li><a href="{% url "defined_list" %}" target="_self">VMC Defined List</a></li>
+			<li><a href="{% url "standard_list" %}" target="_self">Standard Django List</a></li>
+		   </ul>
     </header>
-    <p> </p>
-    <div>
-        <br><br>
-        <div id="messages">
-          {% for message in messages %}
-            <p style="color: {% if message.tags == 'success' %}green{% elif message.tags == 'error' %}red{% endif %}">
-              {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
-            </p>
-          {% endfor %}
-        </div>
+	<br>
+	<hr>
 {% block content %}{% endblock %}
+    <br>
+    <div id="messages">
+        {% for message in messages %}
+        <p style="color: {% if message.tags == 'success' %}green{% elif message.tags == 'error' %}red{% endif %}">
+			{% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+        </p>
+        {% endfor %}
     </div>
     <p></p>
+
   </body>
 </html>

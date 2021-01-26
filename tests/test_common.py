@@ -54,7 +54,7 @@ def test_pad_lots_of_columns(entries_0, columns_many):
 
 # The next two tests are verifying the same thing.
 # I've included them for my own documentation.
-# They deomonstrate using a parametrized fixture versus passing multiple fixtures with getfixturevalue()
+# They demonstrate using a parametrized fixture versus passing multiple fixtures with getfixturevalue()
 
 def test_build_using_parametrized_fixture(padded_columns):
     original_columns = padded_columns[0]

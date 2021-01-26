@@ -106,7 +106,6 @@ def test_same_entries_in_same_vertical_order(entries_27,
 class MockCriteriaVMCView(CriteriaVMCView):
     def __init__(self, **kwargs: int):
         super().__init__(**kwargs)
-        self.set_number_of_columns(**kwargs)
         self.in_data = kwargs.get('in_data')
 
     def get_data(self):

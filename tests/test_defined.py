@@ -45,7 +45,6 @@ def test_same_data_after_processing(columns_2, settings_NUMBER_OF_COLUMNS_2):
 class MockDefinedVMCView(DefinedVMCView):
     def __init__(self, **kwargs: int):
         super().__init__(**kwargs)
-        self.set_number_of_columns(**kwargs)
         self.defined_in_data = kwargs.get('in_data')
 
     def get_data(self):

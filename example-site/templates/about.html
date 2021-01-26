@@ -1,0 +1,28 @@
+<!doctype html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div style="color:blue">The VMC Example Site</div>
+  <p>This site will show you the various VMC views in action and how to code them.</p>
+  <p>
+	<ul>
+		<li>Each sample view includes the same 45 items, each displayed in a different configuration depending on the view.</li>
+		<br>
+			<ul>
+			<li>Look at views.py to see how each was coded.</li>
+			<br>
+			<li>Look at the templates to see how the view data is referenced for display.</li>
+			</ul>
+			<br>
+		<li>You can configure the default number of columns in settings or you can specify this in your VMC view. In priority order:</li>
+		<br>
+			<ul>
+			<li>Pass the number of columns as kwarg 'num_columns'. (See class EvenVMC in views.py in the example app.)</li>
+			<br>
+			<li>Define the default number of columns in your Django settings. (See settings.py in the example app.)</li>
+			<br>
+			<li>If no kwarg is passed and there is no setting defined, the number of columns defaults to 3.
+			</ul>
+  </p>	
+{% endblock %}

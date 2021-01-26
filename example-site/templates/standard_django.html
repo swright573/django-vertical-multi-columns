@@ -1,0 +1,19 @@
+<!doctype html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <p style="font-size:20px;color:red;">Standard Django View</p>
+  <table style="width:100%">
+    {% for row in rows %}
+    <tr>
+        <td style="width:100%">
+            {{ row.name|capfirst }}
+        </td>
+    </tr>
+{%  empty %}
+        There are no results to display.
+  {% endfor %}
+  </table>
+  <br>
+{% endblock %}

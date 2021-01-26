@@ -11,18 +11,21 @@ multi_line_output = 3
 [tool.tox]
 legacy_tox_ini = """
 [tox]
+
 envlist = 
     django22-py{37,38,39}
     django30-py{37,38,39}
     django31-py{37,38,39}
+
 
 [testenv]
 deps =
     django22: Django>=2.2,<2.3
     django30: Django>=3.0,<3.1
     django31: Django>=3.1,<3.2
-	pytest
-	pytest-django
+    pytest
+    pytest-django
+    
 commands = pytest
 setenv PYTHONDONTWRITEBYTECODE=1
 """
