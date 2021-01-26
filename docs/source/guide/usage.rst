@@ -83,16 +83,8 @@ This example implements EvenVMCView but they are all fairly similar. Differences
 Example Site
 ------------
 
-There is a example siie you can install and run to see the VMC views in action. It has no external requirements other than for you to have pip installed
+There is a example site you can install and run to see the VMC views in action. It has no external requirements other than for you to have pip installed
 both Django itself and the django-vertical_multi_columns package.
-
-WILL BE REMOVED ...
-Django-vertical-multi-columns can be installed from PyPI with tools like ``pip``:
-
-.. code-block:: bash
-
-    $ pip install django-vertical-multi-columns
-... DOWN TO HERE
 
 Create a Python virtual directory and activate it. (This is optional and can be done in whatever manner you choose.)
 
