@@ -25,8 +25,8 @@ You already have the columns you want displayed. You provide a column list and V
  
 |definedview|
 
-Required Overrides
-------------------
+Required Method Overrides
+-------------------------
 
 Some methods in the VMC classes must be overridden.
 
