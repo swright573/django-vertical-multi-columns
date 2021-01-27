@@ -86,30 +86,50 @@ Example Site
 There is a example site you can install and run to see the VMC views in action. It has no external requirements other than for you to have pip installed
 both Django itself and the django-vertical_multi_columns package.
 
-1. Create a Python virtual directory and activate it. (This is optional and can be done in whatever manner you choose.)
+(*Windows commands shown. Use the equivalent if you run on Mac or Linux.*)
+
+1. Create a Python virtual directory and activate it. (*This is optional. If using, use your normal method.*)
+
+.. code:block:: bash
+	
+	python -m venv <*virtualdirectory*>
+	.\<*virtualdirectory*\scripts\activate
 
 2. Install Django and the django-vertical-multi-columns package.
 
 .. code-block:: bash
 
-	$ pip install django
-	$ pip install django-vertical-multi-columns
+	pip install django
+	pip install django-vertical-multi-columns
 
 3. Create a new Django project called vmcexamplesite.
 
 .. code-block:: bash
 
-	$ django-admin startproject vmcexamplesite
+	django-admin startproject vmcexamplesite
 	
 4. Copy all the files in example-site in the repo into the vmcexamplesite directory Django just created.
 
-5. Execute python manage.py runserver to activate the site.
+.. code-block:: bash
+	
+	cd .\vmcexamplesite
+	copy <*repodirectory*>\example-site\*.*
+	
+5. Update settings.py with your secret key (*or use an environment variable*)
 
 .. code-block:: bash
 
-	$ python manage.py runserver
+	...
+	SECRET_KEY = <*insert your Django secret key here*>
+	...
+
+6. Execute runserver to activate the site.
+
+.. code-block:: bash
+
+	python manage.py runserver
 	
-6. Point your browser to localhost:8000. More information about the site is provided there under "About the VMC Example Site.
+7. Point your browser to localhost:8000. More information about the site is provided there under "About the VMC Example Site.
 
 
 .. |evenview| image:: https://user-images.githubusercontent.com/31971607/104204457-4eddfd80-53fb-11eb-9d0d-06db9dafb5c8.gif

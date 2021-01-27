@@ -19,12 +19,11 @@ class _BaseVMC:
         """
         self.number_of_columns = kwargs.get("num_columns")
         if self.number_of_columns is None:
-            _user_settings = getattr(settings, "VERTICAL_MULTI_COLUMNS", {})
-            if _user_settings == {}:
+            try:
+                _user_settings = getattr(settings, "VERTICAL_MULTI_COLUMNS")
+                self.number_of_columns = list(map(lambda x: x['NUMBER_OF_COLUMNS'], _user_settings))[0]
+            except:
                 self.number_of_columns = 3
-            else:
-                self.number_of_columns = _user_settings['NUMBER_OF_COLUMNS']
-                #self.number_of_columns = list(map(lambda x: x['NUMBER_OF_COLUMNS'], _user_settings))[0]
 
     def pad_columns(self, columns: list) -> [list, int]:
         """Determines the longest column so the rest can be padded to the same length"""

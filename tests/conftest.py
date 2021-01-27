@@ -9,23 +9,23 @@ def pytest_configure():
 # ------ Fixtures for number of columns
 @pytest.fixture()
 def settings_NUMBER_OF_COLUMNS_Null():
-    settings.VERTICAL_MULTI_COLUMNS = {}
+    settings.VERTICAL_MULTI_COLUMNS = None
 
 @pytest.fixture()
 def settings_NUMBER_OF_COLUMNS_2():
-    settings.VERTICAL_MULTI_COLUMNS = {'NUMBER_OF_COLUMNS': 2}
+    settings.VERTICAL_MULTI_COLUMNS = [{'NUMBER_OF_COLUMNS': 2}]
     
 @pytest.fixture()
 def settings_NUMBER_OF_COLUMNS_3():
-    settings.VERTICAL_MULTI_COLUMNS = {'NUMBER_OF_COLUMNS': 3}
+    settings.VERTICAL_MULTI_COLUMNS = [{'NUMBER_OF_COLUMNS': 3}]
 
 @pytest.fixture()
 def settings_NUMBER_OF_COLUMNS_4():
-    settings.VERTICAL_MULTI_COLUMNS = {'NUMBER_OF_COLUMNS': 4}
+    settings.VERTICAL_MULTI_COLUMNS = [{'NUMBER_OF_COLUMNS': 4}]
 
 @pytest.fixture()
 def settings_NUMBER_OF_COLUMNS_5():
-    settings.VERTICAL_MULTI_COLUMNS = {'NUMBER_OF_COLUMNS': 5}
+    settings.VERTICAL_MULTI_COLUMNS = [{'NUMBER_OF_COLUMNS': 5}]
 
 # ------ Fixtures for data in
 @pytest.fixture()

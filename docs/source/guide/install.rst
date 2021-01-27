@@ -6,7 +6,7 @@ Django-vertical-multi-columns can be installed from PyPI with tools like ``pip``
 
 .. code-block:: bash
 
-    $ pip install django-vertical-multi-columns
+    pip install django-vertical-multi-columns
 
 Add ``'vertical-multi-columns'`` to your ``INSTALLED_APPS``.
 
