@@ -76,7 +76,7 @@ For more extensive document see the ``docs`` folder or `read it in readthedocs`.
 
 Comments & Support
 ------------------
-If you have questions about usage or development you can ... <tbd>
+If you have questions about usage or development you can contact <a href='mailto:lsusanwright573@gmail.com>lsusanwright573@gmail.col</a>.
 
 Special Thanks
 --------------

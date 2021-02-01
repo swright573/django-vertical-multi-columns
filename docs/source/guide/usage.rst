@@ -67,7 +67,7 @@ Define 2 methods:
 * ``get_column_criteria()`` to return two things:
 	* a list containing the functions VMC should use to place your data items into columns, one function per column.
 	* a list containing the dictionary keys referenced in the functions.
-	* NOTE: See `How Passed CriteriaVMCView Functions Work`__ below for a more in depth explanation.
+	* NOTE: See How Passed CriteriaVMCView Functions Work below for a more in depth explanation.
 	 
 **DefinedVMCView**
 
@@ -162,17 +162,19 @@ When is a VMC View Appropriate?
 
 VMC views are meant for situations where you want to display a lots of short data in less vertical space than a straightforward ListView would require.
 
-A common use case would be to query an API for a list of choices (e.g. a list of plants or a list of car models) which you display as links in a VMC view. The end user could select one of those links which triggers a further call to the API to retrieve more detailed information about that choice. You could display that in a DetailView.
+A common use case is to query an API for a list of choices (e.g. a list of plants or a list of car models) which you display as links in a VMC view. The end user could select one of those links which triggers a further call to the API to retrieve more detailed information about that choice. You could display that in a DetailView.
 
 While VMC views do support hierarchical JSON data, this is not recommended since it adds unneeded complexity to your Django templates. You are better off either:
 
 * limiting your "VMC" API return data to only what is required for a user to make a choice, or
 * if hierarchical JSON must be returned by the API, extract the data you need in the view.
 
+.. _how-passed-functions-work:
+
 How Passed CriteriaVMCView Functions Work
 -----------------------------------------
 
-You pass a list of functions and a list of your data's JSON keys to CriteriaVMCView to determine in which column each data item should appear. This scenario should help explain how you should write those functions.
+You pass a list of functions and a list of your data's JSON keys to CriteriaVMCView to determine in which column each data item should appear. This scenario should help explain how you write those functions.
 
 Scenario:
 
@@ -182,7 +184,7 @@ Your API call returns a set of data which includes a list of plants. Specificall
 
 Say you want to display 3 columns ... plants starting with A-F in one column, those starting with G-S in another, and T-Z in a third column.
 
-Using A-F as an example, in the function list (one per column) you pass to CriteriaVMCView when you override the get_column_criteria() method, you would pass this function . This function is looking for instances in your returned data where the first letter of 'name' is in the range 'ABCDEF'. If so, the function returns True. If not, it returns False.
+We'll use A-F as an example. It would be included in the function list (one per column) you pass to CriteriaVMCView in your get_column_criteria() method. This function is looking for instances in your returned data where the first letter of 'name' is in the range 'ABCDEF'. If so, the function returns True. If not, it returns False.
 
 .. code-block:: python
 
@@ -190,7 +192,7 @@ Using A-F as an example, in the function list (one per column) you pass to Crite
         parms = args.split(",")
         return 'ABCDEF'.find(parms[0][0]) > -1
 
-In get_column_criteria(), you will also pass a list of the JSON keys ``['name', 'id']``. These are items in your data that you either want to query in a function or that you want passed to your template. 
+In get_column_criteria(), you will also pass a list of the JSON keys ``['name', 'id']``. These are items in your data that you either want to query in a function or you want passed to your template. 
 
 CriteriaVMCView's logic will apply your functions, using some or all of the JSON keys you pass, to each item in your data to determine if that item should appear in that function's column.
 
@@ -200,7 +202,7 @@ The passed string will be split by our function, giving list ``['Asparagus', '5'
 
 Since our function is only interested in the name, it looks only at ``parms[0]`` which is 'Asparagus'. And further, since it is only interested in the first letter of name, it only looks at ``parms[0][0]`` which is 'A'. The function returns True if parms[0][0] is in the range A-F and False if it is not.
 
-In the True case, that item will appear in that column. If False, it will not. Note that items can appear in multiple columns if function criteria overlap. Conversely an item can appear in no columns if none of the function criteria is met.
+If True, that item will appear in the column. If False, it will not. Note that items can appear in multiple columns if function criteria overlap. Conversely an item can appear in no columns if none of the function criteria are met.
 
 
 .. |evenview| image:: https://user-images.githubusercontent.com/31971607/104608352-c4daa280-564f-11eb-8084-2e78bf6ca1ce.gif
