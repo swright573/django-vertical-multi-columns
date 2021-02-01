@@ -67,7 +67,7 @@ Define 2 methods:
 * ``get_column_criteria()`` to return two things:
 	* a list containing the functions VMC should use to place your data items into columns, one function per column.
 	* a list containing the dictionary keys referenced in the functions.
-	* NOTE: See `How Passed CriteriaVMCView Functions Work`__ below for a more in depth explanation.
+	* NOTE: See How Passed CriteriaVMCView Functions Work__ below for a more in depth explanation.
 	 
 **DefinedVMCView**
 
