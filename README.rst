@@ -83,7 +83,7 @@ Special Thanks
 
 * To `Graham Wright` for his guidance and support in publishing this.
 
-.. _`Susan Wright`: `mailto:lsusanwright573@gmail.com
+.. _`Susan Wright`: mailto:lsusanwright573@gmail.com
 .. _`Graham Wright`: https://github.com/gwright99/gwright99.github.io
 .. _`read the docs`: TBD
 .. _`mailing list`: TBD
