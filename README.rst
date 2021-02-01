@@ -76,17 +76,16 @@ For more extensive document see the ``docs`` folder or `read it in readthedocs`.
 
 Comments & Support
 ------------------
-If you have questions about usage or development you can contact `Susan Wright`.
+If you have questions about usage or development you can contact `Susan Wright`_ or open an issue on `GitHub`_.
 
 Special Thanks
 --------------
 
-* To `Graham Wright` for his guidance and support in publishing this.
+* To `Graham Wright`_ for his guidance and support in publishing this.
 
 .. _`Susan Wright`: mailto:lsusanwright573@gmail.com
+.. _'GitHub': https://github.com/swright573/django-vertical-multi-columns/issues
 .. _`Graham Wright`: https://github.com/gwright99/gwright99.github.io
-.. _`read the docs`: TBD
-.. _`mailing list`: TBD
 
 .. |comparison| image:: https://user-images.githubusercontent.com/31971607/104608321-bbe9d100-564f-11eb-96ba-270fc192ef4b.gif
 	:alt: Comparison
