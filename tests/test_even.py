@@ -79,3 +79,17 @@ class MockEvenVMCView(EvenVMCView):
 def test_get_querydata(test_in_even_criteria_data, test_out_even_data, settings_NUMBER_OF_COLUMNS_3):
     instance = MockEvenVMCView(in_data=test_in_even_criteria_data)
     assert instance.get_queryset() == test_out_even_data
+    
+def test_susan(alternate_data_structure_data, settings_NUMBER_OF_COLUMNS_5):
+    instance = EvenVMCView()
+    rows = instance.process_entries(alternate_data_structure_data)
+    for r in range(len(rows) - 1):
+        row = rows[r]
+        for c in row:
+            for i in range(5):
+                assert type(row[i]) is dict
+    row = rows[len(rows)-1]
+    for i in range(2):
+        assert type(row[i]) is dict
+    for i in range(2, 5):
+        assert row[i] == ''

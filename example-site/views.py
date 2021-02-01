@@ -15,7 +15,7 @@ from . import simulate
 
 class About(TemplateView):
 
-    def __init__(self, **kwargs):
+    def __init__(self):
         super().__init__()
 
     template_name = 'about.html'
@@ -24,12 +24,12 @@ class About(TemplateView):
 class EvenVMC(EvenVMCView):
     # Use VMC's Even distribution to evenly divide data into side-by-side columns
 
-    def __init__(self, **kwargs):
+    def __init__(self):
         super().__init__(num_columns=5)
 
     def get_data(self):
-#       resp = requests.get(_api_url, headers=_api_key)
-#       raw_api_data = resp.json()
+        #resp = requests.get(_api_url, headers=_api_key)
+        #raw_api_data = resp.json()
         raw_api_data = simulate.api_data_json()   # simulation
         sorted_api_data = sorted(raw_api_data, key=lambda i: i['name'], reverse=False)
         return sorted_api_data
@@ -38,9 +38,9 @@ class EvenVMC(EvenVMCView):
     context_object_name = "rows"
 
 class CriteriaVMC(CriteriaVMCView):
-    # Use VMC's Criteria distribution to divide data into side-by-side columns based on passed functions
+    # Use VMC's Criteria distribution to assign data to side-by-side columns based on passed functions
 
-    def __init__(self, **kwargs):
+    def __init__(self):
         super().__init__()
 
     # These are examples of functions you can pass to CriteriaVMCView to handle assignment to columns
@@ -75,7 +75,7 @@ class CriteriaVMC(CriteriaVMCView):
 class DefinedVMC(DefinedVMCView):
     # Use VMC's DefinedDistribution to display pre-defined columns side-by-side
 
-    def __init__(self, **kwargs):
+    def __init__(self):
         super().__init__(num_columns=4)
 
     def get_data(self):

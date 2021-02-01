@@ -219,7 +219,6 @@ class DefinedVMCView(_BaseVMC, ListView):
 
     def __init__(self, **kwargs: int):
         """Constructs the class. Optional kwarg 'num_columns' overrides any value in settings."""
-
         super().__init__(**kwargs)
 
     def get_data(self):

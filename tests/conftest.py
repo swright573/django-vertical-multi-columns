@@ -283,3 +283,49 @@ def test_out_defined_data():
             [{'id': 8, 'name': 'Broccoli'}, '', {'id': 36, 'name': 'Oregano'}, {'id': 34, 'name': 'Winter Squash'}],
             [{'id': 9, 'name': 'Brussels Sprouts'}, '', {'id': 39, 'name': 'Parsley'}, ''],
             [{'id': 10, 'name': 'Cabbage'}, '', '', ''], [{'id': 21, 'name': 'Cantaloupe'}, '', '', '']]
+
+@pytest.fixture()
+def alternate_data_structure_data():
+    return [{"squadName": "Super hero squad","homeTown": "Metro City","formed": 2016,"secretBase": "Super tower","active": True,
+      "members":
+      [{"name": "Molecule Man","age": 29,"secretIdentity": "Dan Jukes","powers": ["Radiation resistance","Turning tiny","Radiation blast"]},
+       {"name": "Madame Uppercut","age": 39,"secretIdentity": "Jane Wilson","powers": ["Million tonne punch","Damage resistance","Superhuman reflexes"]},
+       {"name": "Eternal Flame","age": 1000000,"secretIdentity": "Unknown","powers": ["Immortality","Heat Immunity","Inferno","Teleportation","Interdimensional travel"]}
+       ]
+    },{"squadName": "Super hero squad2","homeTown": "Toronto","formed": 2020,"secretBase": "Super tower","active": False,
+      "members":
+      [{"name": "Molecule Man","age": 29,"secretIdentity": "Dan Jukes","powers": ["Radiation resistance","Turning tiny","Radiation blast"]},
+       {"name": "Madame Uppercut","age": 39,"secretIdentity": "Jane Wilson","powers": ["Million tonne punch","Damage resistance","Superhuman reflexes"]},
+       {"name": "Eternal Flame","age": 1000000,"secretIdentity": "Unknown","powers": ["Immortality","Heat Immunity","Inferno","Teleportation","Interdimensional travel"]}
+       ]
+    }]
+
+@pytest.fixture()
+def simpler_alternate_data_structure_data():
+    return [{"Name": "Susan","active": True, "garments": [{"type": "Skirt","colours": ["red","blue","grey"]},
+                                                          {"type": "Sweater","colours": ["black","pink","white","brown"]},
+                                                          {"type": "Shoes","colours": ["black","brown"]}]
+            },
+            {"Name": "Jane","active": True, "garments": [{"type": "Skirt","colours": ["red","blue","grey"]},
+                                                         {"type": "Blouse","colours": ["white","grey","cream"]},
+                                                         {"type": "Sweater","colours": ["pink","white","beige","brown"]},
+                                                         {"type": "Shoes","colours": ["black","brown"]}]
+            },
+            {"Name": "Freda","active": True, "garments": [{"type": "Skirt","colours": ["fuschia","blue","grey","black"]},
+                                                          {"type": "Sweater","colours": ["black", "pink", "white", "brown"]},
+                                                          {"type": "Shoes","colours": ["black"]}]
+            },
+            {"Name": "Beth","active": True, "garments": [{"type": "Skirt","colours": ["black","blue","grey"]},
+                                                          {"type": "Sweater","colours": ["black", "pink", "white", "brown"]},
+                                                          {"type": "Shoes","colours": ["black", "brown"]},
+                                                          {"type": "Shoes","colours": ["black"]}]
+            }
+           ]
+            
+@pytest.fixture()
+def alternate_data_structure_functions():
+    pass
+
+@pytest.fixture()
+def alternate_data_structure_function_args():
+    pass

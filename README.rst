@@ -70,9 +70,9 @@ You already have the columns you want displayed. You provide a column list and V
 
 Documentation
 -------------
-For more extensive document see the ``docs`` folder or `read it on readthedocs`._
+For more extensive document see the ``docs`` folder or `read it in readthedocs`._
 
-.. _`read it on readthedocs`: https://django-vertical-multi-columns.readthedocs.io/en/latest/index.html
+.. _`read it in readthedocs`: https://django-vertical-multi-columns.readthedocs.io/en/latest/index.html
 
 Comments & Support
 ------------------
