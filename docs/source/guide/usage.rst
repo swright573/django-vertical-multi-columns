@@ -202,7 +202,7 @@ Since our function is only interested in the name, it looks only at ``parms[0]``
 In the True case, that item will appear in that column. If False, it will not. Note that items can appear in multiple columns if function criteria overlap. Conversely an item can appear in no columns if none of the function criteria is met.
 
 
-.. |evenview| image:: https://user-images.githubusercontent.com/31971607/104204457-4eddfd80-53fb-11eb-9d0d-06db9dafb5c8.gif
+.. |evenview| image:: https://user-images.githubusercontent.com/31971607/104608352-c4daa280-564f-11eb-8084-2e78bf6ca1ce.gif
     :alt: EvenView
 	
 .. |criteriaview| image:: https://user-images.githubusercontent.com/31971607/104204473-51d8ee00-53fb-11eb-9824-11f835292ef4.gif
