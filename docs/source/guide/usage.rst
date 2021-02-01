@@ -159,7 +159,9 @@ both Django itself and the django-vertical_multi_columns package.
 A Note about When a VMC View is Appropriate
 -------------------------------------------
 
-VMC views are meant for situations where you want to display a lot of short data in less vertical space than a straightforward ListView would require. A common use case would be where you query an API for a list of choices (e.g. a list of plants or a list of car models) which you would display as links in a VMC view. The end user could select one of those choices which would trigger a further call to the API to retrieve more detailed information about that choice which you could display in a DetailView.
+VMC views are meant for situations where you want to display a lot of short data in less vertical space than a straightforward ListView would require.
+
+A common use case would be to query an API for a list of choices (e.g. a list of plants or a list of car models) which you display as links in a VMC view. The end user could select one of those choices which would trigger a further call to the API to retrieve more detailed information about that choice that you could display in a DetailView.
 
 While VMC views (specifically EvenVMCView and CriteriaVMCView) do support hierarchical JSON data, it is not recommended since this adds unneeded complexity to your Django templates. You are better off either:
 
@@ -175,25 +177,29 @@ Scenario:
 
 Your API call returns a set of data which includes a list of plants. Specifically the data contains 'name' and 'id'. If required, the data has been converted to JSON format.
 
+.. code-block:: python
+
 [{'id': 5, 'name': 'Asparagus'}, {'id': 2, 'name': 'Basil'}, ...  , {'id': 34, 'name': 'Winter Squash'}]
 
 Say you want to display 3 columns ... plants starting with A-F in one column, those starting with G-S in another, and T-Z in a third column.
 
 Using A-F as an example, in the function list (one per column) you pass to CriteriaVMCView when you override the get_column_criteria() method, you would pass this function . This function is looking for instances in your returned data where the first letter of 'name' is in the range 'ABCDEF'. If so, the function returns True. If not, it returns False.
 
+.. code-block:: python
+
     def a_to_f(self, args):
         parms = args.split(",")
         return 'ABCDEF'.find(parms[0][0]) > -1
 
-In get_column_criteria(), you will also pass a list of the JSON keys ['name', 'id'] in your data that you either want to query in a function or that you want passed to your template. 
+In get_column_criteria(), you will also pass a list of the JSON keys `['name', 'id']` in your data that you either want to query in a function or that you want passed to your template. 
 
 CriteriaVMCView's logic will apply your functions, using some or all of the JSON keys you pass, to each item in your data to determine if that item should appear in that function's column.
 
-Say the data item being processed is {'id': 5, 'name': 'Asparagus'}. The 'args' passed to the a_to_f function will be string 'Asparagus, 5' since we said our keys were ['name', 'id'].
+Say the data item being processed is `{'id': 5, 'name': 'Asparagus'}`. The 'args' passed to the a_to_f function will be string `'Asparagus, 5'` since we said our keys were `['name', 'id']`.
 
-The passed string will be split by our function, giving list ['Asparagus', '5'].
+The passed string will be split by our function, giving list `['Asparagus', '5']`.
 
-Since our function is only interested in the name, it looks only at parms[0] which is 'Asparagus'. And further, since it is only interested in the first letter of name, it only looks at parms[0][0] returning True if parms[0][0] is in the range A-F and False if it is not.
+Since our function is only interested in the name, it looks only at `parms[0]` which is 'Asparagus'. And further, since it is only interested in the first letter of name, it only looks at `parms[0][0]` returning True if parms[0][0] is in the range A-F and False if it is not.
 
 In the True case, that item will appear in that column. If False, it will not. Note that items can appear in multiple columns if function criteria overlaps. Conversely an item can appear in no columns if none of the function criteria is met.
 
