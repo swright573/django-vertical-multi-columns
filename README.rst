@@ -70,7 +70,7 @@ You already have the columns you want displayed. You provide a column list and V
 
 Documentation
 -------------
-For more extensive document see the ``docs`` folder or `read it in readthedocs`._
+For more extensive document see the ``docs`` folder or `read it in readthedocs`_.
 
 .. _`read it in readthedocs`: https://django-vertical-multi-columns.readthedocs.io/en/latest/index.html
 
@@ -84,7 +84,7 @@ Special Thanks
 * To `Graham Wright`_ for his guidance and support in publishing this.
 
 .. _`Susan Wright`: mailto:lsusanwright573@gmail.com
-.. _'GitHub': https://github.com/swright573/django-vertical-multi-columns/issues
+.. _`GitHub`: https://github.com/swright573/django-vertical-multi-columns/issues
 .. _`Graham Wright`: https://github.com/gwright99/gwright99.github.io
 
 .. |comparison| image:: https://user-images.githubusercontent.com/31971607/104608321-bbe9d100-564f-11eb-96ba-270fc192ef4b.gif
