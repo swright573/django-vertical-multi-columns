@@ -32,7 +32,7 @@ There are several ways to specify how many columns should be used in your VMC vi
 
 1. Pass kwarg ``num_columns`` to super().__init__().
 
-..code-block:: python
+.. code-block:: python
 
     def __init__(self):
         super().__init__(num_columns=5)
@@ -189,7 +189,7 @@ Using A-F as an example, in the function list (one per column) you pass to Crite
         parms = args.split(",")
         return 'ABCDEF'.find(parms[0][0]) > -1
 
-In get_column_criteria(), you will also pass a list of the JSON keys ``['name', 'id']`` in your data that you either want to query in a function or that you want passed to your template. 
+In get_column_criteria(), you will also pass a list of the JSON keys ``['name', 'id']``. These are items in your data that you either want to query in a function or that you want passed to your template. 
 
 CriteriaVMCView's logic will apply your functions, using some or all of the JSON keys you pass, to each item in your data to determine if that item should appear in that function's column.
 
@@ -197,9 +197,9 @@ Say the data item being processed is ``{'id': 5, 'name': 'Asparagus'}``. The 'ar
 
 The passed string will be split by our function, giving list ``['Asparagus', '5']``.
 
-Since our function is only interested in the name, it looks only at ``parms[0]`` which is 'Asparagus'. And further, since it is only interested in the first letter of name, it only looks at ``parms[0][0]`` returning True if parms[0][0] is in the range A-F and False if it is not.
+Since our function is only interested in the name, it looks only at ``parms[0]`` which is 'Asparagus'. And further, since it is only interested in the first letter of name, it only looks at ``parms[0][0]`` which is 'A'. The function returns True if parms[0][0] is in the range A-F and False if it is not.
 
-In the True case, that item will appear in that column. If False, it will not. Note that items can appear in multiple columns if function criteria overlaps. Conversely an item can appear in no columns if none of the function criteria is met.
+In the True case, that item will appear in that column. If False, it will not. Note that items can appear in multiple columns if function criteria overlap. Conversely an item can appear in no columns if none of the function criteria is met.
 
 
 .. |evenview| image:: https://user-images.githubusercontent.com/31971607/104204457-4eddfd80-53fb-11eb-9d0d-06db9dafb5c8.gif
