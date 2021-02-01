@@ -6,7 +6,7 @@ from pathlib import Path
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SECRET_KEY = 'we^d+w+iixgys4ds8^ap08rqgby9(uo-rufx(aod)$udk*!q!@'      #<your secret key>
+SECRET_KEY = #<insert your secret key here or use an environment variable>
 DEBUG = 1
 ALLOWED_HOSTS = 'localhost'
 INSTALLED_APPS = [

@@ -56,23 +56,24 @@ You must override some methods in the VMC classes so you can define what and how
 
 Define a method:
 
-* ``get_data()`` to return a list of sorted data to be displayed, returned in JSON format.
+* ``get_data()`` to return a list of sorted data in JSON format.
 	
 **CriteriaVMCView**
 
 Define 2 methods:
 
-* ``get_data()`` to return a list of sorted data to be displayed, returned in JSON format.
+* ``get_data()`` to return a list of sorted data in JSON format.
 
 * ``get_column_criteria()`` to return two things:
 	* a list containing the functions VMC should use to place your data items into columns, one function per column.
 	* a list containing the dictionary keys referenced in the functions.
-	* NOTE: See :ref:`How Passed CriteriaVMCView Functions Work` below for a more in depth explanation.
+	* NOTE: See `How Passed CriteriaVMCView Functions Work`__ below for a more in depth explanation.
 	 
 **DefinedVMCView**
 
 Define a method:
-* ``get_data()`` to return a list of pre-defined columns in JSON format. The number of columns must correspond to the 
+
+* ``get_data()`` to return a list of pre-defined columns in JSON formaton. The number should correspond to the number of columns specified.
 
 Sample Code
 -----------
@@ -156,17 +157,17 @@ both Django itself and the django-vertical_multi_columns package.
 	
 7. Point your browser to localhost:8000. More information about the site is provided there under "About the VMC Example Site.
 
-A Note about When a VMC View is Appropriate
--------------------------------------------
+When is a VMC View Appropriate?
+-------------------------------
 
-VMC views are meant for situations where you want to display a lot of short data in less vertical space than a straightforward ListView would require.
+VMC views are meant for situations where you want to display a lots of short data in less vertical space than a straightforward ListView would require.
 
-A common use case would be to query an API for a list of choices (e.g. a list of plants or a list of car models) which you display as links in a VMC view. The end user could select one of those choices which would trigger a further call to the API to retrieve more detailed information about that choice that you could display in a DetailView.
+A common use case would be to query an API for a list of choices (e.g. a list of plants or a list of car models) which you display as links in a VMC view. The end user could select one of those links which triggers a further call to the API to retrieve more detailed information about that choice. You could display that in a DetailView.
 
-While VMC views (specifically EvenVMCView and CriteriaVMCView) do support hierarchical JSON data, it is not recommended since this adds unneeded complexity to your Django templates. You are better off either:
+While VMC views do support hierarchical JSON data, this is not recommended since it adds unneeded complexity to your Django templates. You are better off either:
 
-* limiting your "VMC" API call data to only what is required for a user to make a choice, or
-* extracting from the returned API data only what you need for a user to make a choice and passing only that to the VMC view.
+* limiting your "VMC" API return data to only what is required for a user to make a choice, or
+* if hierarchical JSON must be returned by the API, extract the data you need in the view.
 
 How Passed CriteriaVMCView Functions Work
 -----------------------------------------
