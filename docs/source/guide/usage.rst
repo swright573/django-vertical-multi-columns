@@ -30,7 +30,7 @@ Setting the Number of Columns
 
 There are several ways to specify how many columns should be used in your VMC views. In priority order:
 
-1. Pass kwarg ``num_columns`` to super().__init__().
+1. Pass kwarg ``num_columns`` to ``super().__init__()``.
 
 .. code-block:: python
 
