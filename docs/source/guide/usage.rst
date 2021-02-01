@@ -192,9 +192,9 @@ We'll use A-F as an example. It would be included in the function list (one per 
         parms = args.split(",")
         return 'ABCDEF'.find(parms[0][0]) > -1
 
-In get_column_criteria(), you will also pass a list of the JSON keys ``['name', 'id']``. These are items in your data that you either want to query in a function or you want passed to your template. 
+In get_column_criteria(), you will also pass a list of the JSON keys ``['name']`` you want to query in a function. In this case, you only want to query 'name'.
 
-CriteriaVMCView's logic will apply your functions, using some or all of the JSON keys you pass, to each item in your data to determine if that item should appear in that function's column.
+CriteriaVMCView's logic will apply your functions to each item in your data to determine if that item should appear in that function's column. A function might use only some of the JSON keys you pass. You must also 
 
 Say the data item being processed is ``{'id': 5, 'name': 'Asparagus'}``. The 'args' passed to the a_to_f function will be string ``'Asparagus, 5'`` since we said our keys were ``['name', 'id']``.
 
