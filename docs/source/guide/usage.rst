@@ -54,22 +54,22 @@ You must override some methods in the VMC classes.
 
 **EvenVMCView**: Define a method:
 
-* ``get_data()`` should return a list of sorted data in JSON format.
+* ``get_data()`` to return a list of sorted data in JSON format.
 	
 **CriteriaVMCView**: Define 2 methods:
 
-* ``get_data()`` should return a list of sorted data in JSON format.
+* ``get_data()`` to return a list of sorted data in JSON format.
 
-* ``get_column_criteria()`` should return two things:
+* ``get_column_criteria()`` to return two things:
 
-	* a list of the functions VMC should use to place your data items into each column.
+	* a list of the functions VMC uses to place your data items in columns.
 	* a list of the dictionary keys referenced in the functions.
 	
 	* NOTE: See How Passed CriteriaVMCView Functions Work below for a more in depth explanation.
 	 
 **DefinedVMCView**: Define a method:
 
-* ``get_data()`` should return a list of pre-defined columns in JSON formaton. The number should correspond to the number of columns specified.
+* ``get_data()`` to return a list of pre-defined columns in JSON formaton.
 
 Sample Code
 -----------
