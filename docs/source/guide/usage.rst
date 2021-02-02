@@ -65,7 +65,7 @@ You must override some methods in the VMC classes.
 	* a list of the functions VMC uses to place your data items in columns.
 	* a list of the dictionary keys referenced in the functions.
 	
-NOTE: See How Passed CriteriaVMCView Functions Work below for a more in depth explanation.
+    NOTE: See How Passed CriteriaVMCView Functions Work below for a more in depth explanation.
 	 
 **DefinedVMCView**: Define a method:
 
@@ -74,7 +74,7 @@ NOTE: See How Passed CriteriaVMCView Functions Work below for a more in depth ex
 Sample Code
 -----------
 
-This example implements EvenVMCView but they are all fairly similar. Differences are noted below. Note that the example is pulling API data via requests but data from any source can be used.
+This example implements EvenVMCView but they are all fairly similar. Note that the example is pulling API data via requests but data from any source can be used.
 
 .. code-block:: python
 
@@ -105,14 +105,16 @@ This example implements EvenVMCView but they are all fairly similar. Differences
 When is a VMC View Appropriate?
 -------------------------------
 
-VMC views are meant for situations where you want to display a lots of short data in less vertical space than a straightforward ListView would require.
+VMC views are meant for situations where you want to display a lot of short data in a more compact space than a straightforward ListView would require.
 
-A common use case is to query an API for a list of choices (e.g. a list of plants or a list of car models) which you display as links in a VMC view. The end user could select one of those links which triggers a further call to the API to retrieve more detailed information about that choice. You could display that in a DetailView.
+A common use case is to query an API for a list of choices (e.g. a list of plants or a list of car models) which you would display as links in a view. The end user would select one of the links which would trigger a further call to the API to retrieve more detailed information aboujt that item. You might display this in a detail view.
+
+*Avoid handling hierarchical JSON in a VMC view.*
 
 While VMC views do support hierarchical JSON data, this is not recommended since it adds unneeded complexity to your Django templates. You are better off either:
 
-* limiting your "VMC" API return data to only what is required for a user to make a choice, or
-* if hierarchical JSON must be returned by the API, extract the data you need in the view.
+* limiting your API call to only return the data required for a user to make a choice, or
+* if hierarchical JSON must be returned by the API, extract the data you need before sending it on to the VMC view.
 
 .. _how-passed-functions-work:
 
