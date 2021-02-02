@@ -65,7 +65,7 @@ You must override some methods in the VMC classes.
 	* a list of the functions VMC uses to place your data items in columns.
 	* a list of the dictionary keys referenced in the functions.
 	
-	NOTE: See How Passed CriteriaVMCView Functions Work below for a more in depth explanation.
+NOTE: See How Passed CriteriaVMCView Functions Work below for a more in depth explanation.
 	 
 **DefinedVMCView**: Define a method:
 
