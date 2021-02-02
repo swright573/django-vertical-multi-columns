@@ -90,7 +90,7 @@ Special Thanks
 .. |evenview| image:: https://user-images.githubusercontent.com/31971607/106627791-269f7580-6547-11eb-80ca-6737b5792d63.GIF
     :alt: EvenView
 	
-.. |criteriaview| image:: https://user-images.githubusercontent.com/31971607/106627808-2a32fc80-6547-11eb-8edf-ef59e0787f99.GIF
+.. |criteriaview| image:: https://user-images.githubusercontent.com/31971607/106650000-59a23300-6560-11eb-8c2e-10b617db92af.GIF
 	:alt: CriteriaView
 	
 .. |definedview| image:: https://user-images.githubusercontent.com/31971607/106627824-2dc68380-6547-11eb-9081-dd888fec3b19.GIF
