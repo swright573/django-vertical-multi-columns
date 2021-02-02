@@ -1,7 +1,7 @@
 Django-Vertical-Multi-Columns
 -----------------------------
 Django-Vertical-Multi-Columns (VMC) is a reusable Django application allowing users
-to display a list of items in side-by-side columns rather than in one long list.
+to easily display a list of items in side-by-side columns rather than in one long list.
 
 |comparison|
 
@@ -53,30 +53,27 @@ View Options
 ------------
 There are 3 views available.
 
-**EvenView**
-This view spreads your data across the number of columns you specify, keeping the length of the columns as even as possible.
+**EvenView** spreads your data across the number of columns you specify, keeping the length of the columns as even as possible.
 
 |evenview|
 
-**CriteriaView**
-You provide a list of functions, one per column, that VMC uses to determine which column an item will be placed in.
+**CriteriaView** lets you provide a list of functions, one per column, that VMC uses to determine which column an item will be placed in.
 
 |criteriaview|
 
-**DefinedView**
-You already have the columns you want displayed. You provide a column list and VMC does the rest.
+**DefinedView** lets you provide the columns you want displayed. VMC does the rest.
  
 |definedview|
 
 Documentation
 -------------
-For more extensive document see the ``docs`` folder or `read it in readthedocs`_.
+For more extensive document see the ``docs`` folder or read it in `readthedocs`_.
 
-.. _`read it in readthedocs`: https://django-vertical-multi-columns.readthedocs.io/en/latest/index.html
+.. _`readthedocs`: https://django-vertical-multi-columns.readthedocs.io/en/latest/index.html
 
 Comments & Support
 ------------------
-If you have questions about usage or development you can contact `Susan Wright`_ or open an issue on `GitHub`_.
+If you have questions about usage or development you can participate in the discussion or open an issue on `GitHub`_.  You can also contact `Susan Wright`_ directly.
 
 Special Thanks
 --------------
@@ -84,7 +81,7 @@ Special Thanks
 * To `Graham Wright`_ for his guidance and support in publishing this.
 
 .. _`Susan Wright`: mailto:lsusanwright573@gmail.com
-.. _`GitHub`: https://github.com/swright573/django-vertical-multi-columns/issues
+.. _`GitHub`: https://github.com/swright573/django-vertical-multi-columns
 .. _`Graham Wright`: https://github.com/gwright99/gwright99.github.io
 
 .. |comparison| image:: https://user-images.githubusercontent.com/31971607/104608321-bbe9d100-564f-11eb-96ba-270fc192ef4b.gif
