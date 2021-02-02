@@ -45,7 +45,7 @@ There are several ways to specify how many columns should be used in your VMC vi
 		{NUMBER_OF_COLUMNS=3}
 	]
 
-3. If you there is not setting and you don't pass a num_columns kwarg, the number of columns defaults to 3 .
+3. If there is no setting and you don't pass a num_columns kwarg, the number of columns defaults to 3.
 
 Required Method Overrides
 -------------------------
@@ -54,13 +54,13 @@ You must override some methods in the VMC classes.
 
 **EvenVMCView**: Define a method:
 
-* ``get_data()`` that returns a list of sorted data in JSON format.
+* ``get_data()`` should return a list of sorted data in JSON format.
 	
 **CriteriaVMCView**: Define 2 methods:
 
-* ``get_data()`` that returns a list of sorted data in JSON format.
+* ``get_data()`` should return a list of sorted data in JSON format.
 
-* ``get_column_criteria()`` that returns two things:
+* ``get_column_criteria()`` should return two things:
 
 	* a list of the functions VMC should use to place your data items into each column.
 	* a list of the dictionary keys referenced in the functions.
@@ -69,7 +69,7 @@ You must override some methods in the VMC classes.
 	 
 **DefinedVMCView**: Define a method:
 
-* ``get_data()`` to return a list of pre-defined columns in JSON formaton. The number should correspond to the number of columns specified.
+* ``get_data()`` should return a list of pre-defined columns in JSON formaton. The number should correspond to the number of columns specified.
 
 Sample Code
 -----------
@@ -86,10 +86,8 @@ This example implements EvenVMCView but they are all fairly similar. Differences
 
 	class MyEvenView(EvenVMCView):
 	    def __init__(self, **kwargs):
-            #You can pass an optional num_columns kwarg to override
-            #    the value in settings.
-            # If there is nothing in settings and you don't pass
-            #    num_columns, the number of columns will be 3.
+            #You can pass an optional num_columns kwarg to override the value in settings.
+            # If there is nothing in settings and you don't pass num_columns, the number of columns will be 3.
             super().__init__(num_columns=5)
 
         def get_data(self):
