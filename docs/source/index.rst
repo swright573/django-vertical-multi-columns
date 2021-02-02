@@ -10,4 +10,4 @@ Be nice to your end user ... minimize the scrolling and paging they must do with
    guide/about
    guide/install
    guide/usage
-   guide/examplesite
+   guide/example
