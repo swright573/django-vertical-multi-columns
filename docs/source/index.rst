@@ -1,8 +1,7 @@
-=============================
-django-vertical-multi-columns
-=============================
+Django-Vertical-Multi-Columns
+-----------------------------
 
-Welcome to django-vertical-multi-columns's documentation!
+Be nice to your end user ... minimize the scrolling and paging they must do with side-by-side columns in your Django templates.
 
 .. toctree::
    :maxdepth: 2
@@ -11,16 +10,4 @@ Welcome to django-vertical-multi-columns's documentation!
    guide/about
    guide/install
    guide/usage
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Developer Documentation
-
-   dev/tests
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   guide/examplesite

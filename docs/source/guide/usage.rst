@@ -15,13 +15,13 @@ Spreads your data across the number of columns you specify, keeping the columns 
 
 **CriteriaVMCView** 
 
-You provide a list of functions, one per column, used by VMC to determine in which column an item should be placed.
+You provide a list of functions, one per column. VMC uses these to determine in which column an item should be placed.
 
 |criteriaview|
 
 **DefinedVMCView** 
 
-You already have the columns you want displayed. You provide a column list and VMC does the rest.
+You already have the columns you want displayed. You provide the column list and VMC does the rest.
  
 |definedview|
 
@@ -30,7 +30,7 @@ Setting the Number of Columns
 
 There are several ways to specify how many columns should be used in your VMC views. In priority order:
 
-1. Pass kwarg ``num_columns`` to ``super().__init__()``.
+1. Pass kwarg ``num_columns`` to ``super().__init__()`` in your VMC view's ``__init__()``.
 
 .. code-block:: python
 
@@ -45,33 +45,29 @@ There are several ways to specify how many columns should be used in your VMC vi
 		{NUMBER_OF_COLUMNS=3}
 	]
 
-3. If you there is not setting and you don't pass a num_columns keyword argument, the number of columns defaults to 3 .
+3. If you there is not setting and you don't pass a num_columns kwarg, the number of columns defaults to 3 .
 
 Required Method Overrides
 -------------------------
 
-You must override some methods in the VMC classes so you can define what and how data will be displayed.
+You must override some methods in the VMC classes.
 
-**EvenVMCView**
+**EvenVMCView**: Define a method:
 
-Define a method:
-
-* ``get_data()`` to return a list of sorted data in JSON format.
+* ``get_data()`` that returns a list of sorted data in JSON format.
 	
-**CriteriaVMCView**
+**CriteriaVMCView**: Define 2 methods:
 
-Define 2 methods:
+* ``get_data()`` that returns a list of sorted data in JSON format.
 
-* ``get_data()`` to return a list of sorted data in JSON format.
+* ``get_column_criteria()`` that returns two things:
 
-* ``get_column_criteria()`` to return two things:
-	* a list containing the functions VMC should use to place your data items into columns, one function per column.
-	* a list containing the dictionary keys referenced in the functions.
+	* a list of the functions VMC should use to place your data items into each column.
+	* a list of the dictionary keys referenced in the functions.
+	
 	* NOTE: See How Passed CriteriaVMCView Functions Work below for a more in depth explanation.
 	 
-**DefinedVMCView**
-
-Define a method:
+**DefinedVMCView**: Define a method:
 
 * ``get_data()`` to return a list of pre-defined columns in JSON formaton. The number should correspond to the number of columns specified.
 
@@ -83,79 +79,30 @@ This example implements EvenVMCView but they are all fairly similar. Differences
 .. code-block:: python
 
     from vertical_multi_columns.configure import EvenVMCView
-	import requests
+    import requests
 
 
 .. code-block:: python
 
 	class MyEvenView(EvenVMCView):
-		def __init__(self, **kwargs):
-			# You can pass an optional num_columns kwarg to override
-			#    the value in settings.
-			# If there is nothing in settings and you don't pass
-			#    num_columns, the number of columns will be 3.
-			super().__init__(num_columns=5)
+	    def __init__(self, **kwargs):
+            #You can pass an optional num_columns kwarg to override
+            #    the value in settings.
+            # If there is nothing in settings and you don't pass
+            #    num_columns, the number of columns will be 3.
+            super().__init__(num_columns=5)
 
-		def get_data(self):
-			# Write logic to retrieve the data to be displayed (often from an API)
-			# Sort it appropriately
-			# Note that data must be in JSON format.
-			resp = requests.get(<api_url>)
-			raw_api_data = resp.json()
-			sorted_api_data = sorted(raw_api_data, key=lambda i: i['<field>'])
-			return sorted_api_data
+        def get_data(self):
+            # Write logic to retrieve the data to be displayed (often from an API)
+            # Sort it appropriately
+            # Note that data must be in JSON format.
+            resp = requests.get(<api_url>)
+            raw_api_data = resp.json()
+            sorted_api_data = sorted(raw_api_data, key=lambda i: i['<field>'])
+            return sorted_api_data
 
-		template_name = '<your_template>.html'
-		context_object_name = "<your_choice>"
-
-Example Site
-------------
-
-There is a example site you can install and run to see the VMC views in action. It has no external requirements other than for you to have pip installed
-both Django itself and the django-vertical_multi_columns package.
-
-(*Windows commands shown. Use the equivalent if you run on Mac or Linux.*)
-
-1. Create a Python virtual directory and activate it. (*This is optional. If using, use your normal method.*)
-
-.. code-block:: bash
-
-	python -m venv <*virtualdirectory*>
-	.\<*virtualdirectory*\scripts\activate
-
-2. Install Django and the django-vertical-multi-columns package.
-
-.. code-block:: bash
-
-	pip install django
-	pip install django-vertical-multi-columns
-
-3. Create a new Django project called vmcexamplesite.
-
-.. code-block:: bash
-
-	django-admin startproject vmcexamplesite
-	
-4. Copy all the files in the directory *example-site* in the repo into the vmcexamplesite directory Django just created.
-
-.. code-block:: bash
-
-	cd .\vmcexamplesite
-	copy <*repo_directory*>\example-site\*.*
-	
-5. Update settings.py with your secret key (*or use an environment variable*)
-
-.. code-block:: bash
-
-	SECRET_KEY = <*insert your Django secret key here*>
-
-6. Execute runserver to activate the site.
-
-.. code-block:: bash
-
-	python manage.py runserver
-	
-7. Point your browser to localhost:8000. More information about the site is provided there under "About the VMC Example Site.
+        template_name = '<your_template>.html'
+        context_object_name = "<your_choice>"
 
 When is a VMC View Appropriate?
 -------------------------------
@@ -204,6 +151,13 @@ Since our function is only interested in the name, it looks only at ``parms[0]``
 
 If True, that item will appear in the column. If False, it will not. Note that items can appear in multiple columns if function criteria overlap. Conversely an item can appear in no columns if none of the function criteria are met.
 
+How to Contact/Get Support
+--------------------------
+
+If you have questions about usage or development you can participate in the discussion or open an issue on `GitHub`_.  You can also contact `Susan Wright`_ directly.
+
+.. _`Susan Wright`: mailto:lsusanwright573@gmail.com
+.. _`GitHub`: https://github.com/swright573/django-vertical-multi-columns
 
 .. |evenview| image:: https://user-images.githubusercontent.com/31971607/104608352-c4daa280-564f-11eb-8084-2e78bf6ca1ce.gif
     :alt: EvenView

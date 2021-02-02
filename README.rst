@@ -84,14 +84,14 @@ Special Thanks
 .. _`GitHub`: https://github.com/swright573/django-vertical-multi-columns
 .. _`Graham Wright`: https://github.com/gwright99/gwright99.github.io
 
-.. |comparison| image:: https://user-images.githubusercontent.com/31971607/104608321-bbe9d100-564f-11eb-96ba-270fc192ef4b.gif
+.. |comparison| image:: https://user-images.githubusercontent.com/31971607/106627777-21422b00-6547-11eb-9a8a-49b50d826dc0.jpg
 	:alt: Comparison
 
-.. |evenview| image:: https://user-images.githubusercontent.com/31971607/104608352-c4daa280-564f-11eb-8084-2e78bf6ca1ce.gif
+.. |evenview| image:: https://user-images.githubusercontent.com/31971607/106627791-269f7580-6547-11eb-80ca-6737b5792d63.GIF
     :alt: EvenView
 	
-.. |criteriaview| image:: https://user-images.githubusercontent.com/31971607/104204473-51d8ee00-53fb-11eb-9824-11f835292ef4.gif
+.. |criteriaview| image:: https://user-images.githubusercontent.com/31971607/106627808-2a32fc80-6547-11eb-8edf-ef59e0787f99.GIF
 	:alt: CriteriaView
 	
-.. |definedview| image:: https://user-images.githubusercontent.com/31971607/104204480-53a2b180-53fb-11eb-91f9-98d624ccd170.gif
+.. |definedview| image:: https://user-images.githubusercontent.com/31971607/106627824-2dc68380-6547-11eb-9081-dd888fec3b19.GIF
 	:alt: DefinedView
