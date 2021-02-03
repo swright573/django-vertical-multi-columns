@@ -96,6 +96,10 @@ This example implements EvenVMCView but they are all fairly similar. Note that t
         template_name = '<your_template>.html'
         context_object_name = "<your_choice>"
 
+Sample Template
+---------------
+A sample template is provided in the django-virtual-multi-columns library to demonstrate how to reference the output of your VMC view.
+
 When is a VMC View Appropriate?
 -------------------------------
 

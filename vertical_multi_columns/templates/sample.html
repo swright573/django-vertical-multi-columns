@@ -1,0 +1,37 @@
+{% raw %}
+{% comment %}
+
+Sample template for displaying side-by-side columns ... 3 columns are displayed here
+	- rows is a list of lists
+	- row is a list of dictionaries, one dictionary per column.
+	- for this example, dictionary keys are 'id' and 'name'
+
+    {% extends "base.html" %}
+    {% load static %}
+	
+	<table>
+		{% for row in rows %}
+		<tr>
+			<td>
+				{% if row.0.id %}
+				{{ row.0.name }}
+				{%  endif %}
+			</td>
+			<td>
+				{% if row.1.id %}
+				{{ row.1.name }}
+				{% endif %}
+			</td>
+			<td>
+				{% if row.2.id %}
+				{{ row.2.name }}
+				{%  endif %}
+			</td>
+		</tr>
+		{% empty %}
+			There are no results to display.
+		{% endfor %}
+	</table>
+	
+{% endcomment %}
+{% endraw %}
