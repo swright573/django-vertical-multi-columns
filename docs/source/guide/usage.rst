@@ -121,17 +121,24 @@ While VMC views do support hierarchical JSON data, this is not recommended since
 How Passed CriteriaVMCView Functions Work
 -----------------------------------------
 
-You pass a list of functions and a list of your data's JSON keys to CriteriaVMCView to determine in which column each data item should appear. This scenario should help explain how you write those functions.
+You must pass two lists to CriteriaVMCView to allow it to determine in which column each data item should appear. One is a list of functions and the other a list of the JSON keys referenced in the functions. This scenario should help explain how you write those functions.
 
-Scenario:
-
-Your API call returns a set of data which includes a list of plants. Specifically the data contains 'name' and 'id'. If required, the data has been converted to JSON format.
+Say your API call returns a list of plants consisting of the fields 'name' and 'id'. If required, you have converted the data to JSON format.
 
 ``[{'id': 5, 'name': 'Asparagus'}, {'id': 2, 'name': 'Basil'}, ...  , {'id': 34, 'name': 'Winter Squash'}]``
 
-Say you want to display 3 columns ... plants starting with A-F in one column, those starting with G-S in another, and T-Z in a third column.
+Say you want 3 columns in your template ... plants starting with A-F in column one, those starting with G-S in column two, and T-Z in column three. Each of these functions is interested only in 'name'. Your get_column_criteria() method will look like this:
 
-We'll use A-F as an example. It would be included in the function list (one per column) you pass to CriteriaVMCView in your get_column_criteria() method. This function is looking for instances in your returned data where the first letter of 'name' is in the range 'ABCDEF'. If so, the function returns True. If not, it returns False.
+.. code-block:: python
+
+    def get_column_criteria(self):
+        functions = [self.a_to_f, self.g_to_s, self.t_to_z]
+        keys = ['name','id']
+        return functions, keys
+		
+You should pass all the keys used in any of your functions. We are passing ``['name','id'].`` here but only 'name' will be used in the example below.
+
+Focusing on a_to_f(), it is looking for instances in your returned data where the first letter of 'name' is in the range 'ABCDEF'. It will return True if so and False if not.
 
 .. code-block:: python
 
@@ -139,13 +146,11 @@ We'll use A-F as an example. It would be included in the function list (one per 
         parms = args.split(",")
         return 'ABCDEF'.find(parms[0][0]) > -1
 
-In get_column_criteria(), you will also pass a list of the JSON keys ``['name']`` you want to query in a function. In this case, you only want to query 'name'.
+CriteriaVMCView's logic will apply each of your functions to each item in your data to determine if that item should appear in the corresponding function's column.
 
-CriteriaVMCView's logic will apply your functions to each item in your data to determine if that item should appear in that function's column. A function might use only some of the JSON keys you pass. You must also 
+Say the data item currently being processed is ``{'id': 5, 'name': 'Asparagus'}`` and your a_to_f function is being executed. The 'args' passed to the function by CriteriaVMCView will be string ``'Asparagus, 5'`` since we said our keys were ``['name', 'id']``.
 
-Say the data item being processed is ``{'id': 5, 'name': 'Asparagus'}``. The 'args' passed to the a_to_f function will be string ``'Asparagus, 5'`` since we said our keys were ``['name', 'id']``.
-
-The passed string will be split by our function, giving list ``['Asparagus', '5']``.
+The function first has to split the args string into a list. In this case, parms will be ``['Asparagus', '5']``.
 
 Since our function is only interested in the name, it looks only at ``parms[0]`` which is 'Asparagus'. And further, since it is only interested in the first letter of name, it only looks at ``parms[0][0]`` which is 'A'. The function returns True if parms[0][0] is in the range A-F and False if it is not.
 

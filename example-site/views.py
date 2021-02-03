@@ -66,7 +66,7 @@ class CriteriaVMC(CriteriaVMCView):
 
     def get_column_criteria(self):
         functions = [self.a_to_f, self.g_to_s, self.t_to_z]
-        keys = ['name', 'id']
+        keys = ['name','id']
         return functions, keys
 
     template_name = 'criterialist.html'
