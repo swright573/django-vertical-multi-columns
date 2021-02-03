@@ -1,7 +1,7 @@
 Django-Vertical-Multi-Columns
 -----------------------------
 
-Be nice to your end user ... minimize the scrolling and paging they must do with side-by-side columns in your Django templates.
+Be nice to your end user ... minimize the scrolling and paging required with vertically sorted side-by-side columns in your Django templates.
 
 .. toctree::
    :maxdepth: 2
