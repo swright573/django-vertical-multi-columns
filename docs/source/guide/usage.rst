@@ -2,26 +2,20 @@
 Usage
 *****
 
-There are 3 VMC views available. They are all subclasses of Django's ListView so in addition to the specific VMC capabilities described below, all ListView's capabilities are still available to you.
+There are 3 VMC views available. All are subclasses of Django's ListView so in addition to the specific VMC capabilities described below, all ListView's capabilities are still available to you.
 
 View Options
 ------------
 
-**EvenVMCView** 
-
-Spreads your data across the number of columns you specify, keeping the columns pretty much the same length.
+**EvenVMCView** - Spreads your data across the number of columns you specify, keeping the columns pretty much the same length.
 
 |evenview|
 
-**CriteriaVMCView** 
-
-You provide a list of functions, one per column. VMC uses these to determine in which column an item should be placed.
+**CriteriaVMCView** - You provide a list of functions, one per column. VMC uses these to determine in which column an item should be placed.
 
 |criteriaview|
 
-**DefinedVMCView** 
-
-You already have the columns you want displayed. You provide the column list and VMC does the rest.
+**DefinedVMCView** - You already have the columns you want displayed. You provide the column list and VMC does the rest.
  
 |definedview|
 
