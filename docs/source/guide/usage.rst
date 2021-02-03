@@ -63,7 +63,7 @@ You must override some methods in the VMC classes.
 	 
 **DefinedVMCView**: Define a method:
 
-* ``get_data()`` to return a list of pre-defined columns in JSON formaton.
+* ``get_data()`` to return a list of pre-defined columns in JSON format.
 
 Sample Code
 -----------
@@ -101,14 +101,14 @@ When is a VMC View Appropriate?
 
 VMC views are meant for situations where you want to display a lot of short data in a more compact space than a straightforward ListView would require.
 
-A common use case is to query an API for a list of choices (e.g. a list of plants or a list of car models) which you would display as links in a view. The end user would select one of the links which would trigger a further call to the API to retrieve more detailed information aboujt that item. You might display this in a detail view.
+A common use case is to query an API for a list of choices (e.g. a list of plants or a list of car models) which you would display as links in a view. The end user would select one of the links which would trigger a further call to the API to retrieve more detailed information about that item. You might display this in a detail view.
 
 *Avoid handling hierarchical JSON in a VMC view.*
 
 While VMC views do support hierarchical JSON data, this is not recommended since it adds unneeded complexity to your Django templates. You are better off either:
 
-* limiting your API call to only return the data required for a user to make a choice, or
-* if hierarchical JSON must be returned by the API, extract the data you need before sending it on to the VMC view.
+* limiting your API call to return only the data required for a user to make a choice, or
+* if hierarchical JSON must be returned by the API, extract only the data you need for a user to make a choice before sending it on to the VMC view.
 
 .. _how-passed-functions-work:
 
@@ -148,7 +148,7 @@ The function first has to split the args string into a list. In this case, parms
 
 Since our function is only interested in the name, it looks only at ``parms[0]`` which is 'Asparagus'. And further, since it is only interested in the first letter of name, it only looks at ``parms[0][0]`` which is 'A'. The function returns True if parms[0][0] is in the range A-F and False if it is not.
 
-If True, that item will appear in the column. If False, it will not. Note that items can appear in multiple columns if function criteria overlap. Conversely an item can appear in no columns if none of the function criteria are met.
+If True is returned, that item will appear in the column. If False, it will not. Note that items can appear in multiple columns if function criteria overlap. Conversely an item can appear in no columns if none of the function criteria are met.
 
 How to Contact/Get Support
 --------------------------
