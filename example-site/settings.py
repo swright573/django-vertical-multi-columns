@@ -7,7 +7,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = <insert your Django secret key here>
+#SECRET_KEY = <insert your Django secret key here>
 
 DEBUG = 1
 
