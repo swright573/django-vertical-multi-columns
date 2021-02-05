@@ -21,6 +21,4 @@ TEMPLATES = [{
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [os.path.join(BASE_DIR, "vmcexamplesite/templates")],},]
 
-VERTICAL_MULTI_COLUMNS = [
-    {"NUMBER_OF_COLUMNS": 3},
-]
+VERTICAL_MULTI_COLUMNS = [{"NUMBER_OF_COLUMNS": 3},]
