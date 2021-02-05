@@ -2,8 +2,7 @@
 
 name: Python CI
 
-#on: [push]
-on: [workflow_dispatch]
+on: [push]
 
 jobs:
   build:
@@ -35,3 +34,4 @@ jobs:
 
     - name: Test with tox
       run: tox -e py
+      
