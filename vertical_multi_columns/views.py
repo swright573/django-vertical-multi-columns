@@ -2,7 +2,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.views.generic import ListView
 
-MSTART = 'Vertical-Multi-Columns/CriteriaVMCView-'
+MSTART = "Vertical-Multi-Columns/CriteriaVMCView-"
 
 
 class _BaseVMC:
@@ -21,7 +21,9 @@ class _BaseVMC:
         if self.number_of_columns is None:
             try:
                 _user_settings = getattr(settings, "VERTICAL_MULTI_COLUMNS")
-                self.number_of_columns = list(map(lambda x: x['NUMBER_OF_COLUMNS'], _user_settings))[0]
+                self.number_of_columns = list(
+                    map(lambda x: x["NUMBER_OF_COLUMNS"], _user_settings)
+                )[0]
             except:
                 self.number_of_columns = 3
 
@@ -81,8 +83,12 @@ class EvenVMCView(_BaseVMC, ListView):
         """
 
         number_of_entries = len(entries)
-        entries_all = number_of_entries // self.number_of_columns  # minimum number of entries in all rows
-        entries_some = number_of_entries % self.number_of_columns  # number of additional entries in some rows
+        entries_all = (
+            number_of_entries // self.number_of_columns
+        )  # minimum number of entries in all rows
+        entries_some = (
+            number_of_entries % self.number_of_columns
+        )  # number of additional entries in some rows
 
         # Create columns and calculate column lengths
         columns = [[] for i in range(self.number_of_columns)]
@@ -163,15 +169,17 @@ class CriteriaVMCView(_BaseVMC, ListView):
 
         if not functions:
             raise ImproperlyConfigured(
-                MSTART + 'You have provided no list of functions defining column criteria.'
+                MSTART
+                + "You have provided no list of functions defining column criteria."
             )
         if len(functions) != self.number_of_columns:
             raise ImproperlyConfigured(
-                MSTART + 'Number of functions passed must correspond to number of columns in settings.'
+                MSTART
+                + "Number of functions passed must correspond to number of columns in settings."
             )
         if not keys:
             raise ImproperlyConfigured(
-                MSTART + 'You must provide keys used in column criteria functions)'
+                MSTART + "You must provide keys used in column criteria functions)"
             )
 
     def process_entries(self, entries: list, functions: list, keys: list) -> list:
@@ -186,7 +194,7 @@ class CriteriaVMCView(_BaseVMC, ListView):
         # create column lists using criteria functions passed in
         columns = [[] for c in range(self.number_of_columns)]
         for e in entries:
-            for f in range(len(functions)):    # ??? use enumerate
+            for f in range(len(functions)):  # ??? use enumerate
                 func = functions[f]
                 parm = ""
                 for k in keys:
@@ -233,12 +241,11 @@ class DefinedVMCView(_BaseVMC, ListView):
         """
 
         if not columns:
-            raise ImproperlyConfigured(
-                MSTART + "You have passed no columns."
-            )
+            raise ImproperlyConfigured(MSTART + "You have passed no columns.")
         if len(columns) != self.number_of_columns:
             raise ImproperlyConfigured(
-                MSTART + 'The number of columns passed must correspond to the number of columns setting.'
+                MSTART
+                + "The number of columns passed must correspond to the number of columns setting."
             )
 
     def process_columns(self, columns) -> list:
