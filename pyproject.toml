@@ -11,12 +11,16 @@ multi_line_output = 3
 [tool.tox]
 legacy_tox_ini = """
 [tox]
-
 envlist = 
-    django22   #-py{37,38,39}
-    django30   #-py{37,38,39}
-    django31   #-py{37,38,39}
+    django22-py{37,38,39}
+    django30-py{37,38,39}
+    django31-py{37,38,39}
 
+[gh-actions]
+python =
+    3.7: py37
+    3.8: py38
+    3.9: py39
 
 [testenv]
 deps =

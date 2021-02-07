@@ -2,7 +2,7 @@
 
 name: Python CI
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -13,7 +13,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
@@ -33,5 +32,5 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
     - name: Test with tox
-      run: tox -e
+      run: tox
       
