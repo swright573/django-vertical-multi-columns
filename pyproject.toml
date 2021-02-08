@@ -32,4 +32,5 @@ deps =
     
 commands = pytest
 setenv PYTHONDONTWRITEBYTECODE=1
+
 """
