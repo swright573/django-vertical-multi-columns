@@ -2,7 +2,6 @@
 Django settings for vmcexamplesite project.
 """
 
-from pathlib import Path
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -17,8 +16,13 @@ INSTALLED_APPS = ["vertical_multi_columns"]
 
 ROOT_URLCONF = "vmcexamplesite.urls"
 
-TEMPLATES = [{
+TEMPLATES = [
+    {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "vmcexamplesite/templates")],},]
+        "DIRS": [os.path.join(BASE_DIR, "vmcexamplesite/templates")],
+    },
+]
 
-VERTICAL_MULTI_COLUMNS = [{"NUMBER_OF_COLUMNS": 3},]
+VERTICAL_MULTI_COLUMNS = [
+    {"NUMBER_OF_COLUMNS": 3},
+]

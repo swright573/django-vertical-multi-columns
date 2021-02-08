@@ -16,7 +16,7 @@ View Options
 |criteriaview|
 
 **DefinedVMCView** - You already have the columns you want displayed. You provide the column list and VMC does the rest.
- 
+
 |definedview|
 
 Setting the Number of Columns
@@ -49,7 +49,7 @@ You must override some methods in the VMC classes.
 **EvenVMCView**: Define a method:
 
 * ``get_data()`` to return a list of sorted data in JSON format.
-	
+
 **CriteriaVMCView**: Define 2 methods:
 
 * ``get_data()`` to return a list of sorted data in JSON format.
@@ -58,9 +58,9 @@ You must override some methods in the VMC classes.
 
 	* a list of the functions VMC uses to place your data items in columns.
 	* a list of the dictionary keys referenced in the functions.
-	
+
     NOTE: See How Passed CriteriaVMCView Functions Work below for a more in depth explanation.
-	 
+
 **DefinedVMCView**: Define a method:
 
 * ``get_data()`` to return a list of pre-defined columns in JSON format.
@@ -133,7 +133,7 @@ Say you want 3 columns in your template ... plants starting with A-F in column o
         functions = [self.a_to_f, self.g_to_s, self.t_to_z]
         keys = ['name','id']
         return functions, keys
-		
+
 You should pass all the keys used in any of your functions. We are passing ``['name','id'].`` here but only 'name' will be used in the example below.
 
 Focusing on a_to_f(), it is looking for instances in your returned data where the first letter of 'name' is in the range 'ABCDEF'. It will return True if so and False if not.
@@ -164,9 +164,9 @@ If you have questions about usage or development you can participate in the disc
 
 .. |evenview| image:: https://user-images.githubusercontent.com/31971607/106627791-269f7580-6547-11eb-80ca-6737b5792d63.GIF
     :alt: EvenView
-	
+
 .. |criteriaview| image:: https://user-images.githubusercontent.com/31971607/106650000-59a23300-6560-11eb-8c2e-10b617db92af.GIF
 	:alt: CriteriaView
-	
+
 .. |definedview| image:: https://user-images.githubusercontent.com/31971607/106651467-2d87b180-6562-11eb-9c36-0e696a0e9b8c.GIF
 	:alt: DefinedView

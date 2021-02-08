@@ -1,6 +1,6 @@
 """ Django Vertical Multi Columns Generator
 
-Generates a JSON-formatted list of data to enable display in 
+Generates a JSON-formatted list of data to enable display in
 vertically sorted side-by-side columns in a Django template.
 
 Classes:
@@ -9,5 +9,4 @@ Classes:
     CriteriaVMCView
     DefinedVMCView
     _BaseVMC
-  
 """

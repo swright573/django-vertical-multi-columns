@@ -26,14 +26,14 @@ Add 'vertical_multi_columns' to your INSTALLED_APPS setting.
         ...
         'vertical_multi_columns',
     ]
-	
+
 In your Django settings, you can optionally specify a default number of columns to be generated.
 
 .. code-block:: python
 
 	VERTICAL_MULTI_COLUMNS = [
 		{NUMBER_OF_COLUMNS=3}
-	]	
+	]
 
 Why You May Need This
 ---------------------
@@ -62,7 +62,7 @@ There are 3 views available.
 |criteriaview|
 
 **DefinedView** lets you provide the columns you want displayed. VMC does the rest.
- 
+
 |definedview|
 
 Documentation
@@ -89,9 +89,9 @@ Special Thanks
 
 .. |evenview| image:: https://user-images.githubusercontent.com/31971607/106627791-269f7580-6547-11eb-80ca-6737b5792d63.GIF
     :alt: EvenView
-	
+
 .. |criteriaview| image:: https://user-images.githubusercontent.com/31971607/106650000-59a23300-6560-11eb-8c2e-10b617db92af.GIF
 	:alt: CriteriaView
-	
+
 .. |definedview| image:: https://user-images.githubusercontent.com/31971607/106651467-2d87b180-6562-11eb-9c36-0e696a0e9b8c.GIF
 	:alt: DefinedView

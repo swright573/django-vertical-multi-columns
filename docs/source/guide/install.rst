@@ -16,14 +16,14 @@ Add ``'vertical-multi-columns'`` to your ``INSTALLED_APPS``.
         ...
         'vertical-multi-columns',
     ]
-	
+
 You can specify a default number of columns in your Django settings:
 
 .. code-block:: python
 
 	VERTICAL_MULTI_COLUMNS = [
 		{'NUMBER_OF_COLUMNS': 3}
-	]	
+	]
 
 Django-vertical-multi-columns is tested against supported versions of Python and `Django`__.
 

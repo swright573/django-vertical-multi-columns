@@ -1,4 +1,3 @@
-import pytest
 from vertical_multi_columns.views import EvenVMCView
 from django.contrib.admin.utils import flatten
 

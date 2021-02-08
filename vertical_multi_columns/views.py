@@ -24,7 +24,7 @@ class _BaseVMC:
                 self.number_of_columns = list(
                     map(lambda x: x["NUMBER_OF_COLUMNS"], _user_settings)
                 )[0]
-            except:
+            except AttributeError:
                 self.number_of_columns = 3
 
     def pad_columns(self, columns: list) -> [list, int]:

@@ -10,21 +10,21 @@ def test_no_columns_are_passed(settings_NUMBER_OF_COLUMNS_3):
     # The number of columns passed must correspond to the columns setting
     instance = DefinedVMCView()
     with pytest.raises(ImproperlyConfigured):
-        rows = instance.process_columns(None)
+        instance.process_columns(None)
 
 
 def test_too_few_columns_are_passed(columns_2, settings_NUMBER_OF_COLUMNS_3):
     # The number of columns passed must correspond to the columns setting
     instance = DefinedVMCView()
     with pytest.raises(ImproperlyConfigured):
-        rows = instance.process_columns(columns_2)
+        instance.process_columns(columns_2)
 
 
 def test_too_many_columns_are_passed(columns_4, settings_NUMBER_OF_COLUMNS_3):
     # The number of columns passed must correspond to the columns setting
     instance = DefinedVMCView()
     with pytest.raises(ImproperlyConfigured):
-        rows = instance.process_columns(columns_4)
+        instance.process_columns(columns_4)
 
 
 def test_correct_number_columns_are_passed(columns_4, settings_NUMBER_OF_COLUMNS_4):

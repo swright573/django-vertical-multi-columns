@@ -26,14 +26,14 @@ both Django itself and the django-vertical_multi_columns package.
 .. code-block:: bash
 
 	django-admin startproject vmcexamplesite
-	
+
 4. Copy all the files in the directory *example-site* in the repo into the vmcexamplesite directory Django just created.
 
 .. code-block:: bash
 
 	cd .\vmcexamplesite
 	copy <*repo_directory*>\example-site\*.*
-	
+
 5. Update settings.py with your secret key (*or use an environment variable*)
 
 .. code-block:: bash
@@ -45,5 +45,5 @@ both Django itself and the django-vertical_multi_columns package.
 .. code-block:: bash
 
 	python manage.py runserver
-	
+
 7. Point your browser to localhost:8000. More information about the site is provided there under "About the VMC Example Site.
