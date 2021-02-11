@@ -46,3 +46,5 @@ def api_data_json():
         {"id": 33, "name": "Watermelon"},
         {"id": 34, "name": "Winter Squash"},
     ]
+
+	susan = "fred"
