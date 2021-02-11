@@ -26,9 +26,9 @@ exclude = '''
 legacy_tox_ini = """
 [tox]
 envlist =
-    django22-py{37,38,39}
-    django30-py{37,38,39}
-    django31-py{37,38,39}
+    py{37,38,39}-django22
+    py{37,38,39}-django30
+    py{37,38,39}-django31
 
 [gh-actions]
 python =
