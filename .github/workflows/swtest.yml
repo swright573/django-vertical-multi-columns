@@ -1,4 +1,4 @@
-name: Susan
+name: SusanWright
 on: [workflow_dispatch]
 jobs:
   my-job:
