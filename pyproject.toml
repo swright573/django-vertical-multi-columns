@@ -23,7 +23,7 @@ exclude = '''
 '''
 
 [tool.pylint.'MESSAGE CONTROL']
-disable = "E1111,R0201,E0401"
+disable = "E1111,R0201,E0401,F841"
 
 [tool.tox]
 legacy_tox_ini = """
