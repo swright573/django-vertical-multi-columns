@@ -22,6 +22,9 @@ exclude = '''
 )/
 '''
 
+[tool.pylint.'MESSAGE CONTROL']
+disable = "E1111,R0201,E0401"
+
 [tool.tox]
 legacy_tox_ini = """
 [tox]
@@ -46,4 +49,5 @@ deps =
 
 commands = pytest
 setenv PYTHONDONTWRITEBYTECODE=1
+setenv PYTHONPATH=
 """

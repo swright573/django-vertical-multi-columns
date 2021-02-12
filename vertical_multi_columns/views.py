@@ -1,3 +1,12 @@
+""" Django Vertical Multi Columns Generator
+
+Classes:
+    EvenVMCView
+    CriteriaVMCView
+    DefinedVMCView
+    _BaseVMC
+"""
+
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.views.generic import ListView
@@ -10,25 +19,24 @@ class _BaseVMC:
     This is the base class for the specific VMC view classes. It contains common logic.
     """
 
-    def __init__(self, **kwargs: int):
-        """
-        Constructs the class.
-        Sets the number of columns to be generated. Optional kwarg 'num_columns'
-        overrides any value in settings. Passed kwarg 'num_cols' has highest priority.
-        Next is the value defined in settings.py. Otherwise a default value of 3 is used.
-        """
-        self.number_of_columns = kwargs.get("num_columns")
-        if self.number_of_columns is None:
+    @classmethod
+    def get_number_of_columns(cls, **kwargs: int):
+        """Determine the number of columns to be generated"""
+        number_of_columns = kwargs.get("num_columns")
+        if number_of_columns is None:
             try:
                 _user_settings = getattr(settings, "VERTICAL_MULTI_COLUMNS")
-                self.number_of_columns = list(
+                number_of_columns = list(
                     map(lambda x: x["NUMBER_OF_COLUMNS"], _user_settings)
                 )[0]
             except AttributeError:
-                self.number_of_columns = 3
+                number_of_columns = 3
+        return number_of_columns
 
-    def pad_columns(self, columns: list) -> [list, int]:
+    @classmethod
+    def pad_columns(cls, columns: list) -> [list, int]:
         """Determines the longest column so the rest can be padded to the same length"""
+        print("in pad_columns")
         max_column = max(len(i) for i in columns)
         # Pad shorter columns to the length of the longest
         for column in columns:
@@ -36,14 +44,15 @@ class _BaseVMC:
                 column.append("")
         return columns, max_column
 
-    def build_new_rows(self, columns: list, num_rows: int) -> list:
+    @classmethod
+    def build_new_rows(cls, columns: list, num_rows: int) -> list:
         """
         Builds the rows list to be passed to the template which must
         accommodate the expected number of columns.
         """
         new_rows = []
         for row in range(num_rows):
-            new_row = [columns[col][row] for col in range(self.number_of_columns)]
+            new_row = [columns[col][row] for col in range(len(columns))]
             new_rows.append(new_row)
         return new_rows
 
@@ -67,7 +76,7 @@ class EvenVMCView(_BaseVMC, ListView):
 
     def __init__(self, **kwargs: int):
         """Constructs the class. Optional kwarg 'num_columns' overrides any value in settings."""
-        super().__init__(**kwargs)
+        self.number_of_columns = self.get_number_of_columns(**kwargs)
 
     def get_data(self) -> list:
         """
@@ -145,8 +154,7 @@ class CriteriaVMCView(_BaseVMC, ListView):
 
     def __init__(self, **kwargs: int):
         """Constructs the class. Optional kwarg 'num_columns' overrides any value in settings."""
-
-        super().__init__(**kwargs)
+        self.number_of_columns = self.get_number_of_columns(**kwargs)
 
     def get_data(self) -> list:
         """
@@ -193,18 +201,17 @@ class CriteriaVMCView(_BaseVMC, ListView):
 
         # create column lists using criteria functions passed in
         columns = [[] for c in range(self.number_of_columns)]
-        for e in entries:
-            for f in range(len(functions)):  # ??? use enumerate
-                func = functions[f]
+        for entry in entries:
+            efunctions = enumerate(functions)
+            for pos, func in efunctions:
                 parm = ""
-                for k in keys:
-                    if isinstance(e[k], int):
-                        e[k] = str(e[k])
-                    parm += e[k] + ","
+                for key in keys:
+                    if isinstance(entry[key], int):
+                        entry[key] = str(entry[key])
+                    parm += entry[key] + ","
                 parm = parm[:-1]
                 if func(parm):
-                    columns[f].append(e)
-
+                    columns[pos].append(entry)
         columns, max_column = self.pad_columns(columns)
         rows = self.build_new_rows(columns, max_column)
         return rows
@@ -227,7 +234,7 @@ class DefinedVMCView(_BaseVMC, ListView):
 
     def __init__(self, **kwargs: int):
         """Constructs the class. Optional kwarg 'num_columns' overrides any value in settings."""
-        super().__init__(**kwargs)
+        self.number_of_columns = self.get_number_of_columns(**kwargs)
 
     def get_data(self):
         """
