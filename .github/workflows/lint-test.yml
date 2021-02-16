@@ -40,7 +40,7 @@ jobs:
         pip install pylint flake8
     - name: Run Linters    
       run: |
-        pylint vertical_multi_columns example-site tests
+        pylint vertical_multi_columns example_site tests
         flake8
   test:
     needs: more_lint
