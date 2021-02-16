@@ -26,17 +26,14 @@ class _BaseVMC:
         if number_of_columns is None:
             try:
                 _user_settings = getattr(settings, "VERTICAL_MULTI_COLUMNS")
-                number_of_columns = list(
-                    map(lambda x: x["NUMBER_OF_COLUMNS"], _user_settings)
-                )[0]
-            except AttributeError:
+                number_of_columns = list(map(lambda x: x["NUMBER_OF_COLUMNS"], _user_settings))[0]
+            except (AttributeError, TypeError):
                 number_of_columns = 3
         return number_of_columns
 
     @classmethod
     def pad_columns(cls, columns: list) -> [list, int]:
         """Determines the longest column so the rest can be padded to the same length"""
-        print("in pad_columns")
         max_column = max(len(i) for i in columns)
         # Pad shorter columns to the length of the longest
         for column in columns:
@@ -92,14 +89,10 @@ class EvenVMCView(_BaseVMC, ListView):
         """
 
         number_of_entries = len(entries)
-        entries_all = (
-            number_of_entries // self.number_of_columns
-        )  # minimum number of entries in all rows
-        entries_some = (
-            number_of_entries % self.number_of_columns
-        )  # number of additional entries in some rows
+        entries_all = number_of_entries // self.number_of_columns  # minimum number of entries in all rows
+        entries_some = number_of_entries % self.number_of_columns  # number of additional entries in some rows
 
-        # Create columns and calculate column lengths
+        # Create column structure and calculate column lengths
         columns = [[] for i in range(self.number_of_columns)]
         col_count = [0 for i in range(self.number_of_columns)]
         for i in range(self.number_of_columns):
@@ -108,7 +101,7 @@ class EvenVMCView(_BaseVMC, ListView):
                 col_count[i] += 1
                 entries_some -= 1
 
-        # Create column lists based on number of entries in each column
+        # Populate columns based on number of entries in each column
         entries_pos = 0
         for col in range(self.number_of_columns):
             for i in range(entries_pos, entries_pos + col_count[col]):
@@ -176,19 +169,11 @@ class CriteriaVMCView(_BaseVMC, ListView):
         """
 
         if not functions:
-            raise ImproperlyConfigured(
-                MSTART
-                + "You have provided no list of functions defining column criteria."
-            )
+            raise ImproperlyConfigured(MSTART + "You have provided no list of functions defining column criteria.")
         if len(functions) != self.number_of_columns:
-            raise ImproperlyConfigured(
-                MSTART
-                + "Number of functions passed must correspond to number of columns in settings."
-            )
+            raise ImproperlyConfigured(MSTART + "Number of functions passed must correspond to number of columns in settings.")
         if not keys:
-            raise ImproperlyConfigured(
-                MSTART + "You must provide keys used in column criteria functions)"
-            )
+            raise ImproperlyConfigured(MSTART + "You must provide keys used in column criteria functions)")
 
     def process_entries(self, entries: list, functions: list, keys: list) -> list:
         """
@@ -251,8 +236,7 @@ class DefinedVMCView(_BaseVMC, ListView):
             raise ImproperlyConfigured(MSTART + "You have passed no columns.")
         if len(columns) != self.number_of_columns:
             raise ImproperlyConfigured(
-                MSTART
-                + "The number of columns passed must correspond to the number of columns setting."
+                MSTART + "The number of columns passed must correspond to the number of columns setting."
             )
 
     def process_columns(self, columns) -> list:

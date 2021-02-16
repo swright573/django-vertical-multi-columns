@@ -1,45 +1,57 @@
-import pytest
+"""
+Common elements for pytest tests
+
+"""
+
 import random
+import pytest
 from django.conf import settings
 
 
 def pytest_configure():
-    settings.configure()
-    INSTALLED_APPS = [
-        "vertical_multi_columns",
-    ]
+    """Initialize Django settings"""
+    settings.configure(
+        INSTALLED_APPS=[
+            "vertical_multi_columns",
+        ]
+    )
 
 
-# ------ Fixtures for number of columns
+# Fixtures for setting NUMBER_OF_COLUMNS
 @pytest.fixture()
-def settings_NUMBER_OF_COLUMNS_Null():
+def settings_number_of_columns_null():
+    """There is no setting for NUMBER_OF_COLUMNS"""
     settings.VERTICAL_MULTI_COLUMNS = None
 
 
 @pytest.fixture()
-def settings_NUMBER_OF_COLUMNS_2():
+def settings_number_of_columns_2():
+    """Django setting for NUMBER_OF_COLUMNS is 2"""
     settings.VERTICAL_MULTI_COLUMNS = [{"NUMBER_OF_COLUMNS": 2}]
 
 
 @pytest.fixture()
-def settings_NUMBER_OF_COLUMNS_3():
+def settings_number_of_columns_3():
+    """Django setting for NUMBER_OF_COLUMNS is 3"""
     settings.VERTICAL_MULTI_COLUMNS = [{"NUMBER_OF_COLUMNS": 3}]
 
 
 @pytest.fixture()
-def settings_NUMBER_OF_COLUMNS_4():
+def settings_number_of_columns_4():
+    """Django setting for NUMBER_OF_COLUMNS is 4"""
     settings.VERTICAL_MULTI_COLUMNS = [{"NUMBER_OF_COLUMNS": 4}]
 
 
 @pytest.fixture()
-def settings_NUMBER_OF_COLUMNS_5():
+def settings_number_of_columns_5():
+    """Django setting for NUMBER_OF_COLUMNS is 5"""
     settings.VERTICAL_MULTI_COLUMNS = [{"NUMBER_OF_COLUMNS": 5}]
 
 
-# ------ Fixtures for data in
+# Fixtures for representing data input to a VMC view
 @pytest.fixture()
 def entries_27():
-    # This list has 27 entries
+    """Input data with 27 entries"""
     return [
         {"id": 5, "name": "Asparagus"},
         {"id": 6, "name": "Beans"},
@@ -72,9 +84,8 @@ def entries_27():
 
 
 @pytest.fixture()
-# not used
 def entries_4():
-    # This list has 4 entries
+    """Input data with 4 entries"""
     return [
         {"id": 5, "name": "Asparagus"},
         {"id": 20, "name": "Kale"},
@@ -85,15 +96,14 @@ def entries_4():
 
 @pytest.fixture()
 def entries_0():
-    # This list has 0 entries
+    """Empty input data"""
     return []
 
 
-# Fixtures for data out (except get_queryset ... see bottom on file)
-
-
+# Fixtures for representing data out
 @pytest.fixture()
 def columns_4():
+    """4 columns of out data, each having a varying number of entries"""
     return [
         [
             {"id": 5, "name": "Asparagus"},
@@ -119,6 +129,7 @@ def columns_4():
 
 @pytest.fixture()
 def columns_2():
+    """2 columns of out data, each having a varying number of entries"""
     return [
         [
             {"id": 20, "name": "Kale"},
@@ -136,6 +147,10 @@ def columns_2():
 
 
 def padded_columns_16():
+    """
+    Columns with 16 entries where some entries are blank to fill shorter columns to match the longest
+    Used in parametrized fixture "padded_columns"
+    """
     return [
         [
             {"id": 5, "name": "Asparagus"},
@@ -195,6 +210,10 @@ def padded_columns_16():
 
 
 def padded_columns_4():
+    """
+    Columns with 4 entries where some entries are blank to fill shorter columns to match the longest
+    Used in parametrized fixture "padded_columns"
+    """
     return [
         [
             {"id": 5, "name": "Asparagus"},
@@ -219,11 +238,13 @@ def padded_columns_4():
 
 @pytest.fixture(params=[(padded_columns_4(), 4, 3), (padded_columns_16(), 16, 3)])
 def padded_columns(request):
+    """Pytest parametrized fixture to return the listed fixtures"""
     return request.param
 
 
 @pytest.fixture()
 def fixture_padded_columns_4():
+    """Columns with 4 entries where some entries are blank to fill shorter columns to match the longest"""
     return [
         [
             [
@@ -252,6 +273,7 @@ def fixture_padded_columns_4():
 
 @pytest.fixture()
 def fixture_padded_columns_16():
+    """Columns with 16 entries where some entries are blank to fill shorter columns to match the longest"""
     return [
         [
             [
@@ -316,6 +338,8 @@ def fixture_padded_columns_16():
 
 @pytest.fixture()
 def columns_many():
+    """Simulating many columns being returned with varying numbers of entries in each"""
+
     def _build_cols(num_items, num_cols):
         col = [{} for i in range(num_items - random.randint(0, num_items))]
         cols = [col for i in range(num_cols)]
@@ -328,6 +352,7 @@ def columns_many():
 
 @pytest.fixture()
 def columns_same_length_4():
+    """Columns are all the same length ... test will demonstrate they stay that way"""
     return [
         [
             {"id": 5, "name": "Asparagus"},
@@ -352,6 +377,7 @@ def columns_same_length_4():
 
 @pytest.fixture()
 def first_column_empty_5():
+    """First column is empty ... test will demoonstrate this edge case can be handled"""
     return [
         [],
         [
@@ -373,6 +399,7 @@ def first_column_empty_5():
 
 @pytest.fixture()
 def last_column_empty_2():
+    """Last column is empty ... test will demoonstrate this edge case can be handled"""
     return [
         [{"id": 5, "name": "Asparagus"}, {"id": 2, "name": "Basil"}],
         [{"id": 15, "name": "Cucumbers"}, {"id": 45, "name": "Dill"}],
@@ -383,12 +410,15 @@ def last_column_empty_2():
 
 @pytest.fixture()
 def all_columns_empty():
+    """All columns are empty ... test will demoonstrate this edge case can be handled"""
     return [[] for i in range(0, 100)]
 
 
-# Fixtures for testing CriteriaVMCView
+# Fixtures for specifically testing CriteriaVMCView
 @pytest.fixture()
 def criteria_functions_2():
+    """2 functions are passed to a VMCCriteria view"""
+
     def a_to_m(args):
         parms = args.split(",")
         return "ABCDEFGHIJKLM".find(parms[0][0]) > -1
@@ -402,6 +432,8 @@ def criteria_functions_2():
 
 @pytest.fixture()
 def criteria_functions_3():
+    """3 functions are passed to a VMCCriteria view"""
+
     def a_to_f(args):
         parms = args.split(",")
         return "ABCDEF".find(parms[0][0]) > -1
@@ -419,6 +451,8 @@ def criteria_functions_3():
 
 @pytest.fixture()
 def criteria_functions_4():
+    """4 functions are passed to a VMCCriteria view"""
+
     def a_to_d(args):
         parms = args.split(",")
         return "ABCD".find(parms[0][0]) > -1
@@ -440,6 +474,8 @@ def criteria_functions_4():
 
 @pytest.fixture()
 def criteria_functions_5():
+    """5 functions are passed to a VMCCriteria view"""
+
     def a_to_d(args):
         parms = args.split(",")
         return "ABCD".find(parms[0][0]) > -1
@@ -465,12 +501,14 @@ def criteria_functions_5():
 
 @pytest.fixture()
 def function_args():
+    """2 dictionary keys are passed"""
     return ["name", "id"]
 
 
 # Fixtures specifically for testing get_queryset - common in - specific out by VMC class
 @pytest.fixture()
 def test_in_even_criteria_data():
+    """Input data for ListView's get_queryset() override in EvenVMCView and CriteriaVMCView tests"""
     return [
         {"id": 5, "name": "Asparagus"},
         {"id": 2, "name": "Basil"},
@@ -522,6 +560,7 @@ def test_in_even_criteria_data():
 
 @pytest.fixture()
 def test_out_even_data():
+    """"Out data for the override of ListView's get_queryset() in EvenVMCView"""
     return [
         [
             {"id": 5, "name": "Asparagus"},
@@ -603,6 +642,7 @@ def test_out_even_data():
 
 @pytest.fixture()
 def test_out_criteria_data():
+    """"Out data for the override of ListView's get_queryset() in CriteriaVMCView"""
     return [
         [
             {"id": "5", "name": "Asparagus"},
@@ -653,6 +693,7 @@ def test_out_criteria_data():
 
 @pytest.fixture()
 def test_in_defined_data():
+    """"Input data for ListView's get_queryset() override in DefinedVMCView tests"""
     return [
         [
             {"id": 5, "name": "Asparagus"},
@@ -688,6 +729,7 @@ def test_in_defined_data():
 
 @pytest.fixture()
 def test_out_defined_data():
+    """"Out data for the override of ListView's get_queryset() in EvenVMCView"""
     return [
         [
             {"id": 5, "name": "Asparagus"},
@@ -732,7 +774,8 @@ def test_out_defined_data():
 
 
 @pytest.fixture()
-def alternate_data_structure_data():
+def heirarchical_data_structure_data():
+    """Heirarchical JSON data"""
     return [
         {
             "squadName": "Super hero squad",
@@ -817,57 +860,3 @@ def alternate_data_structure_data():
             ],
         },
     ]
-
-
-@pytest.fixture()
-def simpler_alternate_data_structure_data():
-    return [
-        {
-            "Name": "Susan",
-            "active": True,
-            "garments": [
-                {"type": "Skirt", "colours": ["red", "blue", "grey"]},
-                {"type": "Sweater", "colours": ["black", "pink", "white", "brown"]},
-                {"type": "Shoes", "colours": ["black", "brown"]},
-            ],
-        },
-        {
-            "Name": "Jane",
-            "active": True,
-            "garments": [
-                {"type": "Skirt", "colours": ["red", "blue", "grey"]},
-                {"type": "Blouse", "colours": ["white", "grey", "cream"]},
-                {"type": "Sweater", "colours": ["pink", "white", "beige", "brown"]},
-                {"type": "Shoes", "colours": ["black", "brown"]},
-            ],
-        },
-        {
-            "Name": "Freda",
-            "active": True,
-            "garments": [
-                {"type": "Skirt", "colours": ["fuschia", "blue", "grey", "black"]},
-                {"type": "Sweater", "colours": ["black", "pink", "white", "brown"]},
-                {"type": "Shoes", "colours": ["black"]},
-            ],
-        },
-        {
-            "Name": "Beth",
-            "active": True,
-            "garments": [
-                {"type": "Skirt", "colours": ["black", "blue", "grey"]},
-                {"type": "Sweater", "colours": ["black", "pink", "white", "brown"]},
-                {"type": "Shoes", "colours": ["black", "brown"]},
-                {"type": "Shoes", "colours": ["black"]},
-            ],
-        },
-    ]
-
-
-@pytest.fixture()
-def alternate_data_structure_functions():
-    pass
-
-
-@pytest.fixture()
-def alternate_data_structure_function_args():
-    pass

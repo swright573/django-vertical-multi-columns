@@ -7,6 +7,9 @@ profile = "black"
 multi_line_output = 3
 
 [tool.black]
+line-length = 127
+target-version = ['py38']
+include = '\.pyi?$'
 exclude = '''
 /(
     \.git
@@ -23,7 +26,8 @@ exclude = '''
 '''
 
 [tool.pylint.'MESSAGE CONTROL']
-disable = "E1111,R0201,E0401,F841"
+max-line-length = 127
+disable = "E1111,R0201,E0401,F841,W0613"
 
 [tool.tox]
 legacy_tox_ini = """
