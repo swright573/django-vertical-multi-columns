@@ -78,8 +78,8 @@ def test_partial_rows_display_data_in_left_most_columns(entries_27, settings_num
 
 class MockEvenVMCView(EvenVMCView):
     """
-    For next test ... class fixtures are not yet supported in pytest. Therfore I had to create this mocked version
-    because overridden methods in imported classes will not execute in tests
+    For next test ... class fixtures are not yet supported in pytest. Therfore I had to create this mocked
+    version because overridden methods in imported classes will not execute in tests
     """
 
     def __init__(self, **kwargs: int):

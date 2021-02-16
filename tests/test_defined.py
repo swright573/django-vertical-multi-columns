@@ -38,7 +38,7 @@ def test_correct_number_columns_are_passed(columns_4, settings_number_of_columns
 
 
 def test_same_data_after_processing(columns_2, settings_number_of_columns_2):
-    """Test that the original data can be reconstructed from the processed data, proving the processing worked"""
+    """Test that the original data can be reconstructed from the processed data, proving the processing worked """
     instance = DefinedVMCView()
     rows = instance.process_columns(columns_2)
     gen_columns_from_rows = []

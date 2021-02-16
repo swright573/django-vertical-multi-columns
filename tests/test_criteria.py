@@ -106,8 +106,8 @@ def test_same_entries_in_same_vertical_order(entries_27, criteria_functions_2, f
 
 class MockCriteriaVMCView(CriteriaVMCView):
     """
-    For next test ... class fixtures are not yet supported in pytest. Therfore I had to create this mocked version
-    because overridden methods in imported classes will not execute in tests
+    For next test ... class fixtures are not yet supported in pytest. Therfore I had to create this mocked
+    version because overridden methods in imported classes will not execute in tests
     """
 
     def __init__(self, **kwargs: int):
