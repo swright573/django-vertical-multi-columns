@@ -27,7 +27,7 @@ exclude = '''
 
 [tool.pylint.'MESSAGE CONTROL']
 max-line-length = 127
-disable = "E1111,R0201,E0401,F841,W0613"
+#disable = "E1111,R0201,E0401,F841,W0613"
 
 [tool.tox]
 legacy_tox_ini = """
