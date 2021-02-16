@@ -38,7 +38,9 @@ jobs:
     - name: Install Linters
       run: |
         pip install pylint flake8
-        pylint vertical_multi_columns
+    - name: Run Linters    
+      run: |
+        pylint vertical_multi_columns example-site tests
         flake8
   test:
     needs: more_lint
