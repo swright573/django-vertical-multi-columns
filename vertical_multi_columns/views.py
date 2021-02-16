@@ -11,7 +11,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.views.generic import ListView
 
-MSTART = "Vertical-Multi-Columns/CriteriaVMCView-"
+MSGSTART = "Vertical-Multi-Columns/CriteriaVMCView-"
 
 
 class _BaseVMC:
@@ -169,11 +169,13 @@ class CriteriaVMCView(_BaseVMC, ListView):
         """
 
         if not functions:
-            raise ImproperlyConfigured(MSTART + "You have provided no list of functions defining column criteria.")
+            raise ImproperlyConfigured(MSGSTART + "You have provided no list of functions defining column criteria.")
         if len(functions) != self.number_of_columns:
-            raise ImproperlyConfigured(MSTART + "Number of functions passed must correspond to number of columns in settings.")
+            raise ImproperlyConfigured(
+                MSGSTART + "Number of functions passed must correspond to number of columns in settings."
+            )
         if not keys:
-            raise ImproperlyConfigured(MSTART + "You must provide keys used in column criteria functions)")
+            raise ImproperlyConfigured(MSGSTART + "You must provide keys used in column criteria functions)")
 
     def process_entries(self, entries: list, functions: list, keys: list) -> list:
         """
@@ -233,10 +235,10 @@ class DefinedVMCView(_BaseVMC, ListView):
         """
 
         if not columns:
-            raise ImproperlyConfigured(MSTART + "You have passed no columns.")
+            raise ImproperlyConfigured(MSGSTART + "You have passed no columns.")
         if len(columns) != self.number_of_columns:
             raise ImproperlyConfigured(
-                MSTART + "The number of columns passed must correspond to the number of columns setting."
+                MSGSTART + "The number of columns passed must correspond to the number of columns setting."
             )
 
     def process_columns(self, columns) -> list:
