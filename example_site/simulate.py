@@ -1,4 +1,11 @@
+"""
+Simulate the data that would probably normally be returned in an API call
+
+"""
+
+
 def api_data_json():
+    """Data to be displayed in a VMC view"""
     return [
         {"id": 5, "name": "Asparagus"},
         {"id": 2, "name": "Basil"},

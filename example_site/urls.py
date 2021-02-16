@@ -1,3 +1,8 @@
+"""
+Urls for the VMC Example Site
+
+"""
+
 from django.urls import path
 from . import views
 
