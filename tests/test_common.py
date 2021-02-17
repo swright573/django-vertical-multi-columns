@@ -3,7 +3,8 @@ Tests for common elements found in _BaseVMCView
 """
 
 import pytest
-from vertical_multi_columns.views import _BaseVMC, EvenVMCView
+
+from vertical_multi_columns.views import EvenVMCView, _BaseVMC
 
 # Testing method pad_columns
 #   What to test

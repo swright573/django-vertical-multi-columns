@@ -3,6 +3,7 @@ Tests for EvenVMCView
 """
 
 from django.contrib.admin.utils import flatten
+
 from vertical_multi_columns.views import EvenVMCView
 
 

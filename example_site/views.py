@@ -8,10 +8,11 @@ The same set of data is used in each to demonstrate the different ways data can 
 # import os
 # import requests
 
-from django.views.generic import View, ListView
 from django.shortcuts import render
+from django.views.generic import ListView, View
 
-from vertical_multi_columns.views import EvenVMCView, CriteriaVMCView, DefinedVMCView
+from vertical_multi_columns.views import CriteriaVMCView, DefinedVMCView, EvenVMCView
+
 from . import simulate
 
 # An API call is being simulated here to avoid complexity in this demo program.

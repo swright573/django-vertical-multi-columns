@@ -4,6 +4,7 @@ Common elements for pytest tests
 """
 
 import random
+
 import pytest
 from django.conf import settings
 

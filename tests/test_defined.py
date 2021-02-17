@@ -5,6 +5,7 @@ Note: Columns are passed pre-filled as they are to appear.
 
 import pytest
 from django.core.exceptions import ImproperlyConfigured
+
 from vertical_multi_columns.views import DefinedVMCView
 
 
