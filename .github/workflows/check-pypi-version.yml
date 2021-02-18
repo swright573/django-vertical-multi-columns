@@ -18,7 +18,10 @@ jobs:
           pip install requests
       - name: execute py script
         run: |
-          result=$(python check_pypi_version.py https://test.pypi.org/pypi/django-vertical-multi-columns/json)
+          $(python check_pypi_version.py https://test.pypi.org/pypi/django-vertical-multi-columns/json)
+          if: failure()
+          run: echo Package version number should be bumped forward.
+          
   next_step:
     needs: check_pypi_version_number_has_changed
     runs-on: ubuntu:lastest
