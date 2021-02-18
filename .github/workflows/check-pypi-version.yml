@@ -18,9 +18,7 @@ jobs:
           pip install requests
       - name: execute py script
         run: |
-          if: failure(python check_pypi_version.py https://test.pypi.org/pypi/django-vertical-multi-columns/json)
-          run: echo Package version number should be bumped forward.
-          
+          python check_pypi_version.py https://test.pypi.org/pypi/django-vertical-multi-columns/json
   next_step:
     needs: check_pypi_version_number_has_changed
     runs-on: ubuntu:lastest
@@ -32,4 +30,3 @@ jobs:
       - name: susan
         run: |
          pip install requests
-      

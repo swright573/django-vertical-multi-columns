@@ -21,13 +21,14 @@ def get_version(rel_path):
     return ""
 
 
-local_version = get_version("vertical_multi_columns/__init__.py")
+def main():
+    """Determine if version number needs to be update"""
+    local_version = get_version("vertical_multi_columns/__init__.py")
 
-resp = requests.get(sys.argv[1])
-pypi_version = resp.json()["info"]["version"]
+    resp = requests.get(sys.argv[1])
+    pypi_version = resp.json()["info"]["version"]
 
-if local_version == pypi_version:
-    status = 1  # not ok - version number was not changed
-else:
-    status = 0  # ok - version number was changed
-sys.exit(status)
+    if local_version == pypi_version:
+        sys.exit(1)  # not ok - version number was not changed
+    else:
+        sys.exit(0)  # ok - version number was changed
