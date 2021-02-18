@@ -22,16 +22,12 @@ def get_version(rel_path):
 
 
 local_version = get_version("vertical_multi_columns/__init__.py")
-print(f"{local_version=}")
 
-url = sys.argv[1]
-resp = requests.get(url)
+resp = requests.get(sys.argv[1])
 pypi_version = resp.json()["info"]["version"]
-print(f"{pypi_version=}")
 
 if local_version == pypi_version:
     status = 1  # not ok - version number was not changed
 else:
     status = 0  # ok - version number was changed
-print(f"{status=}")
 sys.exit(status)
