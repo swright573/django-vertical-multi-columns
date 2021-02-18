@@ -18,7 +18,7 @@ jobs:
           pip install requests
       - name: execute py script
         run: |
-          result=$(python check_pypi_version.py https://tstpypi.org/pypi/django-vertical-multi-columns/json)
+          result=$(python check_pypi_version.py https://test.pypi.org/pypi/django-vertical-multi-columns/json)
   next_step:
     needs: check_pypi_version_number_has_changed
     runs-on: ubuntu:lastest
