@@ -1,11 +1,12 @@
 ---
-name: Lint/Test
-
+name: Lint/Test/Deploy for Staging
 on:
   push:
-    branches: [ $default-branch ]
+    branches:
+      - staging
   pull_request:
-    branches: [ $default-branch ]
+    branches:
+      - staging
 
 jobs:
   black:
@@ -84,3 +85,51 @@ jobs:
       - name: Run tests
         run: |
           tox -r --verbose
+check_pypi_version_number_has_changed:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install requests
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+      - name: execute py script
+        run: |
+          result=$(python check_pypi_version.py https://tstpypi.org/pypi/django-vertical-multi-columns/json)
+          
+build_wheel:
+    needs: check_pypi_version_number_has_changed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: prep_create_wheel
+        run: |
+          python -m pip install --upgrade pip
+          python -m setup.py --sdist --bdist_wheel --outdir dist/
+          python -m twine upload --repository testpypi dist/*
+  publish_to_testpypi:
+    needs: build_wheel
+    runs-on: ubuntu:latests
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Publish distribution to TestPyPI
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/
+        
+          
+    
