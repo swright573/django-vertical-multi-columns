@@ -19,9 +19,10 @@ jobs:
       - name: execute py script
         run: |
           if [[ $GITHUB_REF == 'main' ]]; then
-            echo "PYPI_URL=https://pypi.org/pypi/django-vertical-multi-columns/json" >> "$GITHUB_ENV"
+            echo "PYPI_URL=https://pypi.org/pypi/django-vertical-multi-columns/json" >> $GITHUB_ENV
           else
-            echo "PYPI_URL=https://test.pypi.org/pypi/django-vertical-multi-columns/json" >> "$GITHUB_ENV"
+            echo "PYPI_URL=https://test.pypi.org/pypi/django-vertical-multi-columns/json" >> $GITHUB_ENV
+          fi
           python check_pypi_version.py ${PYPI_URL}
   next_step:
     needs: check_pypi_version_number_has_changed
