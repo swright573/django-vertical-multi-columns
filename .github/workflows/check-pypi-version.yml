@@ -17,8 +17,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
       - name: execute py script
+        env:
+            PYPI_URL:
+                "https://test.pypi.org/pypi/django-vertical-multi-columns/json"
         run: |
-          python check_pypi_version.py https://test.pypi.org/pypi/django-vertical-multi-columns/json
+          python check_pypi_version.py ${PYPI_URL}
+          if: failure()
+          run: |
+            echo "Version number should be bumped ... cannot proceed."
   next_step:
     needs: check_pypi_version_number_has_changed
     runs-on: ubuntu-latest
@@ -29,4 +35,4 @@ jobs:
           python-version: 3.9
       - name: susan
         run: |
-         pip install requests
+          pip install requests
