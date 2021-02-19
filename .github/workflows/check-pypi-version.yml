@@ -23,10 +23,11 @@ jobs:
           else
             echo "pypi_url=https://test.pypi.org/pypi/django-vertical-multi-columns/json" >> $GITHUB_ENV
           fi
-          echo "The env variable is ${{ env.pypi_url }}"
       - name: check version number
         run: |
           python check_pypi_version.py "${{ env.pypi_url }}"
+          if: ${{ failure() }} then
+            echo "Procees stopping. Bump the version number and try again."
   next_step:
     needs: check_pypi_version_number_has_changed
     runs-on: ubuntu-latest
