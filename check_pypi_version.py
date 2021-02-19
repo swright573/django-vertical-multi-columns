@@ -32,4 +32,5 @@ def main():
         print("Version number should be bumped in ./vertical_multi_columns/__init__.py before deployment to PyPi")
         sys.exit(1)  # not ok - version number was not changed
     else:
+        print("Version number has been bumped ... good to go")
         sys.exit(0)  # ok - version number was changed
