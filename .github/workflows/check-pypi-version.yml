@@ -21,8 +21,9 @@ jobs:
       - name: execute py script
         run: |
           python check_pypi_version.py ${PYPI_URL}
-          if: failure()
-          run: |
+      - name: If needed, output message
+        if: failure()
+        run: |
             echo "Version number should be bumped ... cannot proceed."
   next_step:
     needs: check_pypi_version_number_has_changed
