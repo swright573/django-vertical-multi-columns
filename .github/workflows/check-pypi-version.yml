@@ -5,6 +5,8 @@ on: [workflow_dispatch]
 
 jobs:
   check_pypi_version_number_has_changed:
+    env:
+      PYPI_URL: https://test.pypi.org/pypi/django-vertical-multi-columns/json
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,9 +19,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
       - name: execute py script
-        env:
-            PYPI_URL:
-                "https://test.pypi.org/pypi/django-vertical-multi-columns/json"
         run: |
           python check_pypi_version.py ${PYPI_URL}
           if: failure()
