@@ -3,10 +3,12 @@ name: Lint/Test/Deploy
 on:
   push:
     branches:
-      - main, staging
+      - main
+      - staging
   pull_request:
     branches:
-      - main, staging
+      - main
+      - staging
 env:
   if [[ $GITHUB_REF == 'main' ]]; then
     echo "pswd=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
