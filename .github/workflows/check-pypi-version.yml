@@ -26,6 +26,8 @@ jobs:
       - name: check version number
         run: |
           python check_pypi_version.py "${{ env.pypi_url }}"
+          if: failure()
+            echo "Version number NOT changed. Cannot push to PyPi."
   next_step:
     needs: check_pypi_version_number_has_changed
     runs-on: ubuntu-latest

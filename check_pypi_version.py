@@ -28,7 +28,7 @@ def main():
     resp = requests.get(sys.argv[1])
     pypi_version = resp.json()["info"]["version"]
     if local_version == pypi_version:
-        sys.exit(1)  # not ok - version number was not changed
+        sys.exit("Version number NOT changed ... cannot upload to Pypi")
     else:
         sys.exit(0)  # ok - version number was changed
 
