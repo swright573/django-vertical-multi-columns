@@ -21,17 +21,17 @@ def get_version(rel_path):
     return ""
 
 
-local_version = get_version("package/__init__.py")
+def main():
+    """Determine if version number needs to be updated"""
+    local_version = get_version("vertical_multi_columns/__init__.py")
 
-url = sys.argv[0]
-resp = requests.get(url)
-# https://pypi.org/pypi/$pythonPackage/json | jq -r .info.version
-x = resp.json()
-pypi_version = x["info"]["version"]
+    resp = requests.get(sys.argv[1])
+    pypi_version = resp.json()["info"]["version"]
+    if local_version == pypi_version:
+        sys.exit(1)  # not ok - version number was not changed
+    else:
+        sys.exit(0)  # ok - version number was changed
 
-if local_version == pypi_version:
-    status = 1  # not ok - version number was not changed
-else:
-    status = 0  # ok - version number was changed
 
-sys.exit(status)
+if __name__ == "__main__":
+    main()
