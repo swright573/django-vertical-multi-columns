@@ -1,19 +1,17 @@
 ---
-name: Lint/Test/Deploy for Staging
+name: Lint/Test/Deploy
 on:
   push:
     branches:
-      - staging
+      - main, staging
   pull_request:
     branches:
-      - staging
+      - main, staging
 env:
   if [[ $GITHUB_REF == 'main' ]]; then
-    echo "pypi_url=https://pypi.org/pypi/" >> $GITHUB_ENV
-    echo "pswd=${{ secrets.TEST_PYPI_API_TOKEN }}" >> $GITHUB_ENV
-  else
-    echo "pypi_url=https://test.pypi.org/pypi/" >> $GITHUB_ENV
     echo "pswd=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
+  else
+    echo "pswd=${{ secrets.TEST_PYPI_API_TOKEN }}" >> $GITHUB_ENV
   fi
 
 jobs:
@@ -123,13 +121,16 @@ jobs:
           python -m setup.py --sdist --bdist_wheel --outdir dist/
   publish_to_pypi:
     needs: build_wheel
-  uses: pypa/gh-action-pypi-publish@master
-  with:
-    user: __token__
-    password: ${{ secrets.PYPI_API_TOKEN }}
-    run: |
-      if [[ $GITHUB_REF == 'main' ]]; then
-        python -m twine upload dist/*
-      else
-        python -m twine upload --repository testpypi dist/*
-      fi
+    runs-on: ubuntu-latest
+    name: Publish a Python distribution to PyPi
+    steps:
+      - name: publish
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          user: __token__
+          password: ${{ env.pswd }}
+          if: github.ref == 'refs/heads/staging'
+          repository_url: https://test.pypi.org/legacy/
+          
+          
+
