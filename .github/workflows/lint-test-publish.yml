@@ -27,15 +27,11 @@ jobs:
        echo "pypi_url=https://test.pypi.org/pypi/" >> $GITHUB_ENV
        echo "action_state=yellow" >> $GITHUB_ENV
        echo "my_url=https://www.leftwright.ca/" >> $GITHUB_ENV
-  check_on_setup:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - name: Show environment variables
-        run: |
-          echo pypi url is ${{ env.pypi_url }}
-          echo "${{ env.action_state }}" # This will output 'yellow'
-          echo ${{ env.my_url }}
+    - name: Show environment variables
+      run: |
+       echo pypi url is ${{ env.pypi_url }}
+       echo "${{ env.action_state }}" # This will output 'yellow'
+       echo ${{ env.my_url }}
   black:
     needs: setup
     runs-on: ubuntu-latest
