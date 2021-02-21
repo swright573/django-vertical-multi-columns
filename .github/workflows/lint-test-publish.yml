@@ -13,13 +13,13 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-    - name: Set env to staging
+    - name: Set env to main
       if: endsWith(github.ref, '/main')
       run: |
         echo "ENVIRONMENT=main" >> $GITHUB_ENV
         echo "pswd=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
         echo "pypi_url=https://pypi.org/pypi/" >> $GITHUB_ENV
-    - name: Set env to production
+    - name: Set env to staging
       if: endsWith(github.ref, '/staging')
       run: |
        echo "ENVIRONMENT=staging" >> $GITHUB_ENV
@@ -28,12 +28,12 @@ jobs:
        echo "action_state=yellow" >> $GITHUB_ENV
        echo "my_url=https://www.leftwright.ca/" >> $GITHUB_ENV
   check_on_setup:
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - name: Show environment variables
         run: |
-          echo pypi url is "${{ env.pypi_url }}"
-          echo xxx pypi url is ${{ env.pypi_url }}
+          echo pypi url is ${{ env.pypi_url }}
           echo "${{ env.action_state }}" # This will output 'yellow'
           echo ${{ env.my_url }}
   black:
