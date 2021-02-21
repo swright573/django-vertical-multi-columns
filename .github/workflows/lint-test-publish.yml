@@ -142,8 +142,8 @@ jobs:
         if: endsWith(github.ref, '/staging')
         run: |
           echo "pswd=${{ secrets.TEST_PYPI_API_TOKEN }}" >> $GITHUB_ENV
-      - name: publish
-        uses: pypa/gh-action-pypi-publish@master
+      - name: publish to pypi
+        uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
           password: ${{ env.pswd }}
