@@ -26,9 +26,6 @@ jobs:
               echo "my_url=https://www.leftwright.ca/" >> $GITHUB_ENV
           fi
           echo branch is ${{github.ref}}
-          echo pypi url is "${{ env.pypi_url }}"
-          echo "${{ env.action_state }}" # This will output 'yellow'
-          echo "${{ env.my_url }}"
   black:
     needs: setup
     runs-on: ubuntu-latest
@@ -117,6 +114,9 @@ jobs:
           python-version: 3.9
       - name: Install requests
         run: |
+          echo pypi url is "${{ env.pypi_url }}"
+          echo "${{ env.action_state }}" # This will output 'yellow'
+          echo "${{ env.my_url }}"
           python -m pip install --upgrade pip
           pip install requests
       - name: check version number
