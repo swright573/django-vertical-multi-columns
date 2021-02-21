@@ -9,14 +9,18 @@ on:
     branches:
       - main
       - staging
-env:
-  if [[ $GITHUB_REF == 'main' ]]; then
-    echo "pswd=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
-  else
-    echo "pswd=${{ secrets.TEST_PYPI_API_TOKEN }}" >> $GITHUB_ENV
-  fi
-
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set environment for branch
+        run: |
+          if [[ $GITHUB_REF == 'main' ]]; then
+              echo "pswd=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
+          else
+              echo "pswd=${{ secrets.TEST_PYPI_API_TOKEN }}" >> $GITHUB_ENV
+          fi
+          echo Branch is ${{ env.pypi_url }}
   black:
     runs-on: ubuntu-latest
     steps:
