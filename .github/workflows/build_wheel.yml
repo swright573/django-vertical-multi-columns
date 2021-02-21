@@ -1,8 +1,6 @@
 ---
-name: Build Wheel
-
+name: Build My Wheel
 on: [workflow_dispatch]
-
 jobs:
   build_wheel:
     runs-on: ubuntu:latest
