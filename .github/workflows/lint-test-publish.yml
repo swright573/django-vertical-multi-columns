@@ -17,11 +17,14 @@ jobs:
         run: |
           if: github.ref == 'refs/heads/main'
               echo "pswd=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
+              echo "pypi_url=https://pypi.org/pypi/" >> $GITHUB_ENV
           else
               echo "pswd=${{ secrets.TEST_PYPI_API_TOKEN }}" >> $GITHUB_ENV
+              echo "pypi_url=https://test.pypi.org/pypi/" >> $GITHUB_ENV
           fi
           echo ${{github.ref}}
   black:
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -98,6 +101,7 @@ jobs:
         run: |
           tox -r --verbose
   check_pypi_version_number_has_changed:
+    needs: more_lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
