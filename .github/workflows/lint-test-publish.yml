@@ -20,7 +20,7 @@ jobs:
           else
               echo "pswd=${{ secrets.TEST_PYPI_API_TOKEN }}" >> $GITHUB_ENV
           fi
-          echo Branch is ${{ env.pypi_url }}
+          echo Branch is ${{ $GITHUB_REF }}
   black:
     runs-on: ubuntu-latest
     steps:
