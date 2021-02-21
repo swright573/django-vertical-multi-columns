@@ -19,12 +19,14 @@ jobs:
           then
               echo "pswd=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
               echo "pypi_url=https://pypi.org/pypi/" >> $GITHUB_ENV
+              echo "action_state=yellow" >> $GITHUB_ENV
           else
               echo "pswd=${{ secrets.TEST_PYPI_API_TOKEN }}" >> $GITHUB_ENV
               echo "pypi_url=https://test.pypi.org/pypi/" >> $GITHUB_ENV
           fi
           echo branch is ${{github.ref}}
-          echo pypi url is ${{env.pypi_url}}
+          echo pypi url is "${{ env.pypi_url }}"
+          echo "${{ env.action_state }}" # This will output 'yellow'
   black:
     needs: setup
     runs-on: ubuntu-latest
