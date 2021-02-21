@@ -121,7 +121,7 @@ jobs:
       - name: check version number
         run: |
           python check_pypi_version.py "${{ env.pypi_url }}django-vertical-multi-columns/json"
-  build_wheel:
+  build_wheel_publish_to_pypi:
     needs: check_pypi_version_number_has_changed
     runs-on: ubuntu-latest
     steps:
@@ -134,11 +134,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m setup.py --sdist --bdist_wheel --outdir dist/
-  publish_to_pypi:
-    needs: build_wheel
-    runs-on: ubuntu-latest
-    name: Publish a Python distribution to PyPi
-    steps:
       - name: Set env to main
         if: endsWith(github.ref, '/main')
         run: |
