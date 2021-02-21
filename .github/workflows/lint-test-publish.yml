@@ -15,13 +15,12 @@ jobs:
     steps:
       - name: Set environment for branch
         run: |
-          if: github.ref == 'main' then
+          if: github.ref == 'refs/heads/main'
               echo "pswd=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
-              echo Branch is main
           else
               echo "pswd=${{ secrets.TEST_PYPI_API_TOKEN }}" >> $GITHUB_ENV
-              echo Branch is staging
           fi
+          echo ${{github.ref}}
   black:
     runs-on: ubuntu-latest
     steps:
