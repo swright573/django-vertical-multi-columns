@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Set environment for branch
         run: |
-          if: github.ref == 'refs/heads/main'
+          if github.ref == 'refs/heads/main'
               echo "pswd=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
               echo "pypi_url=https://pypi.org/pypi/" >> $GITHUB_ENV
           else
