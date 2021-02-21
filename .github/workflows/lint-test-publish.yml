@@ -10,30 +10,7 @@ on:
       - main
       - staging
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Set env to main
-      if: endsWith(github.ref, '/main')
-      run: |
-        echo "ENVIRONMENT=main" >> $GITHUB_ENV
-        echo "pswd=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
-        echo "pypi_url=https://pypi.org/pypi/" >> $GITHUB_ENV
-    - name: Set env to staging
-      if: endsWith(github.ref, '/staging')
-      run: |
-       echo "ENVIRONMENT=staging" >> $GITHUB_ENV
-       echo "pswd=${{ secrets.TEST_PYPI_API_TOKEN }}" >> $GITHUB_ENV
-       echo "pypi_url=https://test.pypi.org/pypi/" >> $GITHUB_ENV
-       echo "action_state=yellow" >> $GITHUB_ENV
-       echo "my_url=https://www.leftwright.ca/" >> $GITHUB_ENV
-    - name: Show environment variables
-      run: |
-       echo pypi url is ${{ env.pypi_url }}
-       echo "${{ env.action_state }}" # This will output 'yellow'
-       echo ${{ env.my_url }}
   black:
-    needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -55,6 +32,15 @@ jobs:
           git checkout $GITHUB_HEAD_REF
           git commit -am "fixup: Format Python code with Black"
           git push
+  isort:
+    needs: black
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
       - name: Install isort
         run: pip install isort
       - name: Run isort check
@@ -70,7 +56,7 @@ jobs:
           git commit -am "fixup: Reorganize imports with isort"
           git push
   more_lint:
-    needs: black
+    needs: isort
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -110,7 +96,7 @@ jobs:
         run: |
           tox -r --verbose
   check_pypi_version_number_has_changed:
-    needs: more_lint
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -122,6 +108,16 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install requests
+      - name: Set env to main
+        if: endsWith(github.ref, '/main')
+        run: |
+          echo "pswd=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
+          echo "pypi_url=https://pypi.org/pypi/" >> $GITHUB_ENV
+      - name: Set env to staging
+        if: endsWith(github.ref, '/staging')
+        run: |
+          echo "pswd=${{ secrets.TEST_PYPI_API_TOKEN }}" >> $GITHUB_ENV
+          echo "pypi_url=https://test.pypi.org/pypi/" >> $GITHUB_ENV
       - name: check version number
         run: |
           python check_pypi_version.py "${{ env.pypi_url }}django-vertical-multi-columns/json"
@@ -143,6 +139,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Publish a Python distribution to PyPi
     steps:
+      - name: Set env to main
+        if: endsWith(github.ref, '/main')
+        run: |
+          echo "pswd=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
+      - name: Set env to staging
+        if: endsWith(github.ref, '/staging')
+        run: |
+          echo "pswd=${{ secrets.TEST_PYPI_API_TOKEN }}" >> $GITHUB_ENV
       - name: publish
         uses: pypa/gh-action-pypi-publish@master
         with:
