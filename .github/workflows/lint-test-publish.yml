@@ -8,7 +8,7 @@ on:
     branches:
       - main, staging
 env:
-  if [[ $GITHUB_REF == 'main' ]]; then
+  if [[ $GITHUB_REF == 'refs/heads/main' ]]; then
     echo "pswd=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
   else
     echo "pswd=${{ secrets.TEST_PYPI_API_TOKEN }}" >> $GITHUB_ENV
