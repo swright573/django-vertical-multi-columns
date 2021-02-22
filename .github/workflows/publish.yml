@@ -1,0 +1,72 @@
+name: Publish
+
+on: 
+  [workflow_dispatch]
+  
+jobs:
+  check_pypi_version_number_has_changed:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install requests
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+      - name: Set env to main
+        if: endsWith(github.ref, '/main')
+        run: |
+          echo "pswd=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
+          echo "pypi_url=https://pypi.org/pypi/" >> $GITHUB_ENV
+      - name: Set env to staging
+        if: endsWith(github.ref, '/staging')
+        run: |
+          echo "pswd=${{ secrets.TEST_PYPI_API_TOKEN }}" >> $GITHUB_ENV
+          echo "pypi_url=https://test.pypi.org/pypi/" >> $GITHUB_ENV
+      - name: check version number
+        run: |
+          python check_pypi_version.py "${{ env.pypi_url }}django-vertical-multi-columns/json"
+  build_wheel:
+    needs: check_pypi_version_number_has_changed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: create_wheel
+        run: |
+          python -m pip install --upgrade pip
+          python -m setup.py --sdist --bdist_wheel --outdir dist/
+      - name: update repo
+        run: |
+          git config --global user.name 'distcreated'
+          git config --global user.email 'swright573@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git checkout $GITHUB_HEAD_REF
+          git commit -am "save wheel to repo"
+          git push
+  publish_to_pypi:
+    needs: build_wheel
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set env to main
+        if: endsWith(github.ref, '/main')
+        run: |
+          echo "pswd=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
+      - name: Set env to staging
+        if: endsWith(github.ref, '/staging')
+        run: |
+          echo "pswd=${{ secrets.TEST_PYPI_API_TOKEN }}" >> $GITHUB_ENV
+      - name: publish to pypi
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ env.pswd }}
+          if: github.ref == 'refs/heads/staging'
+          repository_url: https://test.pypi.org/legacy/
