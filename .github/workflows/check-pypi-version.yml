@@ -16,13 +16,14 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install requests
-      - name: set env variable
+      - name: Set env to main
+        if: endsWith(github.ref, '/main')
         run: |
-          if [[ $GITHUB_REF == 'main' ]]; then
-            echo "pypi_url=https://pypi.org/pypi/django-vertical-multi-columns/json" >> $GITHUB_ENV
-          else
-            echo "pypi_url=https://test.pypi.org/pypi/django-vertical-multi-columns/json" >> $GITHUB_ENV
-          fi
+          echo "pypi_url=https://pypi.org/pypi/" >> $GITHUB_ENV
+      - name: Set env to staging
+        if: endsWith(github.ref, '/staging')
+        run: |
+          echo "pypi_url=https://test.pypi.org/pypi/" >> $GITHUB_ENV
       - name: check version number
         run: |
           python check_pypi_version.py "${{ env.pypi_url }}"
@@ -38,4 +39,4 @@ jobs:
           python-version: 3.9
       - name: susan
         run: |
-          pip install requests
+          echo Finished
