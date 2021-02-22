@@ -39,4 +39,4 @@ jobs:
           python-version: 3.9
       - name: susan
         run: |
-          echo Finished
+          echo Susan was here.
