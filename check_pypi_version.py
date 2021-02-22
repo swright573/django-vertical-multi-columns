@@ -1,7 +1,8 @@
 """Compare PyPi/TestPyPi version number to package code"""
-import sys
 import codecs
 import os.path
+import sys
+
 import requests
 
 
