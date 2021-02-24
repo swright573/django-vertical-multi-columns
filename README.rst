@@ -11,7 +11,7 @@ to easily display a list of items in side-by-side columns rather than in one lon
 .. |codecov|  image:: https://codecov.io/gh/swright573/django-vertical-multi-columns/branch/main/graph/badge.svg
 				:target: https://codecov.io/gh/swright573/django-vertical-multi-columns
 .. |pypi|  image:: https://badge.fury.io/py/django-vertical-multi-columns.svg
-				:target: http://badge.fury.io/py/django-vertical-multi-columns.svg
+    				:target: https://badge.fury.io/py/django-vertical-multi-columns			
 .. |licence|  image:: https://img.shields.io/badge/License-BSD%202--Clause-orange.svg
 .. |black|  image:: https://img.shields.io/badge/code%20style-black-000000.svg
 				:target: https://github.com/psf/black
