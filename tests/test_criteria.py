@@ -5,10 +5,9 @@ Note 2: It is up to the user to ensure their criteria functions and func_args pe
 Note 3: Some entries can appear in more than one column if the criteria functions overlap
 """
 
+import pytest
 from django.contrib.admin.utils import flatten
 from django.core.exceptions import ImproperlyConfigured
-
-import pytest
 
 from vertical_multi_columns.views import CriteriaVMCView
 
