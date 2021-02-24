@@ -14,6 +14,7 @@ to easily display a list of items in side-by-side columns rather than in one lon
     				:target: https://badge.fury.io/py/django-vertical-multi-columns
 .. |pyvers|  image:: https://img.shields.io/pypi/pyversions/django-vertical-multi-columns				
 .. |licence|  image:: https://img.shields.io/badge/License-BSD%202--Clause-orange.svg
+				:target: https://opensource.org/licenses/BSD-2-Clause
 .. |black|  image:: https://img.shields.io/badge/code%20style-black-000000.svg
 				:target: https://github.com/psf/black
 
