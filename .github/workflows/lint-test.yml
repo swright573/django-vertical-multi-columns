@@ -1,0 +1,108 @@
+name: lint-test
+on:
+  push:
+    branches:
+      - main
+      - staging
+  pull_request:
+    branches:
+      - main
+      - staging
+jobs:
+  black:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+      - name: Install Black
+        run: pip install black
+      - name: Run black check
+        run: black --check .
+      - name: If needed, commit black changes to the push/pull request
+        if: failure()
+        run: |
+          black .
+          git config --global user.name 'autoblack'
+          git config --global user.email 'swright573@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git checkout $GITHUB_HEAD_REF
+          git commit -am "fixup: Format Python code with Black"
+          git push
+  isort:
+    needs: black
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+      - name: Install isort
+        run: pip install isort
+      - name: Run isort check
+        run: isort . --check
+      - name: If needed, commit isort changes to the push/pull request
+        if: failure()
+        run: |
+          isort .
+          git config --global user.name 'autoisort'
+          git config --global user.email 'swright573@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git checkout $GITHUB_HEAD_REF
+          git commit -am "fixup: Reorganize imports with isort"
+          git push
+  more_lint:
+    needs: isort
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install Linters
+      run: |
+        pip install pylint flake8
+    - name: Run Linters
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings.
+        flake8 . --count --exit-zero --statistics
+        # See pyproject.toml for disabled pylint messages
+        pylint vertical_multi_columns example_site tests
+  test:
+    needs: more_lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install pytest/tox
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-django pytest-cov tox tox-gh-actions
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Run tests
+        run: |
+          tox --verbose
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.xml
+          directory: ./coverage/reports/
+          flags: pytest
+          env_vars: OS,PYTHON
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          path_to_write_report: ./coverage/codecov_report.txt
+          verbose: true

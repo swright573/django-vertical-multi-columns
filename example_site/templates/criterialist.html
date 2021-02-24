@@ -1,0 +1,44 @@
+<!doctype html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <p style="font-size:20px;color:red;">Criteria List</p>
+  <p><i>Each column of data can be read top to bottom in your sort order. Methods you provide determine which column a data item is placed in. Data items can appear
+  in more than one column or appear in no columns, depending on the logic of your methods.</i></p>
+  <table style="width:100%">
+    <tr>
+        <td style="width:33%">
+            <strong>Column A-F</strong>
+        </td>
+        <td style="width:33%">
+            <strong>Column G-S</strong>
+        </td>
+        <td style="width:34%">
+            <strong>Column T-Z</strong>
+        </td>
+	</tr>
+    {% for row in rows %}
+    <tr>
+        <td>
+            {%  if row.0.id%}
+            {{ row.0.name|capfirst }}
+            {%  endif %}
+        </td>
+        <td>
+            {%  if row.1.id%}
+            {{ row.1.name|capfirst }}
+            {% endif %}
+        </td>
+        <td>
+            {%  if row.2.id%}
+            {{ row.2.name|capfirst }}
+            {%  endif %}
+        </td>
+    </tr>
+{%  empty %}
+        There are no results to display.
+  {% endfor %}
+  </table>
+  <br>
+{% endblock %}
