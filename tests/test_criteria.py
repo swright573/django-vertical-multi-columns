@@ -6,6 +6,7 @@ Note 3: Some entries can appear in more than one column if the criteria function
 """
 
 import pytest
+
 from django.contrib.admin.utils import flatten
 from django.core.exceptions import ImproperlyConfigured
 
