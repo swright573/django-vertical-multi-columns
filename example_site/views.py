@@ -9,7 +9,7 @@ The same set of data is used in each to demonstrate the different ways data can 
 # import requests
 
 from django.shortcuts import render
-from django.views.generic import ListView, View
+from django.views.generic import ListView, TemplateView
 
 from vertical_multi_columns.views import CriteriaVMCView, DefinedVMCView, EvenVMCView
 
@@ -21,7 +21,7 @@ from . import simulate
 # _api_key = {'X-Api-Key': os.environ.get('API_KEY')}
 
 
-class About(View):
+class About(TemplateView):
     """Verbiage about what the VMC package is all about"""
 
     #    def get_context_data(self, **kwargs):
@@ -31,7 +31,7 @@ class About(View):
     template_name = "about.html"
 
 
-class EvenVMC(EvenVMCView):
+class EvenVMCSimple(EvenVMCView):
     """Demonstrates the use of EvenVMCView to evenly divide data into side-by-side columns"""
 
     def __init__(self):
@@ -41,55 +41,122 @@ class EvenVMC(EvenVMCView):
         """Provide the data to be displayed"""
         # resp = requests.get(_api_url, headers=_api_key)
         # raw_api_data = resp.json()
-        raw_api_data = simulate.api_data_json()  # simulation
+        raw_api_data = simulate.api_data_decoded_json()  # simulation
         sorted_api_data = sorted(raw_api_data, key=lambda i: i["name"], reverse=False)
         return sorted_api_data
 
-    template_name = "evenlist.html"
+    template_name = "evenlistsimple.html"
     context_object_name = "rows"
 
+class EvenVMCComplex(EvenVMCView):
+    """
+    Demonstrates the use of EvenVMCView to evenly divide data into side-by-side columns.
+    This view makes use of JSON with all data types represented.
+    """
 
-class CriteriaVMC(CriteriaVMCView):
-    """Demonstrate the use of CriteriaVMCView to assign data to side-by-side columns based on passed functions"""
-
-    # def __init__(self):
-    #    super().__init__()
-
-    # These are examples of functions you can might pass to CriteriaVMCView to handle assignment to columns
-    def a_to_f(self, args):
-        """Identify items starting with the letters A - F"""
-        parms = args.split(",")
-        return "ABCDEF".find(parms[0][0]) > -1
-
-    def g_to_s(self, args):
-        """Identify items starting with the letters G - S"""
-        parms = args.split(",")
-        return "GHIJKLMNOPQRS".find(parms[0][0]) > -1
-
-    def t_to_z(self, args):
-        """Identify items starting with the letters T - Z"""
-        parms = args.split(",")
-        return "TUVWXYZ".find(parms[0][0]) > -1
-
-    # down to here
+    def __init__(self):
+        super().__init__(num_columns=2)
 
     def get_data(self):
         """Provide the data to be displayed"""
         # resp = requests.get(_api_url, headers=_api_key)
         # raw_api_data = resp.json()
-        raw_api_data = simulate.api_data_json()  # simulation
+        raw_api_data = simulate.api_data_decoded_json_with_all_data_types()  # simulation
+        sorted_api_data = sorted(raw_api_data, key=lambda i: i["string"], reverse=False)
+        return sorted_api_data
+
+    template_name = "evenlistcomplex.html"
+    context_object_name = "rows"
+
+class CriteriaVMCSimple(CriteriaVMCView):
+    """
+    Demonstrate the use of CriteriaVMCView to assign data to side-by-side columns based on passed functions
+    - Look in simulate.py to see the incoming data. There are 4 keys in the JSON string ... "id","name","colour","count".
+    """
+
+    # If you want the default number of columns (either set in settings.py or assumed to be 3), you do NOT need to call __init__().
+    # def __init__(self):
+    #    super().__init__()
+
+    # The following are examples of functions you might pass to CriteriaVMCView to handle assignment of data to columns.
+    # You can reference any or all of the JSON keys in the data. In this case, "name", "count", and "herb" are used.
+    # Data can be any JSON data type.
+    def a_to_m_and_count_less_than_10(self, args):
+        """Items matching this condition go in column 1"""
+        entry_keys = args
+        return "ABCDEFGHIJKLM".find(entry_keys[0][0]) > -1 and entry_keys[1] < 10
+
+    def n_to_z_and_count_10_or_greater(self, args):
+        """Items matching this condition go in column 2"""
+        entry_keys = args
+        return "NOPQRSTUVWXYZ".find(entry_keys[0][0]) > -1 and entry_keys[1] >= 10
+
+    def is_herb(self, args):
+        """Items matching this condition go in column 3"""
+        entry_keys = args
+        return entry_keys[2] is True
+        # down to here
+
+    def get_data(self):
+        """Provide the data to be displayed"""
+        # resp = requests.get(_api_url, headers=_api_key)
+        # raw_api_data = resp.json()
+        raw_api_data = simulate.api_data_decoded_json()  # simulation
         sorted_api_data = sorted(raw_api_data, key=lambda i: i["name"], reverse=False)
         return sorted_api_data
 
     def get_column_criteria(self):
         """Pass criteria functions and keys"""
-        functions = [self.a_to_f, self.g_to_s, self.t_to_z]
-        keys = ["name", "id"]
+        functions = [self.a_to_m_and_count_less_than_10, self.n_to_z_and_count_10_or_greater, self.is_herb]
+        keys = ["name", "count", "herb"]
         return functions, keys
 
-    template_name = "criterialist.html"
+    template_name = "criterialistsimple.html"
     context_object_name = "rows"
 
+
+class CriteriaVMCComplex(CriteriaVMCView):
+    """
+    Demonstrate the use of CriteriaVMCView to assign data to side-by-side columns based on passed functions
+    - Look in simulate.py to see the incoming data. There are 4 keys in the JSON string ... "id","name","colour","count".
+    """
+
+    def __init__(self):
+        super().__init__(num_columns=2)
+
+    # The following are examples of functions you might pass to CriteriaVMCView to handle assignment of data to columns.
+    # You can reference any or all of the JSON keys in the data. In this case, "name", "count", and "herb" are used.
+    # Data can be any JSON data type.
+    def boolean_is_true(self, args):
+        """Items matching this condition go in column 1"""
+        entry_keys = args
+        print(f'in boolean_is_true ... {entry_keys=}')
+        print(entry_keys[0])
+        return entry_keys[0]
+
+    def has_111(self, args):
+        """Items matching this condition go in column 2"""
+        entry_keys = args
+        print(f'in has_111 ... {entry_keys=}')
+        print(111 in entry_keys[1])
+        return 111 in entry_keys[1]
+
+    def get_data(self):
+        """Provide the data to be displayed"""
+        # resp = requests.get(_api_url, headers=_api_key)
+        # raw_api_data = resp.json()
+        raw_api_data = simulate.api_data_decoded_json_with_all_data_types()  # simulation
+        sorted_api_data = sorted(raw_api_data, key=lambda i: i["string"], reverse=False)
+        return sorted_api_data
+
+    def get_column_criteria(self):
+        """Pass criteria functions and keys"""
+        functions = [self.boolean_is_true, self.has_111]
+        keys = ["boolean", "array"]
+        return functions, keys
+
+    template_name = "criterialistcomplex.html"
+    context_object_name = "rows"
 
 class DefinedVMC(DefinedVMCView):
     """Demonstrates the use of DefinedVMCView to display pre-defined columns side-by-side"""
@@ -102,63 +169,63 @@ class DefinedVMC(DefinedVMCView):
         example_columns = []
         example_columns.append(
             [
-                {"id": 5, "name": "Asparagus"},
-                {"id": 2, "name": "Basil"},
-                {"id": 6, "name": "Beans"},
-                {"id": 31, "name": "Chard"},
-                {"id": 13, "name": "Chives"},
-                {"id": 38, "name": "Cilantro"},
-                {"id": 18, "name": "Onion"},
-                {"id": 36, "name": "Oregano"},
-                {"id": 39, "name": "Parsley"},
-                {"id": 33, "name": "Watermelon"},
-                {"id": 34, "name": "Winter Squash"},
+            {"id": 8, "name": "Broccoli", "colour": "green", "count": 8, "herb": False},
+            {"id": 9, "name": "Brussels Sprouts", "colour": "green", "count": 16, "herb": False},
+            {"id": 10, "name": "Cabbage", "colour": "green", "count": 7, "herb": False},
+            {"id": 38, "name": "Cilantro", "colour": "green", "count": 8, "herb": True},
+            {"id": 14, "name": "Collard Greens", "colour": "green", "count": 14, "herb": False},
+            {"id": 15, "name": "Cucumbers", "colour": "green", "count": 9, "herb": False},
+            {"id": 45, "name": "Dill", "colour": "green", "count": 4, "herb": True},
+            {"id": 17, "name": "Eggplant", "colour": "purple", "count": 8, "herb": False},
+            {"id": 22, "name": "Parsnips", "colour": "white", "count": 8, "herb": False},
+            {"id": 23, "name": "Peas", "colour": "green", "count": 4, "herb": False},
+            {"id": 25, "name": "Potatoes", "colour": "white", "count": 8, "herb": False},
+            {"id": 26, "name": "Pumpkins", "colour": "orange", "count": 8, "herb": False},
+            {"id": 27, "name": "Radishes", "colour": "red", "count": 8, "herb": False},
             ]
         )
         example_columns.append(
             [
-                {"id": 4, "name": "Carrots"},
-                {"id": 11, "name": "Cauliflower"},
-                {"id": 12, "name": "Celery"},
-                {"id": 3, "name": "Lettuce"},
-                {"id": 40, "name": "Mint"},
-                {"id": 43, "name": "Okra"},
-                {"id": 37, "name": "Rosemary"},
-                {"id": 41, "name": "Sage"},
-                {"id": 29, "name": "Spinach"},
+            {"id": 5, "name": "Asparagus", "colour": "green", "count": 9, "herb": False},
+            {"id": 2, "name": "Basil", "colour": "green", "count": 5, "herb": True},
+            {"id": 3, "name": "Lettuce", "colour": "green", "count": 7, "herb": False},
+            {"id": 40, "name": "Mint", "colour": "green", "count": 4, "herb": True},
+            {"id": 43, "name": "Okra", "colour": "green", "count": 4, "herb": False},   
+            {"id": 37, "name": "Rosemary", "colour": "green", "count": 8, "herb": True},
+            {"id": 41, "name": "Sage", "colour": "green", "count": 4, "herb": True},
+            {"id": 29, "name": "Spinach", "colour": "green", "count": 7, "herb": False},
+            {"id": 30, "name": "Summer Squash", "colour": "yellow", "count": 12, "herb": False},
+            {"id": 16, "name": "Sweet Corn", "colour": "yellow", "count": 10, "herb": False},        
             ]
         )
         example_columns.append(
             [
-                {"id": 7, "name": "Beets"},
-                {"id": 24, "name": "Bell Peppers"},
-                {"id": 8, "name": "Broccoli"},
-                {"id": 22, "name": "Parsnips"},
-                {"id": 23, "name": "Peas"},
-                {"id": 25, "name": "Potatoes"},
-                {"id": 32, "name": "Turnips"},
+            {"id": 11, "name": "Cauliflower", "colour": "white", "count": 11, "herb": False},
+            {"id": 12, "name": "Celery", "colour": "green", "count": 6, "herb": False},
+            {"id": 31, "name": "Chard", "colour": "green", "count": 5, "herb": False},
+            {"id": 36, "name": "Oregano", "colour": "green", "count": 7, "herb": True},
+            {"id": 39, "name": "Parsley", "colour": "green", "count": 7, "herb": True},
+            {"id": 1, "name": "Tomatoes", "colour": "red", "count": 8, "herb": False},
+            {"id": 32, "name": "Turnips", "colour": "white", "count": 7, "herb": False},
+            {"id": 33, "name": "Watermelon", "colour": "red", "count": 10, "herb": False},
+            {"id": 34, "name": "Winter Squash", "colour": "orange", "count": 13, "herb": False},
             ]
         )
         example_columns.append(
             [
-                {"id": 9, "name": "Brussels Sprouts"},
-                {"id": 10, "name": "Cabbage"},
-                {"id": 21, "name": "Cantaloupe"},
-                {"id": 14, "name": "Collard Greens"},
-                {"id": 15, "name": "Cucumbers"},
-                {"id": 45, "name": "Dill"},
-                {"id": 17, "name": "Eggplant"},
-                {"id": 19, "name": "Garlic"},
-                {"id": 20, "name": "Kale"},
-                {"id": 26, "name": "Pumpkins"},
-                {"id": 27, "name": "Radishes"},
-                {"id": 28, "name": "Rhubarb"},
-                {"id": 30, "name": "Summer Squash"},
-                {"id": 16, "name": "Sweet Corn"},
-                {"id": 44, "name": "Sweet Potato"},
-                {"id": 42, "name": "Tarragon"},
-                {"id": 35, "name": "Thyme"},
-                {"id": 1, "name": "Tomatoes"},
+            {"id": 6, "name": "Beans", "colour": "yellow", "count": 5, "herb": False},
+            {"id": 7, "name": "Beets", "colour": "red", "count": 5, "herb": False},
+            {"id": 24, "name": "Bell Peppers", "colour": "red", "count": 12, "herb": False},
+            {"id": 21, "name": "Cantaloupe", "colour": "orange", "count": 10, "herb": False},
+            {"id": 4, "name": "Carrots", "colour": "orange", "count": 7, "herb": False},
+            {"id": 13, "name": "Chives", "colour": "green", "count": 6, "herb": True},
+            {"id": 19, "name": "Garlic", "colour": "white", "count": 6, "herb": True},
+            {"id": 20, "name": "Kale", "colour": "green", "count": 4, "herb": False},
+            {"id": 18, "name": "Onion", "colour": "white", "count": 5, "herb": False},
+            {"id": 28, "name": "Rhubarb", "colour": "red", "count": 7, "herb": False},
+            {"id": 44, "name": "Sweet Potato", "colour": "orange", "count": 12, "herb": False},
+            {"id": 42, "name": "Tarragon", "colour": "green", "count": 8, "herb": True},
+            {"id": 35, "name": "Thyme", "colour": "green", "count": 5, "herb": True},
             ]
         )
         return example_columns
@@ -172,6 +239,6 @@ class StandardDjango(ListView):
 
     def get(self, request):
         """Provide the data to be displayed"""
-        raw_api_data = simulate.api_data_json()  # simulation
+        raw_api_data = simulate.api_data_decoded_json()  # simulation
         sorted_api_data = sorted(raw_api_data, key=lambda i: i["name"], reverse=False)
         return render(request, "standard_django.html", {"rows": sorted_api_data})

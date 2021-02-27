@@ -179,9 +179,8 @@ class CriteriaVMCView(_BaseVMC, ListView):
 
     def process_entries(self, entries: list, functions: list, keys: list) -> list:
         """
-        Morph the passed data into "rows" containing the same number of items
-        as the number of columns requested. At the same time, keep the columns
-        in the sort order passed.
+        Morph the passed data into "rows", placing data in columns using the passed functions/keys.
+        At the same time, keep the columns in the sort order passed.
         """
 
         self.check_criteria(functions, keys)
@@ -191,12 +190,9 @@ class CriteriaVMCView(_BaseVMC, ListView):
         for entry in entries:
             efunctions = enumerate(functions)
             for pos, func in efunctions:
-                parm = ""
+                parm = []
                 for key in keys:
-                    if isinstance(entry[key], int):
-                        entry[key] = str(entry[key])
-                    parm += entry[key] + ","
-                parm = parm[:-1]
+                    parm.append(entry[key])
                 if func(parm):
                     columns[pos].append(entry)
         columns, max_column = self.pad_columns(columns)

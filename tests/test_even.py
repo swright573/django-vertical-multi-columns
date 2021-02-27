@@ -97,7 +97,7 @@ def test_get_querydata(test_in_even_criteria_data, test_out_even_data, settings_
     assert instance.get_queryset() == test_out_even_data
 
 
-def test_heirarchical_data(heirarchical_data_structure_data, settings_number_of_columns_5):
+def test_heirarchical_data(heirarchical_data_structure, settings_number_of_columns_5):
     """Testing that heirarchical data can be handled by VMC (even though this is NOT recommended"""
     instance = EvenVMCView()
     rows = instance.process_entries(heirarchical_data_structure_data)
