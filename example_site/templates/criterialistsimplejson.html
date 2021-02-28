@@ -3,18 +3,20 @@
 {% load static %}
 
 {% block content %}
-  <p style="font-size:20px;color:red;">Criteria List</p>
+  <p style="font-size:20px;color:red;">Criteria List (Simple JSON)</p>
   <p><i>Each column of data can be read top to bottom in your sort order. Methods you provide determine which column a data item is placed in. Data items can appear
   in more than one column or appear in no columns, depending on the logic of your methods.</i></p>
   <table style="width:100%">
     <tr>
         <td style="width:33%">
-            <strong>col 1</strong>
+            <strong>A - M (Count<10)</strong>
         </td>
         <td style="width:33%">
-            <strong>col 2</strong>
+            <strong>N - Z (Count>=10)</strong>
         </td>
-
+        <td style="width:34%">
+            <strong>Herbs</strong>
+        </td>
 	</tr>
 	</--
 	This template is designed for 3 columns. Therefore you must pass 3 functions to your criteria view to allocate data items to columns.
@@ -23,14 +25,19 @@
     {% for row in rows %}
     <tr>
         <td>
-			{%  if row.0.string %}
-            {{ row.0.string }} ({{ row.0.object.a }}, {{ row.0.number }}, {{ row.0.boolean }}, {{ row.0.array.1 }})
+            {%  if row.0.id%}
+            {{ row.0.name|capfirst }} ({{ row.0.colour }})
             {%  endif %}
         </td>
         <td>
-            {%  if row.1.string %}
-            {{ row.1.string }} ({{ row.1.object.a }}, {{ row.1.number }}, {{ row.1.boolean }}, {{ row.1.array.1 }})
+            {%  if row.1.id%}
+            {{ row.1.name|capfirst }} ({{ row.1.colour }})
             {% endif %}
+        </td>
+        <td>
+            {%  if row.2.id%}
+            {{ row.2.name|capfirst }} ({{ row.2.colour }})
+            {%  endif %}
         </td>
     </tr>
 {%  empty %}

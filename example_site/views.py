@@ -31,7 +31,7 @@ class About(TemplateView):
     template_name = "about.html"
 
 
-class EvenVMCSimple(EvenVMCView):
+class EvenVMCSimpleJson(EvenVMCView):
     """Demonstrates the use of EvenVMCView to evenly divide data into side-by-side columns"""
 
     def __init__(self):
@@ -45,10 +45,10 @@ class EvenVMCSimple(EvenVMCView):
         sorted_api_data = sorted(raw_api_data, key=lambda i: i["name"], reverse=False)
         return sorted_api_data
 
-    template_name = "evenlistsimple.html"
+    template_name = "evenlistsimplejson.html"
     context_object_name = "rows"
 
-class EvenVMCComplex(EvenVMCView):
+class EvenVMCComplexJson(EvenVMCView):
     """
     Demonstrates the use of EvenVMCView to evenly divide data into side-by-side columns.
     This view makes use of JSON with all data types represented.
@@ -65,10 +65,10 @@ class EvenVMCComplex(EvenVMCView):
         sorted_api_data = sorted(raw_api_data, key=lambda i: i["string"], reverse=False)
         return sorted_api_data
 
-    template_name = "evenlistcomplex.html"
+    template_name = "evenlistcomplexjson.html"
     context_object_name = "rows"
 
-class CriteriaVMCSimple(CriteriaVMCView):
+class CriteriaVMCSimpleJson(CriteriaVMCView):
     """
     Demonstrate the use of CriteriaVMCView to assign data to side-by-side columns based on passed functions
     - Look in simulate.py to see the incoming data. There are 4 keys in the JSON string ... "id","name","colour","count".
@@ -111,11 +111,11 @@ class CriteriaVMCSimple(CriteriaVMCView):
         keys = ["name", "count", "herb"]
         return functions, keys
 
-    template_name = "criterialistsimple.html"
+    template_name = "criterialistsimplejson.html"
     context_object_name = "rows"
 
 
-class CriteriaVMCComplex(CriteriaVMCView):
+class CriteriaVMCComplexJson(CriteriaVMCView):
     """
     Demonstrate the use of CriteriaVMCView to assign data to side-by-side columns based on passed functions
     - Look in simulate.py to see the incoming data. There are 4 keys in the JSON string ... "id","name","colour","count".
@@ -155,7 +155,7 @@ class CriteriaVMCComplex(CriteriaVMCView):
         keys = ["boolean", "array"]
         return functions, keys
 
-    template_name = "criterialistcomplex.html"
+    template_name = "criterialistcomplexjson.html"
     context_object_name = "rows"
 
 class DefinedVMC(DefinedVMCView):

@@ -57,10 +57,14 @@ def api_data_decoded_json():
 def api_data_decoded_json_with_all_data_types():
     """Data to be displayed in a VMC view"""
     return [
-        {'id': 1, 'string': 'Peter', 'number': 35, 'boolean': True, 'empty': None, 'object': {'a': 'abcde', 'b': 3}, 'array': [1, 2, 3]},
-        {'id': 2, 'string': 'Susan', 'number': 42, 'boolean': False, 'empty': None, 'object': {'a': 'fghij', 'b': 32}, 'array': [11, 12, 13]},
+        {'id': 1, 'string': 'Peter', 'number': 35, 'boolean': True, 'empty': None, 'object': {'a': 'abcde', 'b': 60}, 'array': [1, 2, 3]},
+        {'id': 2, 'string': 'Susan', 'number': 42, 'boolean': False, 'empty': None, 'object': {'a': 'fghij', 'b': 33}, 'array': [11, 12, 13]},
         {'id': 3, 'string': 'Graham', 'number': 22, 'boolean': True, 'empty': None, 'object': {'a': 'klmno', 'b': 90}, 'array': [111, 112, 113]},
-        {'id': 4, 'string': 'Lindsay', 'number': 22, 'boolean': False, 'empty': None, 'object': {'a': 'pqrst', 'b': 90}, 'array': [99, 102, 127]},
-        {'id': 5, 'string': 'Indy', 'number': 22, 'boolean': False, 'empty': None, 'object': {'a': 'uvwyz', 'b': 90}, 'array': [59, 37, 111]},
+        {'id': 4, 'string': 'Lindsay', 'number': 45, 'boolean': False, 'empty': None, 'object': {'a': 'pqrst', 'b': 80}, 'array': [99, 102, 127]},
+        {'id': 5, 'string': 'Indy', 'number': 72, 'boolean': True, 'empty': None, 'object': {'a': 'uvwyz', 'b': 80}, 'array': [59, 37, 111]},
+        {'id': 6, 'string': 'Piotr', 'number': 16, 'boolean': True, 'empty': None, 'object': {'a': 'rewrt', 'b': 70}, 'array': [59, 37, 112]},
+        {'id': 7, 'string': 'Neil', 'number': 37, 'boolean': False, 'empty': None, 'object': {'a': 'iohfk', 'b': 30}, 'array': [59, 37, 111]},
+        {'id': 8, 'string': 'Mac', 'number': 92, 'boolean': True, 'empty': None, 'object': {'a': 'oxceg', 'b': 20}, 'array': [59, 37, 114]},
+        {'id': 9, 'string': 'June', 'number': 88, 'boolean': False, 'empty': None, 'object': {'a': 'wbuln', 'b': 90}, 'array': [59, 37, 111]},
     ]
    
