@@ -1,7 +1,7 @@
-name: lint
+name: Manual Lint
 
 on:
-  [workflow_dispatch]
+  workflow_dispatch
 
 jobs:
   black:
