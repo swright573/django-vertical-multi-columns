@@ -1,4 +1,4 @@
-name: lint
+name: Manual Lint
 
 on:
   [workflow_dispatch]
