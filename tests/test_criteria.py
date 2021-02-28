@@ -120,18 +120,18 @@ class MockCriteriaVMCView(CriteriaVMCView):
 
     def get_column_criteria(self):
         def aaa_to_fff(args):
-            parms = args.split(",")
+            parms = args
             return "ABCDEF".find(parms[0][0]) > -1
 
         def ggg_to_sss(args):
-            parms = args.split(",")
+            parms = args
             return "GHIJKLMNOPQRS".find(parms[0][0]) > -1
 
         def ttt_to_zzz(args):
-            parms = args.split(",")
+            parms = args
             return "TUVWXYZ".find(parms[0][0]) > -1
 
-        return [aaa_to_fff, ggg_to_sss, ttt_to_zzz], ["name", "id"]
+        return [aaa_to_fff, ggg_to_sss, ttt_to_zzz], ["name"]
 
 
 def test_get_querydata(test_in_even_criteria_data, test_out_criteria_data, settings_number_of_columns_3):

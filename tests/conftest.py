@@ -248,22 +248,24 @@ def fixture_padded_columns_4():
     """Columns with 4 entries where some entries are blank to fill shorter columns to match the longest"""
     return [
         [
-            {"id": 5, "name": "Asparagus", "colour": "green", "count": 9, "herb": False},
-            {"id": 2, "name": "Basil", "colour": "green", "count": 5, "herb": True},
-            {"id": 6, "name": "Beans", "colour": "yellow", "count": 5, "herb": False},
-            {"id": 7, "name": "Beets", "colour": "red", "count": 5, "herb": False},
-        ],
-        [
-            {"id": 15, "name": "Cucumbers", "colour": "green", "count": 9, "herb": False},
-            {"id": 45, "name": "Dill", "colour": "green", "count": 4, "herb": True},
-            {"id": 17, "name": "Eggplant", "colour": "purple", "count": 8, "herb": False},
-            {"id": 48, "name": "Fred", "colour": "human", "count": 4, "herb": False},
-        ],
-        [
-            {"id": 26, "name": "Pumpkins", "colour": "orange", "count": 8, "herb": False},
-            {"id": 27, "name": "Radishes", "colour": "red", "count": 8, "herb": False},
-            {"id": 28, "name": "Rhubarb", "colour": "red", "count": 7, "herb": False},
-            "",
+            [
+                {"id": 5, "name": "Asparagus", "colour": "green", "count": 9, "herb": False},
+                {"id": 2, "name": "Basil", "colour": "green", "count": 5, "herb": True},
+                {"id": 6, "name": "Beans", "colour": "yellow", "count": 5, "herb": False},
+                {"id": 7, "name": "Beets", "colour": "red", "count": 5, "herb": False},
+            ],
+            [
+                {"id": 15, "name": "Cucumbers", "colour": "green", "count": 9, "herb": False},
+                {"id": 45, "name": "Dill", "colour": "green", "count": 4, "herb": True},
+                {"id": 17, "name": "Eggplant", "colour": "purple", "count": 8, "herb": False},
+                {"id": 48, "name": "Fred", "colour": "human", "count": 4, "herb": False},
+            ],
+            [
+                {"id": 26, "name": "Pumpkins", "colour": "orange", "count": 8, "herb": False},
+                {"id": 27, "name": "Radishes", "colour": "red", "count": 8, "herb": False},
+                {"id": 28, "name": "Rhubarb", "colour": "red", "count": 7, "herb": False},
+                "",
+            ],
         ],
         4,
         3,
@@ -275,58 +277,60 @@ def fixture_padded_columns_16():
     """Columns with 16 entries where some entries are blank to fill shorter columns to match the longest"""
     return [
         [
-            {"id": 5, "name": "Asparagus", "colour": "green", "count": 9, "herb": False},
-            {"id": 2, "name": "Basil", "colour": "green", "count": 5, "herb": True},
-            {"id": 6, "name": "Beans", "colour": "yellow", "count": 5, "herb": False},
-            {"id": 7, "name": "Beets", "colour": "red", "count": 5, "herb": False},
-            {"id": 24, "name": "Bell Peppers", "colour": "red", "count": 12, "herb": False},
-            {"id": 8, "name": "Broccoli", "colour": "green", "count": 8, "herb": False},
-            {"id": 9, "name": "Brussels Sprouts", "colour": "green", "count": 16, "herb": False},
-            {"id": 10, "name": "Cabbage", "colour": "green", "count": 7, "herb": False},
-            {"id": 21, "name": "Cantaloupe", "colour": "orange", "count": 10, "herb": False},
-            {"id": 4, "name": "Carrots", "colour": "orange", "count": 7, "herb": False},
-            {"id": 11, "name": "Cauliflower", "colour": "white", "count": 11, "herb": False},
-            {"id": 12, "name": "Celery", "colour": "green", "count": 6, "herb": False},
-            {"id": 31, "name": "Chard", "colour": "green", "count": 5, "herb": False},
-            {"id": 13, "name": "Chives", "colour": "green", "count": 6, "herb": True},
-            {"id": 38, "name": "Cilantro", "colour": "green", "count": 8, "herb": True},
-            {"id": 14, "name": "Collard Greens", "colour": "green", "count": 14, "herb": False},
-        ],
-        [
-            {"id": 15, "name": "Cucumbers", "colour": "green", "count": 9, "herb": False},
-            {"id": 45, "name": "Dill", "colour": "green", "count": 4, "herb": True},
-            {"id": 17, "name": "Eggplant", "colour": "purple", "count": 8, "herb": False},
-            {"id": 48, "name": "Fred", "colour": "human", "count": 4, "herb": False},
-            {"id": 49, "name": "Fred the Son", "colour": "human", "count": 12, "herb": False},
-            {"id": 19, "name": "Garlic", "colour": "white", "count": 6, "herb": True},
-            {"id": 20, "name": "Kale", "colour": "green", "count": 4, "herb": False},
-            {"id": 3, "name": "Lettuce", "colour": "green", "count": 7, "herb": False},
-            {"id": 40, "name": "Mint", "colour": "green", "count": 4, "herb": True},
-            {"id": 43, "name": "Okra", "colour": "green", "count": 4, "herb": False},
-            {"id": 18, "name": "Onion", "colour": "white", "count": 5, "herb": False},
-            {"id": 36, "name": "Oregano", "colour": "green", "count": 7, "herb": True},
-            {"id": 39, "name": "Parsley", "colour": "green", "count": 7, "herb": True},
-            {"id": 22, "name": "Parsnips", "colour": "white", "count": 8, "herb": False},
-            {"id": 23, "name": "Peas", "colour": "green", "count": 4, "herb": False},
-            {"id": 25, "name": "Potatoes", "colour": "white", "count": 8, "herb": False},
-        ],
-        [
-            {"id": 26, "name": "Pumpkins", "colour": "orange", "count": 8, "herb": False},
-            {"id": 27, "name": "Radishes", "colour": "red", "count": 8, "herb": False},
-            {"id": 28, "name": "Rhubarb", "colour": "red", "count": 7, "herb": False},
-            {"id": 37, "name": "Rosemary", "colour": "green", "count": 8, "herb": True},
-            {"id": 41, "name": "Sage", "colour": "green", "count": 4, "herb": True},
-            {"id": 29, "name": "Spinach", "colour": "green", "count": 7, "herb": False},
-            {"id": 30, "name": "Summer Squash", "colour": "yellow", "count": 12, "herb": False},
-            {"id": 16, "name": "Sweet Corn", "colour": "yellow", "count": 10, "herb": False},
-            {"id": 44, "name": "Sweet Potato", "colour": "orange", "count": 12, "herb": False},
-            {"id": 42, "name": "Tarragon", "colour": "green", "count": 8, "herb": True},
-            {"id": 35, "name": "Thyme", "colour": "green", "count": 5, "herb": True},
-            {"id": 1, "name": "Tomatoes", "colour": "red", "count": 8, "herb": False},
-            {"id": 32, "name": "Turnips", "colour": "white", "count": 7, "herb": False},
-            {"id": 33, "name": "Watermelon", "colour": "red", "count": 10, "herb": False},
-            {"id": 34, "name": "Winter Squash", "colour": "orange", "count": 13, "herb": False},
-            "",
+            [
+                {"id": 5, "name": "Asparagus", "colour": "green", "count": 9, "herb": False},
+                {"id": 2, "name": "Basil", "colour": "green", "count": 5, "herb": True},
+                {"id": 6, "name": "Beans", "colour": "yellow", "count": 5, "herb": False},
+                {"id": 7, "name": "Beets", "colour": "red", "count": 5, "herb": False},
+                {"id": 24, "name": "Bell Peppers", "colour": "red", "count": 12, "herb": False},
+                {"id": 8, "name": "Broccoli", "colour": "green", "count": 8, "herb": False},
+                {"id": 9, "name": "Brussels Sprouts", "colour": "green", "count": 16, "herb": False},
+                {"id": 10, "name": "Cabbage", "colour": "green", "count": 7, "herb": False},
+                {"id": 21, "name": "Cantaloupe", "colour": "orange", "count": 10, "herb": False},
+                {"id": 4, "name": "Carrots", "colour": "orange", "count": 7, "herb": False},
+                {"id": 11, "name": "Cauliflower", "colour": "white", "count": 11, "herb": False},
+                {"id": 12, "name": "Celery", "colour": "green", "count": 6, "herb": False},
+                {"id": 31, "name": "Chard", "colour": "green", "count": 5, "herb": False},
+                {"id": 13, "name": "Chives", "colour": "green", "count": 6, "herb": True},
+                {"id": 38, "name": "Cilantro", "colour": "green", "count": 8, "herb": True},
+                {"id": 14, "name": "Collard Greens", "colour": "green", "count": 14, "herb": False},
+            ],
+            [
+                {"id": 15, "name": "Cucumbers", "colour": "green", "count": 9, "herb": False},
+                {"id": 45, "name": "Dill", "colour": "green", "count": 4, "herb": True},
+                {"id": 17, "name": "Eggplant", "colour": "purple", "count": 8, "herb": False},
+                {"id": 48, "name": "Fred", "colour": "human", "count": 4, "herb": False},
+                {"id": 49, "name": "Fred the Son", "colour": "human", "count": 12, "herb": False},
+                {"id": 19, "name": "Garlic", "colour": "white", "count": 6, "herb": True},
+                {"id": 20, "name": "Kale", "colour": "green", "count": 4, "herb": False},
+                {"id": 3, "name": "Lettuce", "colour": "green", "count": 7, "herb": False},
+                {"id": 40, "name": "Mint", "colour": "green", "count": 4, "herb": True},
+                {"id": 43, "name": "Okra", "colour": "green", "count": 4, "herb": False},
+                {"id": 18, "name": "Onion", "colour": "white", "count": 5, "herb": False},
+                {"id": 36, "name": "Oregano", "colour": "green", "count": 7, "herb": True},
+                {"id": 39, "name": "Parsley", "colour": "green", "count": 7, "herb": True},
+                {"id": 22, "name": "Parsnips", "colour": "white", "count": 8, "herb": False},
+                {"id": 23, "name": "Peas", "colour": "green", "count": 4, "herb": False},
+                {"id": 25, "name": "Potatoes", "colour": "white", "count": 8, "herb": False},
+            ],
+            [
+                {"id": 26, "name": "Pumpkins", "colour": "orange", "count": 8, "herb": False},
+                {"id": 27, "name": "Radishes", "colour": "red", "count": 8, "herb": False},
+                {"id": 28, "name": "Rhubarb", "colour": "red", "count": 7, "herb": False},
+                {"id": 37, "name": "Rosemary", "colour": "green", "count": 8, "herb": True},
+                {"id": 41, "name": "Sage", "colour": "green", "count": 4, "herb": True},
+                {"id": 29, "name": "Spinach", "colour": "green", "count": 7, "herb": False},
+                {"id": 30, "name": "Summer Squash", "colour": "yellow", "count": 12, "herb": False},
+                {"id": 16, "name": "Sweet Corn", "colour": "yellow", "count": 10, "herb": False},
+                {"id": 44, "name": "Sweet Potato", "colour": "orange", "count": 12, "herb": False},
+                {"id": 42, "name": "Tarragon", "colour": "green", "count": 8, "herb": True},
+                {"id": 35, "name": "Thyme", "colour": "green", "count": 5, "herb": True},
+                {"id": 1, "name": "Tomatoes", "colour": "red", "count": 8, "herb": False},
+                {"id": 32, "name": "Turnips", "colour": "white", "count": 7, "herb": False},
+                {"id": 33, "name": "Watermelon", "colour": "red", "count": 10, "herb": False},
+                {"id": 34, "name": "Winter Squash", "colour": "orange", "count": 13, "herb": False},
+                "",
+            ],
         ],
         16,
         3,
@@ -351,7 +355,8 @@ def columns_many():
 def columns_same_length_4():
     """Columns are all the same length ... test will demonstrate they stay that way"""
     return [
-        [   {"id": 5, "name": "Asparagus", "colour": "green", "count": 9, "herb": False},
+        [
+            {"id": 5, "name": "Asparagus", "colour": "green", "count": 9, "herb": False},
             {"id": 2, "name": "Basil", "colour": "green", "count": 5, "herb": True},
             {"id": 6, "name": "Beans", "colour": "yellow", "count": 5, "herb": False},
             {"id": 7, "name": "Beets", "colour": "red", "count": 5, "herb": False},
@@ -384,7 +389,7 @@ def first_column_empty_5():
             {"id": 24, "name": "Bell Peppers", "colour": "red", "count": 12, "herb": False},
         ],
         [
-            {"id": 8, "name": "Broccoli", "colour": "green", "count": 8, "herb": False},        
+            {"id": 8, "name": "Broccoli", "colour": "green", "count": 8, "herb": False},
             {"id": 15, "name": "Cucumbers", "colour": "green", "count": 9, "herb": False},
             {"id": 45, "name": "Dill", "colour": "green", "count": 4, "herb": True},
             {"id": 17, "name": "Eggplant", "colour": "purple", "count": 8, "herb": False},
@@ -501,22 +506,25 @@ def criteria_functions_5():
 @pytest.fixture()
 def function_args_2():
     """dictionary keys are passed"""
-    return ["id", "name"]
-    
+    return ["name"]
+
+
 @pytest.fixture()
 def function_args_3():
     """dictionary keys are passed"""
     return ["name", "count", "herb"]
-    
+
+
 @pytest.fixture()
 def function_args_4():
     """dictionary keys are passed"""
-    return ["id", "name"]
-    
+    return ["name"]
+
+
 @pytest.fixture()
 def function_args_5():
     """dictionary keys are passed"""
-    return ["id", "name"]    
+    return ["name"]
 
 
 # Fixtures specifically for testing get_queryset - common in - specific out by VMC class
@@ -786,6 +794,7 @@ def test_out_defined_data():
         [{"id": 21, "name": "Cantaloupe"}, "", "", ""],
     ]
 
+
 @pytest.fixture()
 def json_data_structure_with_all_data_types():
     """
@@ -793,10 +802,35 @@ def json_data_structure_with_all_data_types():
     It was generated by calling requests and converting to Python format using .JSON method provided by requests.
     """
     return [
-{'id': 1, 'title': 'hello', 'count': 35, 'boolean': True, 'empty': None, 'object': {'a': 'susan', 'b': 3}, 'array': [1, 2, 3]},
-{'id': 2, 'title': 'goodbye', 'count': 42, 'boolean': False, 'empty': None, 'object': {'a': 'peter', 'b': 32}, 'array': [11, 12, 13]},
-{'id': 3, 'title': 'adieu', 'count': 22, 'boolean': True, 'empty': None, 'object': {'a': 'indy', 'b': 90}, 'array': [111, 112, 113]}
-]
+        {
+            "id": 1,
+            "title": "hello",
+            "count": 35,
+            "boolean": True,
+            "empty": None,
+            "object": {"a": "susan", "b": 3},
+            "array": [1, 2, 3],
+        },
+        {
+            "id": 2,
+            "title": "goodbye",
+            "count": 42,
+            "boolean": False,
+            "empty": None,
+            "object": {"a": "peter", "b": 32},
+            "array": [11, 12, 13],
+        },
+        {
+            "id": 3,
+            "title": "adieu",
+            "count": 22,
+            "boolean": True,
+            "empty": None,
+            "object": {"a": "indy", "b": 90},
+            "array": [111, 112, 113],
+        },
+    ]
+
 
 @pytest.fixture()
 def heirarchical_data_structure():

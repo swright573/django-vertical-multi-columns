@@ -90,7 +90,7 @@ def test_build_using_parametrized_fixture(padded_columns):
             len(row) == instance.number_of_columns
         )  # each row contains the number of elements specified by the setting number_of_columns
 
-    SUSAN - Rework this
+    # SUSAN - Rework this
     reversed_columns = []
     for num in range(instance.number_of_columns):
         col = [rows[row][num] for row in range(out_column_length)]
@@ -113,8 +113,7 @@ def test_build_using_getfixturevalue(padded_columns, request):
         assert (
             len(row) == instance.number_of_columns
         )  # each row contains the number of elements specified by the setting number_of_columns
-    
-    SUSAN - Rework this
+
     reversed_columns = []
     for num in range(instance.number_of_columns):
         col = [rows[row][num] for row in range(out_column_length)]

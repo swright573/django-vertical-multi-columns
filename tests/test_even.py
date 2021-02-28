@@ -71,9 +71,9 @@ def test_partial_rows_display_data_in_left_most_columns(entries_27, settings_num
             for j in range(5):
                 assert isinstance(row_content[j], dict)
     row = rows[len(rows) - 1]
-    for i in range(2):
+    for i in range(1):
         assert isinstance(row[i], dict)
-    for i in range(2, 5):
+    for i in range(1, 5):
         assert row[i] == ""
 
 
@@ -100,7 +100,7 @@ def test_get_querydata(test_in_even_criteria_data, test_out_even_data, settings_
 def test_heirarchical_data(heirarchical_data_structure, settings_number_of_columns_5):
     """Testing that heirarchical data can be handled by VMC (even though this is NOT recommended"""
     instance = EvenVMCView()
-    rows = instance.process_entries(heirarchical_data_structure_data)
+    rows = instance.process_entries(heirarchical_data_structure)
     for row in range(len(rows) - 1):
         row_content = rows[row]
         for i in row_content:
