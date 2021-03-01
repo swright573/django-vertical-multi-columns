@@ -25,9 +25,11 @@ def get_version(rel_path):
 def main():
     """Determine if version number needs to be updated"""
     local_version = get_version("../../vertical_multi_columns/__init__.py")
+    print(f"{local_version=}")
 
     resp = requests.get(sys.argv[1])
     pypi_version = resp.json()["info"]["version"]
+    print(f"{pypi_version=}")
     if local_version == pypi_version:
         sys.exit("Version number NOT changed ... cannot upload to Pypi")
     else:
