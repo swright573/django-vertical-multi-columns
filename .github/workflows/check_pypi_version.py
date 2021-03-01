@@ -24,7 +24,7 @@ def get_version(rel_path):
 
 def main():
     """Determine if version number needs to be updated"""
-    local_version = get_version("vertical_multi_columns/__init__.py")
+    local_version = get_version("../../vertical_multi_columns/__init__.py")
 
     resp = requests.get(sys.argv[1])
     pypi_version = resp.json()["info"]["version"]
