@@ -59,7 +59,7 @@ You must override some methods in the VMC classes.
 	* a list of the functions VMC uses to place your data items in columns.
 	* a list of the dictionary keys referenced in the functions.
 
-    NOTE: See How Passed CriteriaVMCView Functions Work below for a more in depth explanation.
+NOTE: See How Passed CriteriaVMCView Functions Work below for a more in depth explanation.
 
 **DefinedVMCView**: Define a method:
 
@@ -127,7 +127,7 @@ Say your API call returns a list of plants consisting of the fields 'name' and '
 
 ``[{'id': 5, 'name': 'Asparagus'}, {'id': 2, 'name': 'Basil'}, ...  , {'id': 34, 'name': 'Winter Squash'}]``
 
-Say you want to display 3 columns ... plants starting with A-F in column one, those starting with G-S in column two, and T-Z in column three . You will identify the items for each column using functions that you must write.
+Say you want to display 3 columns ... plants starting with A-F in column one, those starting with G-S in column two, and T-Z in column three . You will identify the items for each column using functions that you write.
 
 .. code-block:: python
 	def a_to_f(self, args):
@@ -137,9 +137,9 @@ Say you want to display 3 columns ... plants starting with A-F in column one, th
 		...
 
 	def t_to_z(self, args):
-	...
+		...
 
-In this case, your functions will only query the 'name' field but you could query other keys too and have to include them too. Therefore you pass the keys you will reference in a list.
+In this case, your functions will only query the 'name' field but you could query other keys too. You pass a list of the keys you will reference.
 
 .. code-block:: python
 	keys = ['name']
@@ -159,11 +159,11 @@ Focusing on a_to_f(), it is looking for instances in your returned data where th
 
     def a_to_f(self, args):
 		parms = args
-        return 'ABCDEF'.find(parms[0][0]) > -1
+		return 'ABCDEF'.find(parms[0][0]) > -1
 
 CriteriaVMCView's logic will apply each of your functions to each item in your data to determine if that item should appear in the corresponding function's column or not.
 
-Say the data item currently being processed is ``{'id': 5, 'name': 'Asparagus'}`` and your a_to_f function is being executed. The 'args' passed to the function by CriteriaVMCView will be string ``'Asparagus'`` since we said our keys were ``['name']``.
+Say the data item currently being processed is ``{'id': 5, 'name': 'Asparagus'}`` and a_to_f() is being executed. The 'args' passed to the function by CriteriaVMCView will be string ``'Asparagus'`` since we said our keys were ``['name']``.
 
 Since our function is only interested in the name, it looks only at ``parms[0]`` which is 'Asparagus'. And further, since it is only interested in the first letter of name, it only looks at ``parms[0][0]`` which is 'A'. The function returns True if parms[0][0] is in the range A-F and False if it is not.
 
@@ -172,7 +172,7 @@ If True is returned, that item will appear in the column. If False, it will not.
 How to Contact/Get Support
 --------------------------
 
-If you have questions about usage or development you can participate in the discussion or open an issue on `GitHub`_.  You can also contact `Susan Wright`_ directly.
+If you have questions about usage or development you can open an issue on `GitHub`_.  You can also contact `Susan Wright`_ directly.
 
 .. _`Susan Wright`: mailto:lsusanwright573@gmail.com
 .. _`GitHub`: https://github.com/swright573/django-vertical-multi-columns
