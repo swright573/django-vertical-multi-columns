@@ -154,7 +154,6 @@ class CriteriaVMCView(_BaseVMC, ListView):
         Override this method to retrieve data.
         Return a list of items in json format, sorted in the order you wish them displayed.
         """
-
         return []
 
     def get_column_criteria(self) -> list:
