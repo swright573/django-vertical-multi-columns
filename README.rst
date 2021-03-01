@@ -1,7 +1,7 @@
 =============================
 Django-Vertical-Multi-Columns
 =============================
-Django-Vertical-Multi-Columns (VMC) is a reusable Django application allowing users to easily display a list of items in vertically sorted side-by-side columns rather than in one long list. It supports all JSON data types ... string, number, boolean, object, array, and null/empty;.
+Django-Vertical-Multi-Columns (VMC) is a reusable Django application allowing you to easily display a list of items in vertically sorted side-by-side columns rather than in one long list. It supports all JSON data types ... string, number, boolean, object, array, and null/empty;.
 
 |build| |docs| |codecov| |pypi| |pyvers| |licence| |black|
 
