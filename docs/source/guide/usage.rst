@@ -2,7 +2,7 @@
 Usage
 *****
 
-There are 3 VMC views available. All are subclasses of Django's ListView so in addition to the specific VMC capabilities described below, all ListView's capabilities are still available to you.
+There are 3 VMC views available. All are subclasses of Django's ListView so in addition to the specific VMC capabilities described below, all ListView's capabilities are still available.
 
 View Options
 ------------
@@ -11,18 +11,18 @@ View Options
 
 |evenview|
 
-**CriteriaVMCView** - You provide a list of functions, one per column. VMC uses these to determine in which column an item should be placed.
+**CriteriaVMCView** - You provide a list of functions, one per column, and a list of keys referenced in the functions. VMC uses these to determine in which column an item should be placed.
 
 |criteriaview|
 
-**DefinedVMCView** - You already have the columns you want displayed. You provide the column list and VMC does the rest.
+**DefinedVMCView** - You already have the data arranged in the columns you want displayed. You provide the column list and VMC does the rest.
 
 |definedview|
 
 Setting the Number of Columns
 -----------------------------
 
-There are several ways to specify how many columns should be used in your VMC views. In priority order:
+There are several ways to specify how many columns you want generated. In priority order:
 
 1. Pass kwarg ``num_columns`` to ``super().__init__()`` in your VMC view's ``__init__()``.
 
@@ -48,18 +48,18 @@ You must override some methods in the VMC classes.
 
 **EvenVMCView**: Define a method:
 
-* ``get_data()`` to return a list of sorted data in JSON format.
+* ``get_data()`` to return a list of sorted data in decoded JSON format.
 
 **CriteriaVMCView**: Define 2 methods:
 
-* ``get_data()`` to return a list of sorted data in JSON format.
+* ``get_data()`` to return a list of sorted data in decoded JSON format.
 
 * ``get_column_criteria()`` to return two things:
 
-	* a list of the functions VMC uses to place your data items in columns.
+	* a list of the functions VMC should use to place your data items in columns.
 	* a list of the dictionary keys referenced in the functions.
 
-NOTE: See How Passed CriteriaVMCView Functions Work below for a more in depth explanation.
+	*NOTE: See How Passed CriteriaVMCView Functions Work below for a more in depth explanation.*
 
 **DefinedVMCView**: Define a method:
 
@@ -68,7 +68,7 @@ NOTE: See How Passed CriteriaVMCView Functions Work below for a more in depth ex
 Sample Code
 -----------
 
-This example implements EvenVMCView but they are all fairly similar. Note that the example is pulling API data via requests but data from any source can be used.
+This example implements EvenVMCView but all the VMC views are fairly similar. Note that the example is pulling API data via requests but data from any source can be used as long as it can be converted into decoded JSON.
 
 .. code-block:: python
 
@@ -103,18 +103,18 @@ A sample template is provided in the django-virtual-multi-columns library to dem
 When is a VMC View Appropriate?
 -------------------------------
 
-VMC views are typically meant for situations where you want to display a lot of short data in a more compact space than a straightforward ListView would require.
+VMC views are typically meant for situations where you want to display a lot of short data in a more compact space than a straightforward ListView would demand.
 
-A common use case is to query an API for a list of choices (e.g. a list of plants or a list of car models) which you would display as links in a view. The end user would select one of the links which would trigger a further call to the API to retrieve more detailed information which you might display in a detail view.
+A common use case is to query an API for a list of choices (e.g. a list of plants or a list of car models) then display the list as links in some sort of list view. The end user would select one of the links which would trigger a further call to the API to retrieve more detailed information which you would display in a detail view.
 
 *Avoid handling very complex hierarchical JSON in a VMC view.*
 
 While VMC views do support hierarchical JSON data, it can add unneeded complexity to your Django templates. To avoid that complexity, you are better off either:
 
-* limiting your API call to return only the data required for a user to make a choice, or
+* limiting your API call to returning only the data required for a user to make a choice, or
 * if hierarchical JSON must be returned by the API, extract only the data you need for a user to make a choice before sending it on to the VMC view.
 
-The example site demonstrates how hierarchical data can be handled in a view.
+*Note: The example site demonstrates how hierarchical data can be handled in a view.*
 
 .. _how-passed-functions-work:
 
@@ -132,19 +132,17 @@ Say you want to display 3 columns ... plants starting with A-F in column one, th
 .. code-block:: python
 	def a_to_f(self, args):
 		...
-
 	def g_to_s(self, args):
 		...
-
 	def t_to_z(self, args):
 		...
 
-In this case, your functions will only query the 'name' field but you could query other keys too. You pass a list of the keys you will reference.
+In this case, your functions will only query the 'name' field but you could query other keys too. You will pass a list of all the keys you'll reference in any of the functions.
 
 .. code-block:: python
 	keys = ['name']
 
-To communicate all this to your VMC view, you must write a get_column_criteria() method that will look like this:
+To communicate all this to your VMC view, you will write a get_column_criteria() method that should look something like this:
 
 .. code-block:: python
 
@@ -165,7 +163,7 @@ CriteriaVMCView's logic will apply each of your functions to each item in your d
 
 Say the data item currently being processed is ``{'id': 5, 'name': 'Asparagus'}`` and a_to_f() is being executed. The 'args' passed to the function by CriteriaVMCView will be string ``'Asparagus'`` since we said our keys were ``['name']``.
 
-Since our function is only interested in the name, it looks only at ``parms[0]`` which is 'Asparagus'. And further, since it is only interested in the first letter of name, it only looks at ``parms[0][0]`` which is 'A'. The function returns True if parms[0][0] is in the range A-F and False if it is not.
+Since our function is only interested in the name, it looks only at ``parms[0]`` which is 'Asparagus'. If there were additional keys passed, they would be parms[1], parms[2], etc. And further, since the function is only interested in the first letter of name, it only looks at ``parms[0][0]`` which is 'A'. The function returns True if parms[0][0] is in the range A-F and False if it is not.
 
 If True is returned, that item will appear in the column. If False, it will not. Note that items can appear in multiple columns if function criteria overlap. Conversely an item can appear in no columns if none of the function criteria are met.
 
