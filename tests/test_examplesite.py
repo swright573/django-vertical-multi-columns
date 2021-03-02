@@ -4,19 +4,7 @@ Tests for examplesite
 
 import pytest
 
-from example_site import simulate, views
-
-
-@pytest.fixture()
-def in_data_even_and_criteria_views_simple():
-    """In data for tests of even and criteria views using simple data"""
-    return simulate.decoded_api_json_data_simple()
-
-
-@pytest.fixture()
-def in_data_even_and_criteria_views_complex():
-    """In data for tests of even and criteria views using more complex data"""
-    return simulate.decoded_api_json_data_complex()
+from example_site import views
 
 
 @pytest.fixture()
@@ -445,37 +433,35 @@ def out_defined_rows():
     ]
 
 
-def test_even_simple_example(in_data_even_and_criteria_views_simple, out_even_simple_rows):
+def test_even_simple_example(out_even_simple_rows):
     """Even simple example generates expected rows"""
-    sorted_incoming_data = sorted(in_data_even_and_criteria_views_simple, key=lambda i: i["name"], reverse=False)
     instance = views.EvenVMCSimpleJson()
+    sorted_incoming_data = instance.get_data()
     rows = instance.process_entries(sorted_incoming_data)
     assert rows == out_even_simple_rows
 
 
-def test_even_complex_example(in_data_even_and_criteria_views_complex, out_even_complex_rows):
+def test_even_complex_example(out_even_complex_rows):
     """Even complex example generates expected rows"""
-    sorted_incoming_data = sorted(in_data_even_and_criteria_views_complex, key=lambda i: i["string"], reverse=False)
     instance = views.EvenVMCComplexJson()
+    sorted_incoming_data = instance.get_data()
     rows = instance.process_entries(sorted_incoming_data)
     assert rows == out_even_complex_rows
 
 
-def test_criteria_simple_example(
-    in_data_even_and_criteria_views_simple, out_criteria_simple_rows, settings_number_of_columns_null
-):
+def test_criteria_simple_example(out_criteria_simple_rows, settings_number_of_columns_null):
     """Criteria simple example generates expected rows"""
-    sorted_incoming_data = sorted(in_data_even_and_criteria_views_simple, key=lambda i: i["name"], reverse=False)
     instance = views.CriteriaVMCSimpleJson()
+    sorted_incoming_data = instance.get_data()
     functions, keys = instance.get_column_criteria()
     rows = instance.process_entries(sorted_incoming_data, functions, keys)
     assert rows == out_criteria_simple_rows
 
 
-def test_criteria_complex_example(in_data_even_and_criteria_views_complex, out_criteria_complex_rows):
+def test_criteria_complex_example(out_criteria_complex_rows):
     """Criteria complex example generates expected rows"""
-    sorted_incoming_data = sorted(in_data_even_and_criteria_views_complex, key=lambda i: i["string"], reverse=False)
     instance = views.CriteriaVMCComplexJson()
+    sorted_incoming_data = instance.get_data()
     functions, keys = instance.get_column_criteria()
     rows = instance.process_entries(sorted_incoming_data, functions, keys)
     assert rows == out_criteria_complex_rows
