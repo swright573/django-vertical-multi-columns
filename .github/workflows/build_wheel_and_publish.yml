@@ -19,11 +19,11 @@ jobs:
       - name: Set env to main
         if: endsWith(github.ref, '/main')
         run: |
-          echo "pypi_url=https://pypi.org/pypi/" >> $GITHUB_ENV
+          echo "pypi_url=https://upload.pypi.org/legacy/" >> $GITHUB_ENV
       - name: Set env to staging
         if: endsWith(github.ref, '/staging')
         run: |
-          echo "pypi_url=https://test.pypi.org/pypi/" >> $GITHUB_ENV
+          echo "pypi_url=https://test.pypi.org/legacy/" >> $GITHUB_ENV
       - name: check version number
         run: |
           python ./.github/workflows/check_pypi_version.py "${{ env.pypi_url }}django-vertical-multi-columns/json"
@@ -44,6 +44,7 @@ jobs:
         if: endsWith(github.ref, '/main')
         run: |
           echo "pswd=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
+          echo "repo=
       - name: Set env to staging
         if: endsWith(github.ref, '/staging')
         run: |
@@ -53,5 +54,4 @@ jobs:
         with:
           user: __token__
           password: ${{ env.pswd }}
-          if: github.ref == 'refs/heads/staging'
-          repository_url: https://test.pypi.org/legacy/
+          repository_url: ${{ env.pypi_url }}
