@@ -43,8 +43,7 @@ jobs:
       - name: Set env to main
         if: endsWith(github.ref, '/main')
         run: |
-          echo "pswd=${{ secrets.PYPI_API_TOKEN }}" >> $GITHUB_ENV
-          echo "repo=
+          echo "pypi_url=https://upload.pypi.org/legacy/" >> $GITHUB_ENV
       - name: Set env to staging
         if: endsWith(github.ref, '/staging')
         run: |
