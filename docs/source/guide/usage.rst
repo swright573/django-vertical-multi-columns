@@ -7,11 +7,11 @@ There are 3 VMC views available. All are subclasses of Django's ListView so in a
 View Options
 ------------
 
-**EvenVMCView** - Spreads your data across the number of columns you specify, keeping the columns pretty much the same length.
+**EvenVMCView** - Spreads your data across the number of columns you specify, keeping the columns largely the same length.
 
 |evenview|
 
-**CriteriaVMCView** - You provide a list of functions, one per column, and a list of keys referenced in the functions. VMC uses these to determine in which column an item should be placed.
+**CriteriaVMCView** - You provide a list of functions, one per column, plus a list of data keys referenced in the functions. VMC uses these to determine in which column each item should be placed.
 
 |criteriaview|
 
@@ -41,8 +41,8 @@ There are several ways to specify how many columns you want generated. In priori
 
 3. If there is no setting and you don't pass a num_columns kwarg, the number of columns defaults to 3.
 
-Required Method Overrides
--------------------------
+Method Overrides
+----------------
 
 You must override some methods in the VMC classes.
 
@@ -59,7 +59,7 @@ You must override some methods in the VMC classes.
 	* a list of the functions VMC should use to place your data items in columns.
 	* a list of the dictionary keys referenced in the functions.
 
-	*NOTE: See How Passed CriteriaVMCView Functions Work below for a more in depth explanation.*
+*NOTE: See How Passed CriteriaVMCView Functions Work below for a more in depth explanation.*
 
 **DefinedVMCView**: Define a method:
 
@@ -87,7 +87,7 @@ This example implements EvenVMCView but all the VMC views are fairly similar. No
         def get_data(self):
             # Write logic to retrieve the data to be displayed (often from an API).
             # Sort it appropriately.
-            # Note that data must be in deserialized JSON format.
+            # Note that data must be in decoded JSON format.
             resp = requests.get(<api_url>)
             deserialized_api_data = resp.json()
             sorted_api_data = sorted(deserialized_api_data, key=lambda i: i['<field>'])
@@ -103,33 +103,34 @@ A sample template is provided in the django-virtual-multi-columns library to dem
 When is a VMC View Appropriate?
 -------------------------------
 
-VMC views are typically meant for situations where you want to display a lot of short data in a more compact space than a straightforward ListView would demand.
+VMC views are typically meant for situations where you want to display a lot of short data in a more compact space than a straightforward ListView would require.
 
-A common use case is to query an API for a list of choices (e.g. a list of plants or a list of car models) then display the list as links in some sort of list view. The end user would select one of the links which would trigger a further call to the API to retrieve more detailed information which you would display in a detail view.
+A common use case is to query an API for a list of choices (e.g. a list of plants or a list of car models) then display the list as links in some sort of list view. The end user selects one of the links which triggers a further call to the API to retrieve more detailed information. You would then display this in a detail view.
 
 *Avoid handling very complex hierarchical JSON in a VMC view.*
 
 While VMC views do support hierarchical JSON data, it can add unneeded complexity to your Django templates. To avoid that complexity, you are better off either:
 
-* limiting your API call to returning only the data required for a user to make a choice, or
+* limiting your API call to returning only the data required for a user to make a selection, or
 * if hierarchical JSON must be returned by the API, extract only the data you need for a user to make a choice before sending it on to the VMC view.
 
-*Note: The example site demonstrates how hierarchical data can be handled in a view.*
+*Note: The example site does demonstrate how hierarchical data can be handled in a view so if you need to go that route, you can do so successfully.*
 
 .. _how-passed-functions-work:
 
 How Passed CriteriaVMCView Functions Work
 -----------------------------------------
 
-You must pass two lists to CriteriaVMCView to allow it to determine in which column each data item should appear. One is a list of functions and the other a list of the keys referenced in the functions. This scenario should help explain how you write those functions.
+You pass two lists to CriteriaVMCView so it can determine in which column each data item should appear. One is a list of functions and the other a list of the keys referenced in the functions. This scenario should help explain how you write those functions.
 
-Say your API call returns a list of plants consisting of the fields 'name' and 'id' and you have converted the data to JSON format.
+Say your API call returns a list of plants consisting of the fields 'name' and 'id' and you have decoded the returned JSON.
 
 ``[{'id': 5, 'name': 'Asparagus'}, {'id': 2, 'name': 'Basil'}, ...  , {'id': 34, 'name': 'Winter Squash'}]``
 
-Say you want to display 3 columns ... plants starting with A-F in column one, those starting with G-S in column two, and T-Z in column three . You will identify the items for each column using functions that you write.
+Say you want to display 3 columns ... plant names starting with A-F in column one, those starting with G-S in column two, and T-Z in column three. The first function you pass should return True if the plant name starts with A-F, the second should return True if the plant name starts with G-S, and the third should return True if the plant name starts with T-Z.
 
 .. code-block:: python
+
 	def a_to_f(self, args):
 		...
 	def g_to_s(self, args):
@@ -137,12 +138,13 @@ Say you want to display 3 columns ... plants starting with A-F in column one, th
 	def t_to_z(self, args):
 		...
 
-In this case, your functions will only query the 'name' field but you could query other keys too. You will pass a list of all the keys you'll reference in any of the functions.
+You also need to pass a list of the keys you reference in any of the functions. In this case, your functions are only querying the 'name' field but if you were querying other keys too, you would include them.
 
 .. code-block:: python
+
 	keys = ['name']
 
-To communicate all this to your VMC view, you will write a get_column_criteria() method that should look something like this:
+To communicate all this to your VMC view, you need to write a get_column_criteria() method that should look something like this:
 
 .. code-block:: python
 
@@ -151,7 +153,7 @@ To communicate all this to your VMC view, you will write a get_column_criteria()
         keys = ['name']
         return functions, keys
 
-Focusing on a_to_f(), it is looking for instances in your returned data where the first letter of 'name' is in the range 'ABCDEF'. It will return True if so and False if not.
+Focusing on the a_to_f() function, it is looking for instances in your returned data where the first letter of 'name' is in the range 'ABCDEF'. It will return True if so and False if not.
 
 .. code-block:: python
 
