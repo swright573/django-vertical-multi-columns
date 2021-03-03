@@ -26,7 +26,7 @@ jobs:
           echo "pypi_url=https://test.pypi.org/pypi/django-vertical-multi-columns/json" >> $GITHUB_ENV
       - name: check version number
         run: |
-          python ./.github/workflows/check_pypi_version.py "${{ env.pypi_url }}
+          python ./.github/workflows/check_pypi_version.py ${{ env.pypi_url }}
   build_wheel_and_publish_to_pypi:
     needs: check_pypi_version_number_has_changed
     runs-on: ubuntu-latest
