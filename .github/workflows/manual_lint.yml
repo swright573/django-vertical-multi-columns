@@ -52,7 +52,6 @@ jobs:
           git checkout $GITHUB_HEAD_REF
           git commit -am "fixup: Reorganize imports with isort"
           git push
-          continue-on-error: true
   more_lint:
     needs: [black, isort]
     if: always()
