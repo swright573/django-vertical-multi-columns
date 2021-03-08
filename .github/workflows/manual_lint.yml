@@ -68,4 +68,4 @@ jobs:
         # exit-zero treats all errors as warnings.
         flake8 . --count --exit-zero --statistics
         # See pyproject.toml for disabled pylint messages
-        pylint vertical_multi_columns example_site/example_site tests
+        pylint vertical_multi_columns example_site tests
