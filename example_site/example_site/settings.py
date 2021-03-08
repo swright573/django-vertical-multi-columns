@@ -2,11 +2,13 @@
 Django settings for vmcexamplesite project.
 """
 
+from pathlib import Path
 import os
+from django.core.management.utils import get_random_secret_key
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECRET_KEY = <insert your Django secret key here>
+SECRET_KEY = get_random_secret_key()
 
 DEBUG = 1
 
@@ -14,12 +16,12 @@ ALLOWED_HOSTS = "localhost"
 
 INSTALLED_APPS = ["vertical_multi_columns"]
 
-ROOT_URLCONF = "vmcexamplesite.urls"
+ROOT_URLCONF = "example_site.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "vmcexamplesite/templates")],
+        "DIRS": [os.path.join(BASE_DIR, "example_site/templates")],
     },
 ]
 
