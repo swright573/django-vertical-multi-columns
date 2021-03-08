@@ -4,7 +4,7 @@ Tests for examplesite
 
 import pytest
 
-from example_site import views
+from example_site.example_site import views
 
 
 @pytest.fixture()

@@ -9,7 +9,7 @@ The example site demonstrates each of the VMC view types in actual use, some usi
 
 *Windows commands are shown here. Use the equivalent if you run on Mac or Linux.*
 
-1. Create a new directory, change into it, then create a Python virtual directory and activate it using your normal method.
+1. Create a directory and change into it. Create a Python virtual directory and activate it using your normal method.
 
 .. code-block:: bash
 
@@ -25,35 +25,18 @@ The example site demonstrates each of the VMC view types in actual use, some usi
 	pip install django
 	pip install django-vertical-multi-columns
 
-3. Create a new Django project called vmcexamplesite.
-
-.. code-block:: bash
-
-	django-admin startproject vmcexamplesite
-
-4. Change directory into vmcexamplesite\vmcexamplesite app directory that Django just created.
-
-.. code-block:: bash
-
-	cd .\vmcexamplesite\vmcexamplesite
-
-5. Copy in all the files plus the templates directory found in the repo under *example-site*. Overwrite all files.
+3. Copy everything found in the repo under *example_site* to your new directory. Change to subdirectory example_site.
 
 .. code-block:: bash
 
 	xcopy /E <*repo_directory*>\example_site
+	cd example_site
 
-6. Update settings.py with your secret key (*or use an environment variable*)
-
-.. code-block:: bash
-
-	SECRET_KEY = <*insert your Django secret key here*>
-
-7. Change directory up one level and activate the site.
+4. Change directory up one level and activate the site.
 
 .. code-block:: bash
 
 	cd ..
 	python manage.py runserver
 
-8. Point your browser to localhost:8000. More information about the site is provided there under "About the VMC Example Site.
+5. Point your browser to localhost:8000. More information about the site is provided there under "About the VMC Example Site.
