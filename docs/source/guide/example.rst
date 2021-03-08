@@ -25,7 +25,7 @@ The example site demonstrates each of the VMC view types in actual use, some usi
 	pip install django
 	pip install django-vertical-multi-columns
 
-3. Copy everything found in the repo under *example_site* to your new directory. Change to subdirectory .\example_site.
+3. Copy everything found in the repo under *example_site* to your new directory. Change to subdirectory example_site.
 
 .. code-block:: bash
 
