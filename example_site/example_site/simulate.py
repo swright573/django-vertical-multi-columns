@@ -7,7 +7,8 @@ Simulate the data that would probably normally be returned in an API call
 def decoded_api_json_data_simple():
     """Data to be displayed in a VMC view"""
     return [
-        {"id": 5, "name": "Asparagus", "colour": "green", "count": 9, "herb": False}, {"id": 2, "name": "Basil", "colour": "green", "count": 5, "herb": True},
+        {"id": 5, "name": "Asparagus", "colour": "green", "count": 9, "herb": False},
+        {"id": 2, "name": "Basil", "colour": "green", "count": 5, "herb": True},
         {"id": 6, "name": "Beans", "colour": "yellow", "count": 5, "herb": False},
         {"id": 7, "name": "Beets", "colour": "red", "count": 5, "herb": False},
         {"id": 24, "name": "Bell Peppers", "colour": "red", "count": 12, "herb": False},
