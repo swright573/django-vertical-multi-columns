@@ -28,7 +28,6 @@ jobs:
           git push
           exit 0
   isort:
-    needs: black
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -53,7 +52,6 @@ jobs:
           git push
           exit 0
   more_lint:
-    needs: isort
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
