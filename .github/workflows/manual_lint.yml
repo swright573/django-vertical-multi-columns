@@ -26,8 +26,9 @@ jobs:
           git checkout $GITHUB_HEAD_REF
           git commit -am "fixup: Format Python code with Black"
           git push
-          continue-on-error: true
   isort:
+    needs: black
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -51,6 +52,8 @@ jobs:
           git push
           continue-on-error: true
   more_lint:
+    needs: [black, isort]
+    if: always()
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
