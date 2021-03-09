@@ -26,6 +26,7 @@ jobs:
           git checkout $GITHUB_HEAD_REF
           git commit -am "fixup: Format Python code with Black"
           git push
+          exit 0
   isort:
     needs: black
     if: always()
@@ -51,6 +52,7 @@ jobs:
           git checkout $GITHUB_HEAD_REF
           git commit -am "fixup: Reorganize imports with isort"
           git push
+          exit 0
   more_lint:
     needs: [black, isort]
     if: always()
