@@ -29,8 +29,10 @@ jobs:
           git checkout $GITHUB_HEAD_REF
           git commit -am "fixup: Format Python code with Black"
           git push
+          exit 0
   isort:
     needs: black
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -49,11 +51,14 @@ jobs:
           git config --global user.name 'autoisort'
           git config --global user.email 'swright573@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git pull --no-rebase
           git checkout $GITHUB_HEAD_REF
           git commit -am "fixup: Reorganize imports with isort"
           git push
+          exit 0
   more_lint:
-    needs: isort
+    needs: [black, isort]
+    if: always()
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -66,12 +71,15 @@ jobs:
         pip install pylint flake8
     - name: Run Linters
       run: |
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+        git pull --no-rebase
+        git checkout $GITHUB_HEAD_REF
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings.
         flake8 . --count --exit-zero --statistics
         # See pyproject.toml for disabled pylint messages
-        pylint vertical_multi_columns example_site/example_site tests
+        pylint vertical_multi_columns example_site tests
   test:
     needs: more_lint
     runs-on: ubuntu-latest
