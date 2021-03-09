@@ -66,6 +66,10 @@ jobs:
         pip install pylint flake8
     - name: Run Linters
       run: |
+        # do a pull in case isort has made some corrections
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+        git pull --no-rebase
+        git checkout $GITHUB_HEAD_REF
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings.
