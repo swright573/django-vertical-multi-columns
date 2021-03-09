@@ -29,7 +29,6 @@ jobs:
           git checkout $GITHUB_HEAD_REF
           git commit -am "fixup: Format Python code with Black"
           git push
-          exit 0
   isort:
     needs: black
     if: always()
@@ -55,10 +54,8 @@ jobs:
           git checkout $GITHUB_HEAD_REF
           git commit -am "fixup: Reorganize imports with isort"
           git push
-          exit 0
   more_lint:
     needs: [black, isort]
-    if: always()
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -72,7 +69,6 @@ jobs:
     - name: Run Linters
       run: |
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
-        git pull $FETCH_HEAD --no-rebase
         git checkout $GITHUB_HEAD_REF
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
