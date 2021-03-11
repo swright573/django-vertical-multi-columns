@@ -1,0 +1,31 @@
+<!doctype html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div style="color:blue">The VMC Example Site</div>
+  <p>This site will show you the various VMC views in action and how to code them.</p>
+  <p>
+	<ul>
+		<li>The sample views use incoming data that would typically be requested via an API call but here this is simulated to avoid complexity in setting up the example site. There are two sets of data. One set is more straightforward ... just name and id which are JSON string and number data types respectively. The other set contains all the JSON data types (string, number, boolean, null/empty, object, and array).</li>
+		<br>
+			<ul>
+			<li>Look at simulate.py to see the incoming data.
+			</ul>
+			<br>
+		<li> The data is displayed in different configurations, depending on the VMC view used.</li>
+		<br>
+			<ul>
+			<li>Look at views.py to see how each was coded.</li>
+			<li>Look at the templates to see how the view data is referenced for display.</li>
+			</ul>
+			<br>
+		<li>You can configure the default number of columns in settings or you can specify this in your VMC view. In priority order:</li>
+		<br>
+			<ul>
+			<li>Pass the number of columns as kwarg 'num_columns'. (See class EvenVMC in views.py in the example app.)</li>
+			<li>Define the default number of columns in your Django settings. (See settings.py in the example app.)</li>
+			<li>If no kwarg is passed and there is no setting defined, the number of columns defaults to 3.
+			</ul>
+  </p>
+{% endblock %}

@@ -1,0 +1,52 @@
+<!doctype html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <p style="font-size:20px;color:red;">Defined List</p>
+  <p><i>Data columns appear exactly as you provide them.</i></p>
+  <table style="width:100%">
+	<tr>
+        <td style="width:25%">
+            <strong>Column 1</strong>
+        </td>
+        <td style="width:25%">
+            <strong>Column 2</strong>
+        </td>
+        <td style="width:25%">
+            <strong>Column 3</strong>
+        </td>
+		<td style="width:25%">
+            <strong>Column 4</strong>
+        </td>
+	</tr>
+
+    {% for row in rows %}
+    <tr>
+        <td style="width:25%">
+            {%  if row.0.id%}
+            {{ row.0.name|capfirst }} ({{ row.0.colour }})
+            {%  endif %}
+        </td>
+        <td style="width:25%">
+            {%  if row.1.id%}
+            {{ row.1.name|capfirst }} ({{ row.1.colour }})
+            {% endif %}
+        </td>
+        <td style="width:25%">
+            {%  if row.2.id%}
+            {{ row.2.name|capfirst }} ({{ row.2.colour }})
+            {%  endif %}
+        </td>
+        <td style="width:25%">
+			{%  if row.3.id%}
+			{{ row.3.name|capfirst }} ({{ row.3.colour }})
+			{%  endif %}
+        </td>
+    </tr>
+{%  empty %}
+        There are no results to display.
+  {% endfor %}
+  </table>
+  <br>
+{% endblock %}

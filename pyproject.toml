@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools >= 40.6.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.black]
+line-length = 127
+target-version = ['py38']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.github
+  | \.idea
+  | \.pytest_cache
+  | \.tox
+  | \venv
+  | _build
+  | build
+  | dist
+  | susan-other
+)/
+'''
+
+[tool.pylint.'MESSAGE CONTROL']
+max-line-length = 127
+disable = "E1111,R0201,E0401,F841,W0613,R0801,C0103,R0903,W0621,C0415"
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist =
+    py{37,38,39}-django22
+    py{37,38,39}-django30
+    py{37,38,39}-django31
+
+[gh-actions]
+python =
+    3.7: py37
+    3.8: py38
+    3.9: py39
+
+[testenv]
+deps =
+    django22: Django>=2.2,<2.3
+    django30: Django>=3.0,<3.1
+    django31: Django>=3.1,<3.2
+    pytest
+    pytest-django
+	pytest-cov
+	codecov
+setenv = PYTHONDONTWRITEBYTECODE = 1
+commands =
+	pytest --cov=./ --cov-report=xml
+	codecov
+"""

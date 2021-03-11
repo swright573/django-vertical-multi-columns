@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Django Vertical Multi Columns</title>
+  </head>
+  <body style="font-family:arial,serif">
+    <header>
+		<div style="font-size:20px; color:blue;"> Example Site - Django Vertical Multi Columns</div>
+		<hr>
+		<p>Click to view:</p>
+		  <a href="{% url "about" %}" target="_self">About the VMC Example Site</a>
+		  <ul>
+            <li><a href="{% url "even_list_simple_json" %}" target="_self">VMC Even List (Simple JSON)</a></li>
+			<li><a href="{% url "even_list_complex_json" %}" target="_self">VMC Even List (More Complex JSON)</a></li>
+            <li><a href="{% url "criteria_list_simple_json" %}" target="_self">VMC Criteria List (Simple JSON)</a></li>
+			<li><a href="{% url "criteria_list_complex_json" %}" target="_self">VMC Criteria List (More Complex JSON)</a></li>
+            <li><a href="{% url "defined_list" %}" target="_self">VMC Defined List</a></li>
+			<li><a href="{% url "standard_list" %}" target="_self">Standard Django List</a></li>
+		   </ul>
+    </header>
+	<br>
+	<hr>
+{% block content %}{% endblock %}
+    <br>
+    <div id="messages">
+        {% for message in messages %}
+        <p style="color: {% if message.tags == 'success' %}green{% elif message.tags == 'error' %}red{% endif %}">
+			{% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+        </p>
+        {% endfor %}
+    </div>
+    <p></p>
+
+  </body>
+</html>

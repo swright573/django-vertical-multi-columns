@@ -1,0 +1,78 @@
+name: Manual Lint
+
+on:
+  workflow_dispatch
+
+jobs:
+  black:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+      - name: Install Black
+        run: pip install black
+      - name: Run black check
+        run: black --check .
+      - name: If needed, commit black changes to the push/pull request
+        if: failure()
+        run: |
+          black .
+          git config --global user.name 'autoblack'
+          git config --global user.email 'swright573@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git checkout $GITHUB_REF
+          git commit -am "fixup: Format Python code with Black"
+          git push
+  isort:
+    needs: black
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+      - name: Install isort
+        run: pip install isort
+      - name: Run isort check
+        run: isort . --check
+      - name: If needed, commit isort changes to the push/pull request
+        if: failure()
+        run: |
+          isort .
+          git config --global user.name 'autoisort'
+          git config --global user.email 'swright573@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git pull --no-rebase
+          git checkout $GITHUB_REF
+          git commit -am "fixup: Reorganize imports with isort"
+          git push
+  more_lint:
+    needs: [black, isort]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install Linters
+      run: |
+        pip install pylint flake8
+    - name: Run Linters
+      run: |
+        # do a pull in case isort has made some corrections
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+        git pull --no-rebase
+        git checkout $GITHUB_REF
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings.
+        flake8 . --count --exit-zero --statistics
+        # See pyproject.toml for disabled pylint messages
+        pylint vertical_multi_columns example_site tests

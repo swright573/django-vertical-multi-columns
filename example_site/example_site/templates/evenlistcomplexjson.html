@@ -1,0 +1,36 @@
+<!doctype html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <p style="font-size:20px;color:red;">Even List (Complex JSON)</p>
+  <p><i>Data can be read top to bottom, left to right, in your sort order. It is distributed so that the length of each column is roughly the same.</i></p>
+   <table style="width:100%">
+		<tr>
+        <td style="width:20%">
+            <strong>Column 1</strong>
+        </td>
+        <td style="width:20%">
+            <strong>Column 2</strong>
+        </td>
+	</tr>
+	</-- This template is designed for 2 columns. You can reference any field in the data, not just those passed to your functions. --/>
+    {% for row in rows %}
+    <tr>
+        <td>
+			{%  if row.0.string %}
+            {{ row.0.string }} ({{ row.0.object.a }}, {{ row.0.number }}, {{ row.0.boolean }}, {{ row.0.array.1 }})
+            {%  endif %}
+        </td>
+        <td>
+            {%  if row.1.string %}
+            {{ row.1.string }} ({{ row.1.object.a }}, {{ row.1.number }}, {{ row.1.boolean }}, {{ row.1.array.1 }})
+            {% endif %}
+        </td>
+    </tr>
+{%  empty %}
+        There are no results to display.
+  {% endfor %}
+  </table>
+  <br>
+{% endblock %}

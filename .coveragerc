@@ -1,0 +1,2 @@
+[run]
+omit = tests/*, susan-other/* venv/*, example_site/example_site/settings.py, example_site/urls.py, setup.py
