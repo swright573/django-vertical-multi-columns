@@ -43,10 +43,7 @@ class _BaseVMC:
 
     @classmethod
     def build_new_rows(cls, columns: list, num_rows: int) -> list:
-        """
-        Builds the rows list to be passed to the template which must
-        accommodate the expected number of columns.
-        """
+        """Builds the rows list to be passed to the template which must accommodate the expected number of columns."""
         new_rows = []
         for row in range(num_rows):
             new_row = [columns[col][row] for col in range(len(columns))]
@@ -87,29 +84,30 @@ class EvenVMCView(_BaseVMC, ListView):
         as the number of columns requested. At the same time, keep the columns
         in the sort order passed.
         """
+        if entries:
+            number_of_entries = len(entries)
+            entries_all = number_of_entries // self.number_of_columns  # minimum number of entries in all rows
+            entries_some = number_of_entries % self.number_of_columns  # number of additional entries in some rows
 
-        number_of_entries = len(entries)
-        entries_all = number_of_entries // self.number_of_columns  # minimum number of entries in all rows
-        entries_some = number_of_entries % self.number_of_columns  # number of additional entries in some rows
+            # Create column structure and calculate column lengths
+            columns = [[] for i in range(self.number_of_columns)]
+            col_count = [0 for i in range(self.number_of_columns)]
+            for i in range(self.number_of_columns):
+                col_count[i] = entries_all
+                if entries_some > 0:
+                    col_count[i] += 1
+                    entries_some -= 1
+            # Populate columns based on number of entries in each column
+            entries_pos = 0
+            for col in range(self.number_of_columns):
+                for i in range(entries_pos, entries_pos + col_count[col]):
+                    columns[col].append(entries[i])
+                entries_pos += col_count[col]
 
-        # Create column structure and calculate column lengths
-        columns = [[] for i in range(self.number_of_columns)]
-        col_count = [0 for i in range(self.number_of_columns)]
-        for i in range(self.number_of_columns):
-            col_count[i] = entries_all
-            if entries_some > 0:
-                col_count[i] += 1
-                entries_some -= 1
-
-        # Populate columns based on number of entries in each column
-        entries_pos = 0
-        for col in range(self.number_of_columns):
-            for i in range(entries_pos, entries_pos + col_count[col]):
-                columns[col].append(entries[i])
-            entries_pos += col_count[col]
-
-        columns, max_column = self.pad_columns(columns)
-        rows = self.build_new_rows(columns, max_column)
+            columns, max_column = self.pad_columns(columns)
+            rows = self.build_new_rows(columns, max_column)
+        else:
+            rows = []
         return rows
 
     def get_queryset(self) -> list:
@@ -178,24 +176,27 @@ class CriteriaVMCView(_BaseVMC, ListView):
 
     def process_entries(self, entries: list, functions: list, keys: list) -> list:
         """
-        Morph the passed data into "rows", placing data in columns using the passed functions/keys.
-        At the same time, keep the columns in the sort order passed.
+        Check that there is data to display. If so, morph the passed data into "rows", placing data in columns using
+        the passed functions/keys. At the same time, keep the columns in the sort order passed.
         """
 
-        self.check_criteria(functions, keys)
+        if entries:
+            self.check_criteria(functions, keys)
 
-        # create column lists using criteria functions passed in
-        columns = [[] for c in range(self.number_of_columns)]
-        for entry in entries:
-            efunctions = enumerate(functions)
-            for pos, func in efunctions:
-                parm = []
-                for key in keys:
-                    parm.append(entry[key])
-                if func(parm):
-                    columns[pos].append(entry)
-        columns, max_column = self.pad_columns(columns)
-        rows = self.build_new_rows(columns, max_column)
+            # create column lists using criteria functions passed in
+            columns = [[] for c in range(self.number_of_columns)]
+            for entry in entries:
+                efunctions = enumerate(functions)
+                for pos, func in efunctions:
+                    parm = []
+                    for key in keys:
+                        parm.append(entry[key])
+                    if func(parm):
+                        columns[pos].append(entry)
+            columns, max_column = self.pad_columns(columns)
+            rows = self.build_new_rows(columns, max_column)
+        else:
+            rows = []
         return rows
 
     def get_queryset(self) -> list:
