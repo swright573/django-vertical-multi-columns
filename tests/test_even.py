@@ -39,6 +39,13 @@ def test_number_columns_kwarg_with_setting(entries_27, settings_number_of_column
     assert num_cols == 5
 
 
+def test_can_handle_no_data_passed(settings_number_of_columns_null, entries_0):
+    """If no data is passed, process_entries can handle it"""
+    instance = EvenVMCView()
+    rows = instance.process_entries(entries_0)
+    assert rows == []
+
+
 def test_same_entries_in_same_vertical_order(entries_27, settings_number_of_columns_4):
     """All the entries received are still there and are vertically sorted in the same order as received
     Note entries_27 spread over 4 rows means 7 rows with the last row having 1 null entry in the last position

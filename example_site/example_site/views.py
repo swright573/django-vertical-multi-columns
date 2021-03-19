@@ -39,11 +39,16 @@ class EvenVMCSimpleJson(EvenVMCView):
 
     def get_data(self):
         """Provide the data to be displayed"""
-        # resp = requests.get(_api_url, headers=_api_key)
-        # raw_api_data = resp.json()
+        # try:
+        #     resp = requests.get(_api_url, headers=_api_key)
+        #     resp.raise_for_status()
+        #     raw_api_data = resp.json()
         raw_api_data = simulate.decoded_api_json_data_simple()  # simulation
         sorted_api_data = sorted(raw_api_data, key=lambda i: i["name"], reverse=False)
         return sorted_api_data
+        # except requests.exceptions.RequestException as err:
+        #     messages.error(self.request, 'Something went wrong ... ' + str(err))
+        #     return []
 
     template_name = "evenlistsimplejson.html"
     context_object_name = "rows"
@@ -60,11 +65,16 @@ class EvenVMCComplexJson(EvenVMCView):
 
     def get_data(self):
         """Provide the data to be displayed"""
-        # resp = requests.get(_api_url, headers=_api_key)
-        # raw_api_data = resp.json()
+        # try:
+        #     resp = requests.get(_api_url, headers=_api_key)
+        #     resp.raise_for_status()
+        #     raw_api_data = resp.json()
         raw_api_data = simulate.decoded_api_json_data_complex()  # simulation
         sorted_api_data = sorted(raw_api_data, key=lambda i: i["string"], reverse=False)
         return sorted_api_data
+        # except requests.exceptions.RequestException as err:
+        #     messages.error(self.request, 'Something went wrong ... ' + str(err))
+        #     return []
 
     template_name = "evenlistcomplexjson.html"
     context_object_name = "rows"
@@ -103,11 +113,16 @@ class CriteriaVMCSimpleJson(CriteriaVMCView):
 
     def get_data(self):
         """Provide the data to be displayed"""
-        # resp = requests.get(_api_url, headers=_api_key)
-        # raw_api_data = resp.json()
+        # try:
+        #     resp = requests.get(_api_url, headers=_api_key)
+        #     resp.raise_for_status()
+        #     raw_api_data = resp.json()
         raw_api_data = simulate.decoded_api_json_data_simple()  # simulation
         sorted_api_data = sorted(raw_api_data, key=lambda i: i["name"], reverse=False)
         return sorted_api_data
+        # except requests.exceptions.RequestException as err:
+        #     messages.error(self.request, 'Something went wrong ... ' + str(err))
+        #     return []
 
     def get_column_criteria(self):
         """Pass criteria functions and keys"""
@@ -143,11 +158,16 @@ class CriteriaVMCComplexJson(CriteriaVMCView):
 
     def get_data(self):
         """Provide the data to be displayed"""
-        # resp = requests.get(_api_url, headers=_api_key)
-        # raw_api_data = resp.json()
+        # try:
+        #     resp = requests.get(_api_url, headers=_api_key)
+        #     resp.raise_for_status()
+        #     raw_api_data = resp.json()
         raw_api_data = simulate.decoded_api_json_data_complex()  # simulation
         sorted_api_data = sorted(raw_api_data, key=lambda i: i["string"], reverse=False)
         return sorted_api_data
+        # except requests.exceptions.RequestException as err:
+        #     messages.error(self.request, 'Something went wrong ... ' + str(err))
+        #     return []
 
     def get_column_criteria(self):
         """Pass criteria functions and keys"""
@@ -240,6 +260,14 @@ class StandardDjango(ListView):
 
     def get(self, request):
         """Provide the data to be displayed"""
+
+        # try:
+        #     resp = requests.get(_api_url, headers=_api_key)
+        #     resp.raise_for_status()
+        #     raw_api_data = resp.json()
         raw_api_data = simulate.decoded_api_json_data_simple()  # simulation
         sorted_api_data = sorted(raw_api_data, key=lambda i: i["name"], reverse=False)
+        # except requests.exceptions.RequestException as err:
+        #     messages.error(self.request, 'Something went wrong ... ' + str(err))
+        #     sorted_api_data = []
         return render(request, "standard_django.html", {"rows": sorted_api_data})

@@ -51,6 +51,13 @@ def test_no_column_setting_and_more_than_3_functions_are_passed(
         instance.check_criteria(criteria_functions_4, function_args_4)
 
 
+def test_can_handle_no_data_passed(settings_number_of_columns_null, entries_0, criteria_functions_3, function_args_3):
+    """If no data is passed, process_entries can handle it"""
+    instance = CriteriaVMCView()
+    rows = instance.process_entries(entries_0, criteria_functions_3, function_args_3)
+    assert rows == []
+
+
 def test_no_column_setting_and_3_functions_are_passed(
     settings_number_of_columns_null, entries_27, criteria_functions_3, function_args_3
 ):

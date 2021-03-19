@@ -32,6 +32,12 @@ Sample template for displaying side-by-side columns ... 3 columns are displayed 
 			There are no results to display.
 		{% endfor %}
 	</table>
-
+    <div id="messages">
+        {% for message in messages %}
+            <p style="color: {% if message.tags == 'success' %}green{% elif message.tags == 'error' %}red{% endif %}">
+                {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+            </p>
+          {% endfor %}
+    </div>
 {% endcomment %}
 {% endraw %}
