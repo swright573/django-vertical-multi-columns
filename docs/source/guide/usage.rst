@@ -89,7 +89,7 @@ This example implements EvenVMCView but all the VMC views are fairly similar. No
             # Sort it appropriately.
             # Note that data must be in decoded JSON format.
             resp = requests.get(<api_url>)
-			resp.raise_for_status()
+            resp.raise_for_status()
             deserialized_api_data = resp.json()
             sorted_api_data = sorted(deserialized_api_data, key=lambda i: i['<field>'])
             return sorted_api_data
