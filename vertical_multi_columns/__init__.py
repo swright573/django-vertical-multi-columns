@@ -4,4 +4,4 @@ Generates a JSON-formatted list of data to enable display in
 vertically sorted side-by-side columns in a Django template.
 
 """
-__version__ = "0.9.4"
+__version__ = "1.0.0"
