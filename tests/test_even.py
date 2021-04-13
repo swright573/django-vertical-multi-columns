@@ -1,8 +1,9 @@
 """
 Tests for EvenVMCView
 """
+# pylint: disable=unused-argument
 
-from django.contrib.admin.utils import flatten
+from django.contrib.admin.utils import flatten  # noqa   # pylint: disable=import-error
 
 from vertical_multi_columns.views import EvenVMCView
 
@@ -89,6 +90,8 @@ class MockEvenVMCView(EvenVMCView):
     For next test ... class fixtures are not yet supported in pytest. Therfore I had to create this mocked
     version because overridden methods in imported classes will not execute in tests
     """
+
+    # pylint: disable=duplicate-code
 
     def __init__(self, **kwargs: int):
         super().__init__(**kwargs)

@@ -7,9 +7,9 @@ Classes:
     _BaseVMC
 """
 
-from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
-from django.views.generic import ListView
+from django.conf import settings  # pylint: disable=import-error
+from django.core.exceptions import ImproperlyConfigured  # pylint: disable=import-error
+from django.views.generic import ListView  # pylint: disable=import-error
 
 MSGSTART = "Vertical-Multi-Columns/CriteriaVMCView-"
 
@@ -113,7 +113,7 @@ class EvenVMCView(_BaseVMC, ListView):
     def get_queryset(self) -> list:
         """ Overridden ListView method to send the response object to the template."""
 
-        entries = self.get_data()
+        entries = self.get_data()  # pylint: disable=assignment-from-no-return
         processed_entries = self.process_entries(entries)
         return processed_entries
 
@@ -147,14 +147,14 @@ class CriteriaVMCView(_BaseVMC, ListView):
         """Constructs the class. Optional kwarg 'num_columns' overrides any value in settings."""
         self.number_of_columns = self.get_number_of_columns(**kwargs)
 
-    def get_data(self) -> list:
+    def get_data(self) -> list:  # noqa   # pylint:disable = no-self-use
         """
         Override this method to retrieve data.
         Return a list of items in json format, sorted in the order you wish them displayed.
         """
         return []
 
-    def get_column_criteria(self) -> list:
+    def get_column_criteria(self) -> list:  # noqa   # pylint:disable = no-self-use
         """Override this method to retrieve the functions and keys used to place data in columns."""
         return [[], []]
 
@@ -252,6 +252,6 @@ class DefinedVMCView(_BaseVMC, ListView):
     def get_queryset(self) -> list:
         """ Overridden ListView method to send the response object to the template."""
 
-        columns = self.get_data()
+        columns = self.get_data()  # pylint: disable=assignment-from-no-return
         processed_entries = self.process_columns(columns)
         return processed_entries

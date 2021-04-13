@@ -5,8 +5,8 @@ Common elements for pytest tests
 
 import random
 
-import pytest
-from django.conf import settings
+import pytest  # pylint: disable=import-error
+from django.conf import settings  # pylint: disable=import-error
 
 
 def pytest_configure():

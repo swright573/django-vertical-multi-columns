@@ -1,8 +1,10 @@
 """
 Tests for examplesite
 """
+# pylint: disable=redefined-outer-name
+# pylint: disable=unused-argument
 
-import pytest
+import pytest  # pylint: disable=import-error
 
 from example_site.example_site import views
 

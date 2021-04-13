@@ -4,10 +4,11 @@ Note 1: Passed criteria functions determine which entries appear in which column
 Note 2: It is up to the user to ensure their criteria functions and func_args perform as expected
 Note 3: Some entries can appear in more than one column if the criteria functions overlap
 """
+# pylint: disable=unused-argument
 
-import pytest
-from django.contrib.admin.utils import flatten
-from django.core.exceptions import ImproperlyConfigured
+import pytest  # pylint: disable=import-error
+from django.contrib.admin.utils import flatten  # pylint: disable=import-error
+from django.core.exceptions import ImproperlyConfigured  # pylint: disable=import-error
 
 from vertical_multi_columns.views import CriteriaVMCView
 
@@ -117,6 +118,8 @@ class MockCriteriaVMCView(CriteriaVMCView):
     For next test ... class fixtures are not yet supported in pytest. Therfore I had to create this mocked
     version because overridden methods in imported classes will not execute in tests
     """
+
+    # pylint: disable=duplicate-code
 
     def __init__(self, **kwargs: int):
         super().__init__(**kwargs)

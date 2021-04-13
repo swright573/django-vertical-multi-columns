@@ -8,8 +8,8 @@ The same set of data is used in each to demonstrate the different ways data can 
 # import os
 # import requests
 
-from django.shortcuts import render
-from django.views.generic import ListView, TemplateView
+from django.shortcuts import render  # pylint: disable=import-error
+from django.views.generic import ListView, TemplateView  # pylint: disable=import-error
 
 from vertical_multi_columns.views import CriteriaVMCView, DefinedVMCView, EvenVMCView
 
@@ -21,12 +21,8 @@ from . import simulate
 # _api_key = {'X-Api-Key': os.environ.get('API_KEY')}
 
 
-class About(TemplateView):
+class About(TemplateView):  # pylint: disable=too-few-public-methods
     """Verbiage about what the VMC package is all about"""
-
-    #    def get_context_data(self, **kwargs):
-    #        """Filler to keep pylint happy"""
-    #        pass
 
     template_name = "about.html"
 
@@ -95,17 +91,17 @@ class CriteriaVMCSimpleJson(CriteriaVMCView):
     # These are examples of functions you might pass to CriteriaVMCView to handle assignment of data to columns.
     # You can reference any or all of the JSON keys in the data. In this case, "name", "count", and "herb" are used.
     # Data can be any JSON data type.
-    def a_to_m_and_count_less_than_10(self, args):
+    def a_to_m_and_count_less_than_10(self, args):  # pylint: disable=no-self-use
         """Items matching this condition go in column 1"""
         entry_keys = args
         return "ABCDEFGHIJKLM".find(entry_keys[0][0]) > -1 and entry_keys[1] < 10
 
-    def n_to_z_and_count_10_or_greater(self, args):
+    def n_to_z_and_count_10_or_greater(self, args):  # pylint: disable=no-self-use
         """Items matching this condition go in column 2"""
         entry_keys = args
         return "NOPQRSTUVWXYZ".find(entry_keys[0][0]) > -1 and entry_keys[1] >= 10
 
-    def is_herb(self, args):
+    def is_herb(self, args):  # pylint: disable=no-self-use
         """Items matching this condition go in column 3"""
         entry_keys = args
         return entry_keys[2] is True
@@ -146,12 +142,12 @@ class CriteriaVMCComplexJson(CriteriaVMCView):
     # These are examples of functions you might pass to CriteriaVMCView for assignment of data to columns.
     # You can reference any or all of the JSON keys in the data.
     # Data can be any JSON data type.
-    def boolean_is_true(self, args):
+    def boolean_is_true(self, args):  # pylint: disable=no-self-use
         """Items matching this condition go in column 1"""
         entry_keys = args
         return entry_keys[0]
 
-    def has_111(self, args):
+    def has_111(self, args):  # pylint: disable=no-self-use
         """Items matching this condition go in column 2"""
         entry_keys = args
         return 111 in entry_keys[1]
@@ -255,10 +251,10 @@ class DefinedVMC(DefinedVMCView):
     context_object_name = "rows"
 
 
-class StandardDjango(ListView):
+class StandardDjango(ListView):  # pylint: disable=too-few-public-methods
     """A standard Django ListView display"""
 
-    def get(self, request):
+    def get(self, request):  # pylint: disable=no-self-use
         """Provide the data to be displayed"""
 
         # try:

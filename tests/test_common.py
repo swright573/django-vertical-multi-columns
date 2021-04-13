@@ -2,7 +2,7 @@
 Tests for common elements found in _BaseVMCView
 """
 
-import pytest
+import pytest  # pylint: disable=import-error
 
 from vertical_multi_columns.views import EvenVMCView, _BaseVMC
 

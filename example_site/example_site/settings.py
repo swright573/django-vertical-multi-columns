@@ -1,6 +1,7 @@
 """
 Django settings for vmcexamplesite project.
 """
+# pylint: disable=import-error
 
 import os
 from pathlib import Path

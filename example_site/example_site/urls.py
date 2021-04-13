@@ -3,11 +3,11 @@ Urls for the VMC Example Site
 
 """
 
-from django.urls import path
+from django.urls import path  # noqa   # pylint: disable=import-error
 
 from . import views
 
-app_name = "vmcexamplesite"
+app_name = "vmcexamplesite"  # noqa   # pylint: disable=invalid-name
 
 urlpatterns = [
     path("", views.About.as_view(), name="about"),
