@@ -1,3 +1,5 @@
+default_language_version:
+  python: python3.9
 repos:
 -   repo: https://github.com/psf/black
     rev: 20.8b1
@@ -19,6 +21,12 @@ repos:
     rev: 'v3.0.0a1'
     hooks:
     -   id: pylint
+
+-   repo: https://github.com/pycqa/bandit
+    rev: 1.7.0
+    hooks:
+    -   id: bandit
+        args: ['-ii', '-ll']
 
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.4.0
