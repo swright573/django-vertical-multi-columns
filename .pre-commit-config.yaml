@@ -48,4 +48,4 @@ repos:
 
 -   repo: local
     hooks:
-     - id:no-debug-statements
+    - id:no-debug-statements
