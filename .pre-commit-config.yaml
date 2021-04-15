@@ -45,3 +45,12 @@ repos:
     - id: name-tests-test
       args: [ "--django" ]
     - id: check-added-large-files
+
+-   repo: local
+    hooks:
+     - id:no-debug-statements
+       name: "No Debug Statements"
+       entry: run-no-debug-statements.sh
+       language: "script"
+       description: "This checks that no debug statements are left in python files"
+        
