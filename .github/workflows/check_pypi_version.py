@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Compare PyPi/TestPyPi version number to package code"""
 import codecs
 import os.path

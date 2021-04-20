@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Tests for CriteriaVMCView
 Note 1: Passed criteria functions determine which entries appear in which column(s)

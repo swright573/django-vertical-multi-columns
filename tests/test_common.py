@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Tests for common elements found in _BaseVMCView
 """

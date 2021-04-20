@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Simulate the data that would probably normally be returned in an API call
 

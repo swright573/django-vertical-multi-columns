@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Example Site
 This site demonstrates how various VMC views are configured.

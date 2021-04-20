@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Urls for the VMC Example Site
 

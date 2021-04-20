@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Tests for DefinedVMCView
 Note: Columns are passed pre-filled as they are to appear.
